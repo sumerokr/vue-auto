@@ -1,8 +1,11 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/cars">Cars</router-link> |
-    <router-link to="/service">Service</router-link>
+  <div class="flex border-b border-solid border-indigo-500 px-4">
+    <nav id="nav" class="flex">
+      <router-link class="p-2" to="/">Home</router-link>
+      <router-link class="p-2" to="/cars">Cars</router-link>
+      <router-link class="p-2" to="/service">Service</router-link>
+    </nav>
+    <router-link class="ml-auto p-2" to="/user">User</router-link>
   </div>
 </template>
 
