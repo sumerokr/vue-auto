@@ -16,7 +16,7 @@
         >
           <li class="flex-shrink-0 w-2">&nbsp;</li>
           <li
-            v-for="item in ['633', '363', '336']"
+            v-for="(item, index) in ['633', '363', '336', '844', '484', '448']"
             :key="item"
             class="flex-shrink-0"
             style="scroll-snap-align: start; width: calc(100% - 2rem)"
@@ -31,6 +31,7 @@
                 https://fakeimg.pl/1280x960/${item}  1280w,
                 https://fakeimg.pl/1600x1180/${item} 1600w
               `"
+              :loading="index > 0 ? 'lazy' : 'auto'"
             />
           </li>
           <li class="flex-shrink-0 w-2">&nbsp;</li>
