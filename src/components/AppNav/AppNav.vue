@@ -1,5 +1,5 @@
 <template>
-  <div class="flex border-b border-solid border-indigo-500 px-4">
+  <div class="flex border-b-2 border-solid border-blue-500 px-4">
     <nav id="nav" class="flex">
       <router-link class="p-3" to="/">Home</router-link>
       <router-link class="p-3" to="/cars">Cars</router-link>

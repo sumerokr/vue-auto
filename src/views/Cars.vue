@@ -37,7 +37,7 @@
                   https://fakeimg.pl/640x480/${item}/    640w,
                   https://fakeimg.pl/960x720/${item}/    960w,
                   https://fakeimg.pl/1280x960/${item}/  1280w,
-                  https://fakeimg.pl/1600x1180/${item}/ 1600w
+                  https://fakeimg.pl/1600x1200/${item}/ 1600w
                 `"
                 :loading="index > 0 ? 'lazy' : 'auto'"
               />
