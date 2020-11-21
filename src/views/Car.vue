@@ -54,7 +54,6 @@
         class="flex overflow-x-scroll space-x-0"
         style="scroll-snap-type: x mandatory; scroll-padding-left: 0"
       >
-        <li class="flex-shrink-0 w-3">&nbsp;</li>
         <li
           v-for="(item, index) in [
             '663333',
@@ -85,7 +84,6 @@
             @click="activateGallery"
           />
         </li>
-        <li class="flex-shrink-0 w-3">&nbsp;</li>
       </ul>
     </div>
 
