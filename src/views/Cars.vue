@@ -18,12 +18,12 @@
             <li class="flex-shrink-0 w-3">&nbsp;</li>
             <li
               v-for="(item, index) in [
-                '633',
-                '363',
-                '336',
-                '844',
-                '484',
-                '448',
+                '663333',
+                '336633',
+                '333366',
+                '884444',
+                '448844',
+                '444488',
               ]"
               :key="item"
               class="flex-shrink-0"
@@ -31,13 +31,13 @@
             >
               <img
                 class="max-w-full"
-                :src="`https://fakeimg.pl/320x240/${item}`"
+                :src="`https://fakeimg.pl/320x240/${item}/`"
                 :srcset="`
-                  https://fakeimg.pl/320x240/${item}    320w,
-                  https://fakeimg.pl/640x480/${item}    640w,
-                  https://fakeimg.pl/960x720/${item}    960w,
-                  https://fakeimg.pl/1280x960/${item}  1280w,
-                  https://fakeimg.pl/1600x1180/${item} 1600w
+                  https://fakeimg.pl/320x240/${item}/    320w,
+                  https://fakeimg.pl/640x480/${item}/    640w,
+                  https://fakeimg.pl/960x720/${item}/    960w,
+                  https://fakeimg.pl/1280x960/${item}/  1280w,
+                  https://fakeimg.pl/1600x1180/${item}/ 1600w
                 `"
                 :loading="index > 0 ? 'lazy' : 'auto'"
               />
