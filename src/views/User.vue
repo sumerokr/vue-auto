@@ -9,9 +9,12 @@
         class="border-b border-black border-opacity-5"
       >
         <router-link
-          class="block px-2 py-2 text-black text-opacity-90"
+          class="block px-2 py-3 text-black text-opacity-90"
           :to="{ name: route.name }"
-          >{{ route.text }}</router-link
+          ><i class="material-icons-outlined align-middle mr-3">{{
+            route.icon
+          }}</i>
+          {{ route.text }}</router-link
         >
       </li>
     </ul>
@@ -30,18 +33,22 @@ export default defineComponent({
         {
           name: "UserAdverts",
           text: "My adverts",
+          icon: "view_agenda",
         },
         {
           name: "UserFavorites",
           text: "Favorites",
+          icon: "bookmarks",
         },
         {
           name: "UserMessages",
           text: "Messages",
+          icon: "message",
         },
         {
           name: "UserSubscriptions",
           text: "Subscriptions",
+          icon: "monetization_on",
         },
       ],
     };
