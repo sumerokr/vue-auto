@@ -12,7 +12,7 @@
           <h2>Audi Q3, 2012</h2>
           <p class="text-xl mb-2">11 900 €</p>
           <ul
-            class="flex -mx-4 overflow-x-scroll space-x-1 mb-2"
+            class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
             style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
           >
             <li class="flex-shrink-0 w-3">&nbsp;</li>
@@ -27,18 +27,22 @@
               ]"
               :key="item"
               class="flex-shrink-0"
-              style="scroll-snap-align: start; width: calc(100% - 2rem)"
+              style="
+                scroll-snap-align: start;
+                width: calc(100% - 2rem);
+                max-width: 300px;
+              "
             >
               <img
                 class="max-w-full"
                 :src="`https://fakeimg.pl/320x240/${item}/`"
                 :srcset="`
-                  https://fakeimg.pl/320x240/${item}/    320w,
-                  https://fakeimg.pl/640x480/${item}/    640w,
-                  https://fakeimg.pl/960x720/${item}/    960w,
-                  https://fakeimg.pl/1280x960/${item}/  1280w,
-                  https://fakeimg.pl/1600x1200/${item}/ 1600w
-                `"
+              https://fakeimg.pl/320x240/${item}/    320w,
+              https://fakeimg.pl/640x480/${item}/    640w,
+              https://fakeimg.pl/960x720/${item}/    960w,
+              https://fakeimg.pl/1280x960/${item}/  1280w,
+              https://fakeimg.pl/1600x1200/${item}/ 1600w
+            `"
                 :loading="index > 0 ? 'lazy' : 'auto'"
               />
             </li>
