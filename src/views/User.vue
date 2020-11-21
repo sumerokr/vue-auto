@@ -9,7 +9,7 @@
         class="border-b border-black border-opacity-5"
       >
         <router-link
-          class="block px-2 py-3 text-black text-opacity-90"
+          class="block px-2 py-3 text-black text-opacity-60"
           :to="{ name: route.name }"
           ><i class="material-icons-outlined align-middle mr-3">{{
             route.icon

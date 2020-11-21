@@ -69,7 +69,7 @@
           style="scroll-snap-align: start"
         >
           <img
-            class="max-w-full"
+            class="w-full"
             :src="`https://fakeimg.pl/320x240/${item}/`"
             :srcset="`
               https://fakeimg.pl/320x240/${item}/    320w,
