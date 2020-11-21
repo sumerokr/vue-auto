@@ -37,12 +37,15 @@
                 class="max-w-full"
                 :src="`https://fakeimg.pl/320x240/${item}/`"
                 :srcset="`
-              https://fakeimg.pl/320x240/${item}/    320w,
-              https://fakeimg.pl/640x480/${item}/    640w,
-              https://fakeimg.pl/960x720/${item}/    960w,
-              https://fakeimg.pl/1280x960/${item}/  1280w,
-              https://fakeimg.pl/1600x1200/${item}/ 1600w
-            `"
+                  https://fakeimg.pl/320x240/${item}/    320w,
+                  https://fakeimg.pl/640x480/${item}/    640w,
+                  https://fakeimg.pl/960x720/${item}/    960w,
+                  https://fakeimg.pl/1280x960/${item}/  1280w,
+                  https://fakeimg.pl/1600x1200/${item}/ 1600w
+                `"
+                width="320"
+                height="240"
+                alt=""
                 :loading="index > 0 ? 'lazy' : 'auto'"
               />
             </li>
