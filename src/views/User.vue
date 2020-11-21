@@ -13,8 +13,8 @@
           :to="{ name: route.name }"
           ><i class="material-icons-outlined align-middle mr-3">{{
             route.icon
-          }}</i>
-          {{ route.text }}</router-link
+          }}</i
+          >{{ route.text }}</router-link
         >
       </li>
     </ul>
@@ -46,8 +46,13 @@ export default defineComponent({
           icon: "message",
         },
         {
-          name: "UserSubscriptions",
-          text: "Subscriptions",
+          name: "UserPersonalDetails",
+          text: "Personal details",
+          icon: "person_outline",
+        },
+        {
+          name: "UserPaymentHistory",
+          text: "Payment history",
           icon: "monetization_on",
         },
       ],

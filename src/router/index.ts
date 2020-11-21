@@ -18,11 +18,47 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "car" */ "../views/Car.vue"),
   },
   {
+    path: "/companies",
+    name: "Companies",
+    component: () =>
+      import(/* webpackChunkName: "companies" */ "../views/Companies.vue"),
+  },
+  {
+    path: "/companies/:id",
+    name: "Company",
+    component: () =>
+      import(/* webpackChunkName: "company" */ "../views/Company.vue"),
+  },
+  {
     path: "/service",
     name: "Service",
     component: () =>
       import(/* webpackChunkName: "service" */ "../views/Service.vue"),
   },
+  //#region Auth
+  {
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+  },
+  {
+    path: "/registration",
+    name: "Registration",
+    component: () =>
+      import(
+        /* webpackChunkName: "registration" */ "../views/Registration.vue"
+      ),
+  },
+  {
+    path: "/restore-password",
+    name: "RestorePassword",
+    component: () =>
+      import(
+        /* webpackChunkName: "restore-password" */ "../views/RestorePassword.vue"
+      ),
+  },
+  //#endregion
   //#region User
   {
     path: "/user",
@@ -52,11 +88,19 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   {
-    path: "/user/subscriptions",
-    name: "UserSubscriptions",
+    path: "/user/personal-details",
+    name: "UserPersonalDetails",
     component: () =>
       import(
-        /* webpackChunkName: "user-subscriptions" */ "../views/UserSubscriptions.vue"
+        /* webpackChunkName: "user-personal-details" */ "../views/UserPersonalDetails.vue"
+      ),
+  },
+  {
+    path: "/user/payment-history",
+    name: "UserPaymentHistory",
+    component: () =>
+      import(
+        /* webpackChunkName: "user-payment-history" */ "../views/UserPaymentHistory.vue"
       ),
   },
   //#endregion
