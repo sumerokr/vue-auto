@@ -3,13 +3,13 @@
     <p class="-mx-4 mb-4">
       <img
         class="w-full"
-        :src="`https://fakeimg.pl/320x180/ffca28/000000`"
+        :src="`https://fakeimg.pl/320x180/ffca28/000000/`"
         :srcset="`
-          https://fakeimg.pl/320x180/ffca28/000000    320w,
-          https://fakeimg.pl/640x360/ffca28/000000    640w,
-          https://fakeimg.pl/960x540/ffca28/000000    960w,
-          https://fakeimg.pl/1280x720/ffca28/000000  1280w,
-          https://fakeimg.pl/1600x900/ffca28/000000 1600w
+          https://fakeimg.pl/320x180/ffca28/000000/    320w,
+          https://fakeimg.pl/640x360/ffca28/000000/    640w,
+          https://fakeimg.pl/960x540/ffca28/000000/    960w,
+          https://fakeimg.pl/1280x720/ffca28/000000/  1280w,
+          https://fakeimg.pl/1600x900/ffca28/000000/ 1600w
         `"
         width="320"
         height="180"
