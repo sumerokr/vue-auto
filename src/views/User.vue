@@ -5,7 +5,7 @@
     <ul>
       <li
         v-for="route in routes"
-        :key="route"
+        :key="route.name"
         class="border-b border-black border-opacity-5"
       >
         <router-link

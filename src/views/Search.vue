@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-3xl mb-8">Service</h1>
+    <h1 class="text-3xl mb-8">Search</h1>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Service",
+  name: "Search",
 });
 </script>

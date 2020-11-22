@@ -8,6 +8,18 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
+    path: "/pages",
+    name: "Pages",
+    component: () =>
+      import(/* webpackChunkName: "pages" */ "../views/Pages.vue"),
+  },
+  {
+    path: "/search",
+    name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
+  },
+  {
     path: "/cars",
     name: "Cars",
     component: () => import(/* webpackChunkName: "cars" */ "../views/Cars.vue"),
@@ -28,12 +40,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "Company",
     component: () =>
       import(/* webpackChunkName: "company" */ "../views/Company.vue"),
-  },
-  {
-    path: "/service",
-    name: "Service",
-    component: () =>
-      import(/* webpackChunkName: "service" */ "../views/Service.vue"),
   },
   //#region Auth
   {
