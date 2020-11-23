@@ -2,20 +2,38 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Companies</h1>
 
-    <ul>
-      <li>
-        <router-link :to="{ name: 'Company', params: { id: 1 } }"
-          >Renault Alliance</router-link
-        >
+    <ul v-if="companies.length">
+      <li v-for="company in companies" :key="company.id">
+        <router-link :to="{ name: 'Company', params: { id: company.id } }">{{
+          company.name
+        }}</router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, Ref } from "vue";
+import { firestore } from "@/firebase/firestore.ts";
 
 export default defineComponent({
   name: "Companies",
+
+  setup: () => {
+    const companies: Ref<object[]> = ref([]);
+    const companiesRef = firestore.collection("companies");
+    companiesRef.get().then((qs) => {
+      qs.forEach((doc) => {
+        companies.value.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+    });
+
+    return {
+      companies,
+    };
+  },
 });
 </script>
