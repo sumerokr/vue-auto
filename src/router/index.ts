@@ -110,6 +110,11 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   //#endregion
+  {
+    path: "/seed",
+    name: "Seed",
+    component: () => import(/* webpackChunkName: "seed" */ "../views/Seed.vue"),
+  },
 ];
 
 const router = createRouter({
