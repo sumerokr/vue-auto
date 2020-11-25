@@ -5,27 +5,23 @@
     <ul class="space-y-4">
       <li
         class="border-b-4 border-solid border-gray-200 pb-4"
-        v-for="n in 10"
-        :key="n"
+        v-for="car in cars"
+        :key="car.id"
       >
-        <router-link class="block" :to="{ name: 'Car', params: { id: n } }">
-          <h2>Audi Q3, 2012</h2>
-          <p class="text-xl mb-2">11 900 €</p>
+        <router-link
+          class="block"
+          :to="{ name: 'Car', params: { id: car.id } }"
+        >
+          <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
+          <p class="text-xl mb-2">{{ numberFormatter.format(car.price) }} €</p>
           <ul
             class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
             style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
           >
             <li class="flex-shrink-0 w-3">&nbsp;</li>
             <li
-              v-for="(item, index) in [
-                '663333',
-                '336633',
-                '333366',
-                '884444',
-                '448844',
-                '444488',
-              ]"
-              :key="item"
+              v-for="(image, index) in car.images"
+              :key="image['320']"
               class="flex-shrink-0"
               style="
                 scroll-snap-align: start;
@@ -35,13 +31,13 @@
             >
               <img
                 class="max-w-full"
-                :src="`https://fakeimg.pl/320x240/${item}/`"
+                :src="image['320']"
                 :srcset="`
-                  https://fakeimg.pl/320x240/${item}/    320w,
-                  https://fakeimg.pl/640x480/${item}/    640w,
-                  https://fakeimg.pl/960x720/${item}/    960w,
-                  https://fakeimg.pl/1280x960/${item}/  1280w,
-                  https://fakeimg.pl/1600x1200/${item}/ 1600w
+                  ${image['320']}    320w,
+                  ${image['640']}    640w,
+                  ${image['960']}    960w,
+                  ${image['1280']}  1280w,
+                  ${image['1600']} 1600w
                 `"
                 width="320"
                 height="240"
@@ -55,12 +51,12 @@
             <li
               class="text-sm"
               v-for="item in [
-                '25 000 km',
-                '1.6 l, 200 hp',
-                'Robot',
-                'Black',
-                'FWD',
-                'Sedan',
+                car.mileage,
+                car.gearbox,
+                car.color,
+                car.fuel,
+                car.drivetrain,
+                car.type,
               ]"
               :key="item"
             >
@@ -74,9 +70,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, Ref } from "vue";
+import { firestore } from "@/firebase/firestore.ts";
 
 export default defineComponent({
   name: "Cars",
+
+  setup: () => {
+    const cars: Ref<object[]> = ref([]);
+    const carsRef = firestore.collection("cars");
+    carsRef
+      .limit(20)
+      .get()
+      .then((qs) => {
+        qs.forEach((doc) => {
+          cars.value.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+      });
+
+    return {
+      cars,
+      numberFormatter: new Intl.NumberFormat("ru-RU"),
+    };
+  },
 });
 </script>

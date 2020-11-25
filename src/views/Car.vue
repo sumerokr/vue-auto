@@ -1,23 +1,16 @@
 <template>
-  <div class="p-4">
+  <div class="p-4" v-if="car">
     <h1 class="text-3xl mb-8">Car</h1>
-    <h2>Audi Q3, 2012</h2>
-    <p class="text-xl mb-2">11 900 €</p>
+    <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
+    <p class="text-xl mb-2">{{ numberFormatter.format(car.price) }} €</p>
     <ul
       class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
       style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
     >
       <li class="flex-shrink-0 w-3">&nbsp;</li>
       <li
-        v-for="(item, index) in [
-          '663333',
-          '336633',
-          '333366',
-          '884444',
-          '448844',
-          '444488',
-        ]"
-        :key="item"
+        v-for="(image, index) in car.images"
+        :key="image['320']"
         class="flex-shrink-0"
         style="
           scroll-snap-align: start;
@@ -27,13 +20,13 @@
       >
         <img
           class="max-w-full"
-          :src="`https://fakeimg.pl/320x240/${item}/`"
+          :src="image['320']"
           :srcset="`
-            https://fakeimg.pl/320x240/${item}/    320w,
-            https://fakeimg.pl/640x480/${item}/    640w,
-            https://fakeimg.pl/960x720/${item}/    960w,
-            https://fakeimg.pl/1280x960/${item}/  1280w,
-            https://fakeimg.pl/1600x1200/${item}/ 1600w
+            ${image['320']}    320w,
+            ${image['640']}    640w,
+            ${image['960']}    960w,
+            ${image['1280']}  1280w,
+            ${image['1600']} 1600w
           `"
           width="320"
           height="240"
@@ -55,27 +48,20 @@
         style="scroll-snap-type: x mandatory; scroll-padding-left: 0"
       >
         <li
-          v-for="(item, index) in [
-            '663333',
-            '336633',
-            '333366',
-            '884444',
-            '448844',
-            '444488',
-          ]"
-          :key="item"
+          v-for="(image, index) in car.images"
+          :key="image['320']"
           class="flex-shrink-0"
           style="scroll-snap-align: start"
         >
           <img
             class="w-full"
-            :src="`https://fakeimg.pl/320x240/${item}/`"
+            :src="image['320']"
             :srcset="`
-              https://fakeimg.pl/320x240/${item}/    320w,
-              https://fakeimg.pl/640x480/${item}/    640w,
-              https://fakeimg.pl/960x720/${item}/    960w,
-              https://fakeimg.pl/1280x960/${item}/  1280w,
-              https://fakeimg.pl/1600x1200/${item}/ 1600w
+              ${image['320']}    320w,
+              ${image['640']}    640w,
+              ${image['960']}    960w,
+              ${image['1280']}  1280w,
+              ${image['1600']} 1600w
             `"
             width="320"
             height="240"
@@ -90,9 +76,26 @@
     <h3 class="text-xl mb-2">Options</h3>
     <table>
       <tbody>
-        <tr v-for="n in 10" :key="n">
-          <td class="pr-8 text-black text-opacity-60">Property</td>
-          <td class="text-black text-opacity-90">Value</td>
+        <tr
+          v-for="[key, val] in [
+            ['Mileage', car.mileage],
+            ['Type', car.type],
+            ['Fuel', car.fuel],
+            ['Color', car.color],
+            ['Gearbox', car.gearbox],
+            ['City', car.city],
+            [
+              'Registered till',
+              dateFormatter.format(
+                new Date(Date.now() + car.registeredTill.seconds)
+              ),
+            ],
+            ['Drivetrain', car.drivetrain],
+          ]"
+          :key="key"
+        >
+          <td class="pr-8 text-black text-opacity-60">{{ key }}</td>
+          <td class="text-black text-opacity-90">{{ val }}</td>
         </tr>
       </tbody>
     </table>
@@ -127,12 +130,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, Ref, watch } from "vue";
+import { firestore } from "@/firebase/firestore.ts";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "Car",
   setup() {
     const isGalleryActive = ref(false);
+    const route = useRoute();
+    const car: Ref<any> = ref(null);
+
+    const carRef = firestore.collection("cars").doc(String(route.params.id));
+
+    carRef.get().then((doc) => {
+      car.value = doc.data();
+    });
 
     return {
       isGalleryActive,
@@ -142,6 +155,10 @@ export default defineComponent({
       deactivateGallry: () => {
         isGalleryActive.value = false;
       },
+      car,
+      language: window.navigator.language,
+      dateFormatter: new Intl.DateTimeFormat("ru-RU"),
+      numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },
 });

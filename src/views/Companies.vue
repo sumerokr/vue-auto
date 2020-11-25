@@ -22,14 +22,17 @@ export default defineComponent({
   setup: () => {
     const companies: Ref<object[]> = ref([]);
     const companiesRef = firestore.collection("companies");
-    companiesRef.get().then((qs) => {
-      qs.forEach((doc) => {
-        companies.value.push({
-          id: doc.id,
-          ...doc.data(),
+    companiesRef
+      .limit(20)
+      .get()
+      .then((qs) => {
+        qs.forEach((doc) => {
+          companies.value.push({
+            id: doc.id,
+            ...doc.data(),
+          });
         });
       });
-    });
 
     return {
       companies,
