@@ -20,11 +20,7 @@
       <div class="flex space-x-4">
         <div class="flex-1">
           <label for="model">Min year</label><br />
-          <select
-            class="border border-gray-200 p-2 w-full"
-            type="text"
-            id="model"
-          >
+          <select class="border border-gray-200 p-2 w-full" id="model">
             <option
               v-for="year in new Array(20)
                 .fill(null)
@@ -38,11 +34,7 @@
         </div>
         <div class="flex-1">
           <label for="model">Max year</label><br />
-          <select
-            class="border border-gray-200 p-2 w-full"
-            type="text"
-            id="model"
-          >
+          <select class="border border-gray-200 p-2 w-full" id="model">
             <option
               v-for="year in new Array(20)
                 .fill(null)
@@ -112,14 +104,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Search",
 
   setup: () => {
+    const router = useRouter();
+
     return {
       onSearch: () => {
-        alert("Search attempt");
+        router.push({
+          name: "Cars",
+        });
       },
     };
   },
