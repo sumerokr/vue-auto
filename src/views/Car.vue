@@ -130,7 +130,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, watch } from "vue";
+import { defineComponent, ref, Ref } from "vue";
 import { firestore } from "@/firebase/firestore.ts";
 import { useRoute } from "vue-router";
 
