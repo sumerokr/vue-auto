@@ -31,20 +31,20 @@
     <form @submit.prevent="onRegistration">
       <label for="email">Email</label><br />
       <input
-        class="border-2 border-gray-300 rounded p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="email"
         id="email"
       /><br /><br />
 
       <label for="password">Password</label><br />
       <input
-        class="border-2 border-gray-300 rounded p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="password"
         id="password"
       /><br /><br />
 
       <button
-        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90"
+        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Register

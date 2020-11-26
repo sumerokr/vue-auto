@@ -4,7 +4,7 @@
 
     <p>
       Don't have an account?
-      <router-link class="text-blue-500" :to="{ name: 'Registration' }">
+      <router-link class="text-blue-700" :to="{ name: 'Registration' }">
         Register</router-link
       >
     </p>
@@ -13,20 +13,21 @@
     <form @submit.prevent="onLogin">
       <label for="email">Email</label><br />
       <input
-        class="border border-gray-200 p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+        style="caret-color: rgb(29, 78, 216)"
         type="email"
         id="email"
       /><br /><br />
 
       <label for="password">Password</label><br />
       <input
-        class="border border-gray-200 p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="password"
         id="password"
       /><br />
       <p class="mt-2">
         Forgot password?
-        <router-link class="text-blue-500" :to="{ name: 'RestorePassword' }">
+        <router-link class="text-blue-700" :to="{ name: 'RestorePassword' }">
           Restore</router-link
         >
       </p>
@@ -34,7 +35,7 @@
       <br />
 
       <button
-        class="bg-blue-500 text-white px-4 py-3 rounded text-opacity-90"
+        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Log in

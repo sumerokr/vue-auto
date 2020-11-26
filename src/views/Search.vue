@@ -5,14 +5,14 @@
     <form @submit.prevent="onSearch">
       <label for="brand">Brand</label><br />
       <input
-        class="border border-gray-200 p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="text"
         id="brand"
       /><br /><br />
 
       <label for="model">Model</label><br />
       <input
-        class="border border-gray-200 p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="text"
         id="model"
       /><br /><br />
@@ -20,7 +20,10 @@
       <div class="flex space-x-4">
         <div class="flex-1">
           <label for="model">Min year</label><br />
-          <select class="border border-gray-200 p-2 w-full" id="model">
+          <select
+            class="border-2 border-gray-200 bg-transparent rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+            id="model"
+          >
             <option
               v-for="year in new Array(20)
                 .fill(null)
@@ -34,7 +37,10 @@
         </div>
         <div class="flex-1">
           <label for="model">Max year</label><br />
-          <select class="border border-gray-200 p-2 w-full" id="model">
+          <select
+            class="border-2 border-gray-200 bg-transparent rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+            id="model"
+          >
             <option
               v-for="year in new Array(20)
                 .fill(null)
@@ -54,7 +60,7 @@
         <div class="flex-1">
           <label for="model">Min mileage</label><br />
           <input
-            class="border border-gray-200 p-2 w-full"
+            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
             type="text"
             id="model"
           />
@@ -62,7 +68,7 @@
         <div class="flex-1">
           <label for="model">Max mileage</label><br />
           <input
-            class="border border-gray-200 p-2 w-full"
+            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
             type="text"
             id="model"
           />
@@ -75,7 +81,7 @@
         <div class="flex-1">
           <label for="model">Min prce</label><br />
           <input
-            class="border border-gray-200 p-2 w-full"
+            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
             type="text"
             id="model"
           />
@@ -83,7 +89,7 @@
         <div class="flex-1">
           <label for="model">Max price</label><br />
           <input
-            class="border border-gray-200 p-2 w-full"
+            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
             type="text"
             id="model"
           />
@@ -93,7 +99,7 @@
       <br />
 
       <button
-        class="bg-blue-500 text-white px-4 py-3 rounded text-opacity-90"
+        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Search

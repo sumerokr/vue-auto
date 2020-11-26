@@ -120,7 +120,7 @@
     <h3 class="text-xl mb-2">Seller's name</h3>
     <p>
       <button
-        class="bg-blue-500 text-white px-4 py-3 rounded text-opacity-90"
+        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
         type="button"
       >
         Call

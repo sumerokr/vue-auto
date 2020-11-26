@@ -14,13 +14,13 @@
     <form @submit.prevent="onRestore">
       <label for="email">Email</label><br />
       <input
-        class="border border-gray-200 p-2 w-full"
+        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
         type="email"
         id="email"
       /><br /><br />
 
       <button
-        class="bg-blue-500 text-white px-4 py-3 rounded text-opacity-90"
+        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Restore

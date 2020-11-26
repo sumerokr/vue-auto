@@ -4,14 +4,14 @@
 
     <p>
       Don't have an account?
-      <router-link class="text-blue-500" :to="{ name: 'Registration' }">
+      <router-link class="text-blue-700" :to="{ name: 'Registration' }">
         Register</router-link
       >
     </p>
     <br />
     <p>
       Already registered?
-      <router-link class="text-blue-500" :to="{ name: 'Login' }">
+      <router-link class="text-blue-700" :to="{ name: 'Login' }">
         Log in</router-link
       >
     </p>
