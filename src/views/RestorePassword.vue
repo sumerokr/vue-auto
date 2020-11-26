@@ -2,6 +2,15 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">RestorePassword</h1>
 
+    <p>
+      Back to
+      <router-link class="text-blue-700" :to="{ name: 'Login' }">
+        Log in</router-link
+      >
+    </p>
+
+    <br />
+
     <form @submit.prevent="onRestore">
       <label for="email">Email</label><br />
       <input
