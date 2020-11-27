@@ -14,7 +14,6 @@
       <label for="email">Email</label><br />
       <input
         class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-        style="caret-color: rgb(29, 78, 216)"
         type="email"
         id="email"
       /><br /><br />
