@@ -2,9 +2,30 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Cars</h1>
 
+    <ul class="flex space-x-4 mb-8">
+      <li class="flex-1">
+        <button
+          class="bg-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          type="button"
+        >
+          <i class="material-icons-outlined align-middle mr-3">filter_list</i>
+          Filter
+        </button>
+      </li>
+      <li class="flex-1">
+        <button
+          class="bg-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          type="button"
+        >
+          <i class="material-icons-outlined align-middle mr-3">sort</i>
+          Sort
+        </button>
+      </li>
+    </ul>
+
     <ul class="space-y-4">
       <li
-        class="border-b-4 border-solid border-gray-200 pb-4"
+        class="border-b border-solid border-gray-200 pb-4"
         v-for="car in cars"
         :key="car.id"
       >
@@ -30,7 +51,7 @@
               "
             >
               <img
-                class="max-w-full"
+                class="max-w-full rounded"
                 :src="image['320']"
                 :srcset="`
                   ${image['320']}   320w,

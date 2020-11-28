@@ -19,7 +19,7 @@
         "
       >
         <img
-          class="max-w-full"
+          class="max-w-full rounded"
           :src="image['320']"
           :srcset="`
             ${image['320']}   320w,
@@ -54,7 +54,7 @@
           style="scroll-snap-align: start"
         >
           <img
-            class="w-full"
+            class="w-full rounded"
             :src="image['320']"
             :srcset="`
               ${image['320']}   320w,
