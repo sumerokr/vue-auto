@@ -18,10 +18,10 @@
                 class="max-w-full mr-4"
                 :src="car.images[0]['320']"
                 :srcset="`
-                  ${car.images[0]['320']}    320w,
-                  ${car.images[0]['640']}    640w,
-                  ${car.images[0]['960']}    960w,
-                  ${car.images[0]['1280']}  1280w,
+                  ${car.images[0]['320']}   320w,
+                  ${car.images[0]['640']}   640w,
+                  ${car.images[0]['960']}   960w,
+                  ${car.images[0]['1280']} 1280w,
                   ${car.images[0]['1600']} 1600w
                 `"
                 width="320"

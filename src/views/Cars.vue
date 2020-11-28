@@ -33,10 +33,10 @@
                 class="max-w-full"
                 :src="image['320']"
                 :srcset="`
-                  ${image['320']}    320w,
-                  ${image['640']}    640w,
-                  ${image['960']}    960w,
-                  ${image['1280']}  1280w,
+                  ${image['320']}   320w,
+                  ${image['640']}   640w,
+                  ${image['960']}   960w,
+                  ${image['1280']} 1280w,
                   ${image['1600']} 1600w
                 `"
                 width="320"
