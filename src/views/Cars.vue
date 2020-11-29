@@ -68,7 +68,7 @@
             </li>
             <li class="flex-shrink-0 w-3">&nbsp;</li>
           </ul>
-          <ul style="columns: 2">
+          <ul class="mb-4" style="columns: 2">
             <li
               class="text-sm"
               v-for="item in [
@@ -85,6 +85,18 @@
             </li>
           </ul>
         </router-link>
+        <p class="flex items-center">
+          <span class="mr-3 material-icons">{{
+            car.price % 2 === 0 || car.price % 3 === 0 ? "person" : "business"
+          }}</span>
+          <span class="mr-3">John Doe</span>
+          <button class="border-2 border-gray-200 px-2 py-2 rounded">
+            <span class="material-icons align-top">call</span>
+          </button>
+          <button class="ml-auto border-2 border-gray-200 px-2 py-2 rounded">
+            <span class="material-icons align-top">bookmark_border</span>
+          </button>
+        </p>
       </li>
     </ul>
   </div>

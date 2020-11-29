@@ -20,7 +20,7 @@
             type="button"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
-            Buy 10 items
+            Buy 10 ads
           </button>
         </p>
       </li>
@@ -42,7 +42,7 @@
             type="button"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
-            Buy 25 items
+            Buy 25 ads
           </button>
         </p>
       </li>
@@ -64,7 +64,7 @@
             type="button"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
-            Buy 50 items
+            Buy 50 ads
           </button>
         </p>
       </li>
@@ -86,7 +86,7 @@
             type="button"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
-            Buy 100 items
+            Buy 100 ads
           </button>
         </p>
       </li>

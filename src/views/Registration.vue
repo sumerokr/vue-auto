@@ -13,13 +13,13 @@
     <p>Type</p>
     <ul class="space-y-2">
       <li>
-        <label class="block border-2 border-gray-300 p-2 rounded" for="personal"
+        <label class="block border-2 border-gray-200 p-2 rounded" for="personal"
           ><input type="radio" id="personal" name="type" value="personal" />
           Personal</label
         >
       </li>
       <li>
-        <label class="block border-2 border-gray-300 p-2 rounded" for="company"
+        <label class="block border-2 border-gray-200 p-2 rounded" for="company"
           ><input type="radio" id="company" name="type" value="company" />
           Company</label
         >
