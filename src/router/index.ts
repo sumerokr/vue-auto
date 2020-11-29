@@ -102,11 +102,11 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   {
-    path: "/user/payments",
-    name: "UserPayments",
+    path: "/user/payment-history",
+    name: "UserPaymentHistory",
     component: () =>
       import(
-        /* webpackChunkName: "user-payments" */ "../views/UserPayments.vue"
+        /* webpackChunkName: "user-payment-history" */ "../views/UserPaymentHistory.vue"
       ),
   },
   //#endregion
@@ -114,6 +114,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/seed",
     name: "Seed",
     component: () => import(/* webpackChunkName: "seed" */ "../views/Seed.vue"),
+  },
+  {
+    path: "/pricing",
+    name: "Pricing",
+    component: () =>
+      import(/* webpackChunkName: "pricing" */ "../views/Pricing.vue"),
   },
 ];
 

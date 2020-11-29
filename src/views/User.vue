@@ -45,8 +45,8 @@ export default defineComponent({
           icon: "person_outline",
         },
         {
-          name: "UserPayments",
-          text: "Payments",
+          name: "UserPaymentHistory",
+          text: "Payment history",
           icon: "monetization_on",
         },
       ],

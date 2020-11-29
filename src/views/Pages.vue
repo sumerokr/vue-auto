@@ -35,6 +35,10 @@ export default defineComponent({
           name: "Search",
           text: "Search",
         },
+        {
+          name: "Pricing",
+          text: "Pricing",
+        },
       ],
     };
   },
