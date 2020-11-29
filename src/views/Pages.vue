@@ -3,13 +3,9 @@
     <h1 class="text-3xl mb-8">Pages</h1>
 
     <ul>
-      <li
-        v-for="route in routes"
-        :key="route.name"
-        class="border-b border-black border-opacity-5"
-      >
+      <li v-for="route in routes" :key="route.name">
         <router-link
-          class="block px-2 py-3 text-black text-opacity-60"
+          class="block py-3 text-black text-opacity-60"
           :to="{ name: route.name }"
           >{{ route.text }}</router-link
         >

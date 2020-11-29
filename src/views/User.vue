@@ -3,17 +3,11 @@
     <h1 class="text-3xl mb-8">User</h1>
 
     <ul>
-      <li
-        v-for="route in routes"
-        :key="route.name"
-        class="border-b border-black border-opacity-5"
-      >
+      <li v-for="route in routes" :key="route.name" class="">
         <router-link
-          class="block px-2 py-3 text-black text-opacity-60"
+          class="block py-3 text-black text-opacity-60"
           :to="{ name: route.name }"
-          ><i class="material-icons-outlined align-middle mr-3">{{
-            route.icon
-          }}</i
+          ><i class="material-icons-outlined align-top mr-3">{{ route.icon }}</i
           >{{ route.text }}</router-link
         >
       </li>
@@ -51,8 +45,8 @@ export default defineComponent({
           icon: "person_outline",
         },
         {
-          name: "UserPaymentHistory",
-          text: "Payment history",
+          name: "UserPayments",
+          text: "Payments",
           icon: "monetization_on",
         },
       ],

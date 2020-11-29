@@ -102,11 +102,11 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   {
-    path: "/user/payment-history",
-    name: "UserPaymentHistory",
+    path: "/user/payments",
+    name: "UserPayments",
     component: () =>
       import(
-        /* webpackChunkName: "user-payment-history" */ "../views/UserPaymentHistory.vue"
+        /* webpackChunkName: "user-payments" */ "../views/UserPayments.vue"
       ),
   },
   //#endregion

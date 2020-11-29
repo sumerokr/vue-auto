@@ -5,19 +5,19 @@
     <ul class="flex space-x-4 mb-8">
       <li class="flex-1">
         <button
-          class="bg-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          class="border-2 border-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
           type="button"
         >
-          <i class="material-icons-outlined align-middle mr-3">filter_list</i>
+          <i class="material-icons-outlined align-top mr-3">filter_list</i>
           Filter
         </button>
       </li>
       <li class="flex-1">
         <button
-          class="bg-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          class="border-2 border-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
           type="button"
         >
-          <i class="material-icons-outlined align-middle mr-3">sort</i>
+          <i class="material-icons-outlined align-top mr-3">sort</i>
           Sort
         </button>
       </li>
