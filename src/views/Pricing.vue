@@ -15,13 +15,13 @@
           <li>- Donate to the Vue.js project</li>
         </ul>
         <p class="text-center">
-          <button
-            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
-            type="button"
+          <router-link
+            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium inline-block"
+            :to="{ name: 'PaymentNew' }"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
             Buy 10 ads
-          </button>
+          </router-link>
         </p>
       </li>
 
@@ -37,13 +37,13 @@
           <li>- Donate to the Vue.js project</li>
         </ul>
         <p class="text-center">
-          <button
-            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
-            type="button"
+          <router-link
+            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium inline-block"
+            :to="{ name: 'PaymentNew' }"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
             Buy 25 ads
-          </button>
+          </router-link>
         </p>
       </li>
 
@@ -59,13 +59,13 @@
           <li>- Donate to the Vue.js project</li>
         </ul>
         <p class="text-center">
-          <button
-            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
-            type="button"
+          <router-link
+            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium inline-block"
+            :to="{ name: 'PaymentNew' }"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
             Buy 50 ads
-          </button>
+          </router-link>
         </p>
       </li>
 
@@ -81,13 +81,13 @@
           <li>- Donate to the Vue.js project</li>
         </ul>
         <p class="text-center">
-          <button
-            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
-            type="button"
+          <router-link
+            class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium inline-block"
+            :to="{ name: 'PaymentNew' }"
           >
             <span class="material-icons align-top mr-3">shopping_cart</span>
             Buy 100 ads
-          </button>
+          </router-link>
         </p>
       </li>
     </ul>

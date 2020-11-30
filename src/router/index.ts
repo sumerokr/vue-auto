@@ -121,6 +121,30 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "pricing" */ "../views/Pricing.vue"),
   },
+  {
+    path: "/payments/failure",
+    name: "PaymentFailure",
+    component: () =>
+      import(
+        /* webpackChunkName: "payments-failure" */ "../views/Payments/Failure.vue"
+      ),
+  },
+  {
+    path: "/payments/success",
+    name: "PaymentSuccess",
+    component: () =>
+      import(
+        /* webpackChunkName: "payments-success" */ "../views/Payments/Success.vue"
+      ),
+  },
+  {
+    path: "/payments/new",
+    name: "PaymentNew",
+    component: () =>
+      import(
+        /* webpackChunkName: "payments-new" */ "../views/Payments/New.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
