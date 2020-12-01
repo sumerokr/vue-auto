@@ -3,9 +3,7 @@
     <h1 class="text-3xl mb-8">Payment success</h1>
 
     <p class="text-center">
-      <i class="material-icons-outlined text-9xl text-green-400"
-        >check_circle</i
-      >
+      <i class="material-icons text-9xl text-green-400">check_circle</i>
     </p>
     <br />
     <p class="text-center">

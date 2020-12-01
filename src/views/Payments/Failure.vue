@@ -3,7 +3,7 @@
     <h1 class="text-3xl mb-8">Payment failure</h1>
 
     <p class="text-center">
-      <i class="material-icons-outlined text-9xl text-red-400">error</i>
+      <i class="material-icons text-9xl text-red-400">error</i>
     </p>
     <br />
     <p class="text-center">

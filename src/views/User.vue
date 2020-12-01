@@ -7,7 +7,7 @@
         <router-link
           class="block py-3 text-black text-opacity-60"
           :to="{ name: route.name }"
-          ><i class="material-icons-outlined align-top mr-3">{{ route.icon }}</i
+          ><i class="material-icons align-top mr-3">{{ route.icon }}</i
           >{{ route.text }}</router-link
         >
       </li>
