@@ -7,7 +7,10 @@
     </div>
     <ul>
       <li v-for="item in items" :key="item.name" @click="$emit('click')">
-        <RouterLink class="block px-4 py-3" :to="{ name: item.name }">
+        <RouterLink
+          class="block px-4 py-3 text-black text-opacity-90"
+          :to="{ name: item.name }"
+        >
           <span class="material-icons align-top mr-8">{{ item.icon }}</span>
           {{ item.text }}
         </RouterLink>
@@ -32,6 +35,7 @@ export default {
         { name: "Home", text: "Add", icon: "add_box" },
         { name: "UserFavorites", text: "Favorites", icon: "bookmarks" },
         { name: "User", text: "Profile", icon: "person" },
+        { name: "Pages", text: "Pages", icon: "apps" },
       ],
     };
   },
