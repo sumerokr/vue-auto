@@ -3,7 +3,7 @@
   <AppBarTop
     @click="
       () => {
-        isNavVisible = !isNavVisible;
+        isNavVisible = true;
       }
     "
   /><transition name="slide">
@@ -11,10 +11,21 @@
       v-if="isNavVisible"
       @click="
         () => {
-          isNavVisible = !isNavVisible;
+          isNavVisible = false;
         }
       "
   /></transition>
+  <transition name="fade">
+    <div
+      v-if="isNavVisible"
+      class="fixed z-40 top-0 right-0 bottom-0 left-0 bg-black bg-opacity-20"
+      @click="
+        () => {
+          isNavVisible = false;
+        }
+      "
+    ></div>
+  </transition>
   <router-view />
 </template>
 
@@ -54,5 +65,18 @@ export default defineComponent({
 .slide-enter-from,
 .slide-leave-to {
   transform: translateX(-100%);
+}
+
+.fade-enter-active {
+  transition: opacity 0.2s ease-out;
+}
+
+.fade-leave-active {
+  transition: opacity 0.2s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
