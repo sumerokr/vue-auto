@@ -36,6 +36,7 @@ export default {
         { name: "UserFavorites", text: "Favorites", icon: "bookmarks" },
         { name: "User", text: "Profile", icon: "person" },
         { name: "Pages", text: "Pages", icon: "apps" },
+        { name: "Prisma", text: "Prisma", icon: "apps" },
       ],
     };
   },
