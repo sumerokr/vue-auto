@@ -2,6 +2,27 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Payment history</h1>
 
+    <ul class="flex space-x-4 mb-8">
+      <li class="flex-1">
+        <button
+          class="border-2 border-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          type="button"
+        >
+          <i class="material-icons align-top mr-3">filter_list</i>
+          Filter
+        </button>
+      </li>
+      <li class="flex-1">
+        <button
+          class="border-2 border-gray-200 px-4 py-2 rounded w-full text-opacity-90 font-medium text-left"
+          type="button"
+        >
+          <i class="material-icons align-top mr-3">sort</i>
+          Sort
+        </button>
+      </li>
+    </ul>
+
     <ul>
       <li class="py-2">
         <div class="flex items-baseline">

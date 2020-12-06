@@ -28,7 +28,7 @@
       <router-link
         class="flex-1 flex flex-col p-2 text-center text-black text-opacity-60 transition-colors duration-200"
         active-class="text-opacity-90"
-        :to="{ name: 'UserFavorites' }"
+        :to="{ name: 'Add' }"
       >
         <span class="material-icons">bookmarks</span>
         <span class="text-xs">Favorites</span>

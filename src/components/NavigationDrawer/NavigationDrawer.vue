@@ -32,10 +32,10 @@ export default {
       items: [
         { name: "Home", text: "Home", icon: "home" },
         { name: "Search", text: "Search", icon: "search" },
-        { name: "Home", text: "Add", icon: "add_box" },
+        { name: "Add", text: "Add", icon: "add_box" },
         { name: "UserFavorites", text: "Favorites", icon: "bookmarks" },
         { name: "User", text: "Profile", icon: "person" },
-        { name: "Pages", text: "Pages", icon: "apps" },
+        { name: "Pages", text: "Pages", icon: "library_books" },
         { name: "Prisma", text: "Prisma", icon: "apps" },
       ],
     };

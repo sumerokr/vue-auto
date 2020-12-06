@@ -4,11 +4,13 @@
 
     <ul>
       <li v-for="route in routes" :key="route.name" class="">
-        <router-link
-          class="block py-3 text-black text-opacity-60"
-          :to="{ name: route.name }"
-          ><i class="material-icons align-top mr-3">{{ route.icon }}</i
-          >{{ route.text }}</router-link
+        <router-link class="block py-3" :to="{ name: route.name }"
+          ><i
+            class="material-icons align-top mr-3 text-black text-opacity-60"
+            >{{ route.icon }}</i
+          ><span class="text-black text-opacity-90">{{
+            route.text
+          }}</span></router-link
         >
       </li>
     </ul>
