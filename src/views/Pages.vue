@@ -5,7 +5,7 @@
     <ul>
       <li v-for="route in routes" :key="route.name">
         <router-link
-          class="block py-3 text-black text-opacity-60"
+          class="block py-3 text-black text-opacity-90"
           :to="{ name: route.name }"
           >{{ route.text }}</router-link
         >
