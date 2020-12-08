@@ -24,6 +24,42 @@
     </ul>
 
     <ul class="space-y-4">
+      <li class="shadow rounded" v-for="car in cars" :key="car.id">
+        <router-link
+          class="grid grid-cols-3 gap-4"
+          :to="{ name: 'Car', params: { id: car.id } }"
+        >
+          <p class="col-span-1">
+            <img
+              class="max-w-full mr-4 rounded rounded-tr-none rounded-br-none"
+              src="https://via.placeholder.com/320x240"
+              :srcset="`
+                https://via.placeholder.com/320x240.webp   320w,
+                https://via.placeholder.com/640x480.webp   640w,
+                https://via.placeholder.com/960x720.webp   960w,
+                https://via.placeholder.com/1280x960.webp 1280w,
+                https://via.placeholder.com/1600x1200.webp 1600w
+              `"
+              sizes="
+                (max-width: 352px)  320px,
+                (max-width: 672px)  640px,
+                (max-width: 992px)  960px,
+                (max-width: 1312px) 1280px,
+                (max-width: 1632px) 1600px,
+                320px
+              "
+              width="320"
+              height="240"
+              alt=""
+            />
+          </p>
+          <div class="col-span-2 py-2">
+            <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
+            <p>{{ numberFormatter.format(car.price) }} €</p>
+          </div>
+        </router-link>
+      </li>
+
       <li
         class="border-b border-solid border-gray-200 pb-4"
         v-for="(car, index) in cars"
