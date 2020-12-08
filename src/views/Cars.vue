@@ -24,14 +24,7 @@
     </ul>
 
     <ul class="space-y-4">
-      <li
-        class="rounded"
-        v-for="car in cars"
-        :key="car.id"
-        :style="`
-          box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-        `"
-      >
+      <li class="shadow rounded" v-for="car in cars" :key="car.id">
         <div class="p-4">
           <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
           <p class="text-xl">{{ numberFormatter.format(car.price) }} €</p>
@@ -42,54 +35,27 @@
               class="w-full"
               src="https://via.placeholder.com/320x240"
               :srcset="`
-                https://via.placeholder.com/320x240   320w,
-                https://via.placeholder.com/640x480   640w,
-                https://via.placeholder.com/960x720   960w,
-                https://via.placeholder.com/1280x960 1280w,
-                https://via.placeholder.com/1600x1200 1600w
+                https://via.placeholder.com/320x240.webp   320w,
+                https://via.placeholder.com/640x480.webp   640w,
+                https://via.placeholder.com/960x720.webp   960w,
+                https://via.placeholder.com/1280x960.webp 1280w,
+                https://via.placeholder.com/1600x1200.webp 1600w
               `"
-              :sizes="`
-                (max-width: 353px)   320px,
-                (max-width: 673px)   640px,
-                (max-width: 993px)   960px,
-                (max-width: 1313px) 1280px,
-                (max-width: 1633px) 1600px,
+              sizes="
+                (max-width: 352px)  320px,
+                (max-width: 672px)  640px,
+                (max-width: 992px)  960px,
+                (max-width: 1312px) 1280px,
+                (max-width: 1632px) 1600px,
                 320px
-              `"
+              "
               width="320"
               height="240"
               alt=""
             />
           </p>
         </div>
-        <div class="p-4 pb-2">
-          <ul class="mb-4" style="columns: 2">
-            <li
-              class="text-sm"
-              v-for="item in [
-                car.mileage,
-                car.gearbox,
-                car.color,
-                car.fuel,
-                car.drivetrain,
-                car.type,
-              ]"
-              :key="item"
-            >
-              {{ item }}
-            </li>
-          </ul>
-          <div class="flex -ml-2 items-center">
-            <i class="material-icons p-2 text-black text-opacity-60">person</i>
-            <span>John Doe</span>
-            <i class="material-icons p-2 text-black text-opacity-60 ml-auto"
-              >phone</i
-            >
-            <i class="material-icons p-2 text-black text-opacity-60"
-              >bookmark</i
-            >
-          </div>
-        </div>
+        <div></div>
       </li>
 
       <li
