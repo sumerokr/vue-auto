@@ -42,11 +42,10 @@
                 https://via.placeholder.com/1600x1200.webp 1600w
               `"
               sizes="
-                (max-width: 352px)  320px,
-                (max-width: 672px)  640px,
-                (max-width: 992px)  960px,
-                (max-width: 1312px) 1280px,
-                (max-width: 1632px) 1600px,
+                (min-width: 1312px) 1600px,
+                (min-width: 992px)  1280px,
+                (min-width: 672px)  960px,
+                (min-width: 352px)  640px,
                 320px
               "
               width="320"

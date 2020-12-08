@@ -31,22 +31,20 @@
         >
           <p class="col-span-1">
             <img
-              class="max-w-full mr-4 rounded rounded-tr-none rounded-br-none"
+              class="w-full mr-4 rounded rounded-tr-none rounded-br-none"
               src="https://via.placeholder.com/320x240"
-              :srcset="`
-                https://via.placeholder.com/320x240.webp   320w,
-                https://via.placeholder.com/640x480.webp   640w,
-                https://via.placeholder.com/960x720.webp   960w,
-                https://via.placeholder.com/1280x960.webp 1280w,
+              srcset="
+                https://via.placeholder.com/160x120.webp    160w,
+                https://via.placeholder.com/320x240.webp    320w,
+                https://via.placeholder.com/640x480.webp    640w,
+                https://via.placeholder.com/960x720.webp    960w,
+                https://via.placeholder.com/1280x960.webp  1280w,
                 https://via.placeholder.com/1600x1200.webp 1600w
-              `"
+              "
               sizes="
-                (max-width: 352px)  320px,
-                (max-width: 672px)  640px,
-                (max-width: 992px)  960px,
-                (max-width: 1312px) 1280px,
-                (max-width: 1632px) 1600px,
-                320px
+                (min-width: 1025px) 640px,
+                (min-width: 192px)  160px,
+                160px
               "
               width="320"
               height="240"

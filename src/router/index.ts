@@ -156,6 +156,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "payments-new" */ "../views/Prisma.vue"),
   },
+  {
+    path: "/users",
+    name: "Lambda users",
+    component: () =>
+      import(/* webpackChunkName: "users" */ "../views/Users.vue"),
+  },
 ];
 
 const router = createRouter({

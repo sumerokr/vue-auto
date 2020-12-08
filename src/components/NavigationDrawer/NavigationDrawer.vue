@@ -37,6 +37,7 @@ export default {
         { name: "User", text: "Profile", icon: "person" },
         { name: "Pages", text: "Pages", icon: "library_books" },
         { name: "Prisma", text: "Prisma", icon: "apps" },
+        { name: "Lambda users", text: "Lambda users", icon: "people" },
       ],
     };
   },
