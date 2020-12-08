@@ -35,8 +35,8 @@
           </div>
           <div class="flex-grow p-4 overflow-y-auto">
             <ul>
-              <li v-for="post in posts" :key="post.id" class="flex py-3">
-                <span class="flex-grow">{{ post.title.slice(0, 20) }}</span>
+              <li v-for="car in cars" :key="car" class="flex py-3">
+                <span class="flex-grow">{{ car }}</span>
                 <span class="material-icons p-3 -my-3">expand_more</span>
               </li>
             </ul>
@@ -167,7 +167,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { posts } from "@/faker/posts.ts";
+import { cars } from "@/faker/cars.ts";
 
 export default defineComponent({
   name: "Search",
@@ -177,7 +177,7 @@ export default defineComponent({
     const isSelectorVisible = ref(true);
 
     return {
-      posts,
+      cars: [...new Set(cars.map((c) => c.brand))].sort(),
       isSelectorVisible,
       onSearch: () => {
         router.push({
