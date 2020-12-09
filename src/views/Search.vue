@@ -4,14 +4,14 @@
 
     <form @submit.prevent="onSearch">
       <button
-        class="border-2 border-gray-200 rounded bg-white px-4 py-2 w-full flex"
+        class="border-2 border-gray-200 rounded bg-white p-2 w-full flex"
         type="button"
         @click="showSelector"
       >
         <span class="material-icons text-black text-opacity-60 mr-3"
           >directions_car</span
         >
-        <span class="text-black text-opacity-90">Make, model</span>
+        <span class="text-black text-opacity-60">Make, model</span>
         <span class="material-icons text-black text-opacity-60 ml-auto"
           >search</span
         >
@@ -159,20 +159,32 @@
 
       <div class="flex space-x-4">
         <div class="flex-1">
-          <label for="model">Min prce</label><br />
-          <input
-            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            type="number"
-            id="model"
-          />
+          <label for="min-price">Min prce</label>
+          <div class="relative z-10">
+            <input
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
+              type="number"
+              id="min-price"
+            />
+            <span
+              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
+              >€</span
+            >
+          </div>
         </div>
         <div class="flex-1">
-          <label for="model">Max price</label><br />
-          <input
-            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            type="number"
-            id="model"
-          />
+          <label for="max-price">Max price</label>
+          <div class="relative z-10">
+            <input
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
+              type="number"
+              id="max-price"
+            />
+            <span
+              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
+              >€</span
+            >
+          </div>
         </div>
       </div>
 

@@ -9,13 +9,13 @@
     <h1 class="text-xl mb-2">Heading</h1>
     <h1 class="mb-4 flex items-center bg-yellow-100 relative">
       <span
-        class="absolute top-0 -z-1 left-0 right-0 bg-green-100 bg-opacity-50"
+        class="absolute top-0 -z-10 left-0 right-0 bg-green-100 bg-opacity-50"
         style="height: 5px"
       ></span>
       <span class="material-icons">check_box_outline_blank</span>
       Heading <span class="material-icons">disabled_by_default</span>
       <span
-        class="absolute bottom-0 -z-1 left-0 right-0 bg-green-100 bg-opacity-50"
+        class="absolute bottom-0 -z-10 left-0 right-0 bg-green-100 bg-opacity-50"
         style="height: 5px"
       ></span>
     </h1>
