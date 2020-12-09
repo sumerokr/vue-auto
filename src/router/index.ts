@@ -162,6 +162,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "users" */ "../views/Users.vue"),
   },
+  {
+    path: "/fonts",
+    name: "Fonts",
+    component: () =>
+      import(/* webpackChunkName: "fonts" */ "../views/Fonts.vue"),
+  },
 ];
 
 const router = createRouter({

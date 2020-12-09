@@ -198,7 +198,7 @@ export default defineComponent({
 
   setup: () => {
     const router = useRouter();
-    const isSelectorVisible = ref(true);
+    const isSelectorVisible = ref(false);
 
     interface Expanded {
       [key: string]: boolean;
