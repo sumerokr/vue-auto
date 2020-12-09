@@ -4,14 +4,14 @@
 
     <form @submit.prevent="onSearch">
       <button
-        class="border-2 border-gray-200 rounded bg-white p-2 w-full flex"
+        class="mb-4 border-2 border-gray-200 rounded bg-white p-2 w-full flex"
         type="button"
         @click="showSelector"
       >
         <span class="material-icons text-black text-opacity-60 mr-3"
           >directions_car</span
         >
-        <span class="text-black text-opacity-60">Make, model</span>
+        <span class="text-black text-opacity-60 font-medium">Make, model</span>
         <span class="material-icons text-black text-opacity-60 ml-auto"
           >search</span
         >
@@ -23,7 +23,7 @@
           class="fixed right-0 bottom-0 left-0 z-50 bg-white rounded-t flex flex-col"
           :style="`
             top: 120px;
-            box-shadow: 0 -2px 6px 0 hsla(0, 0%, 0%, 0.1);
+            box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
           `"
         >
           <div class="p-4">
@@ -66,14 +66,14 @@
           </div>
           <div class="bg-gray-50 p-4 flex justify-end">
             <button
-              class="text-black text-opacity-60 px-4 py-2 rounded mr-4 font-medium"
+              class="text-black text-opacity-60 px-4 py-2 text-sm rounded mr-4 font-medium uppercase"
               type="button"
               @click="hideSelector"
             >
               Cancel
             </button>
             <button
-              class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
+              class="bg-blue-700 text-white px-4 py-2 text-sm rounded text-opacity-90 font-medium uppercase"
               type="submit"
             >
               Save
@@ -82,7 +82,6 @@
         </div>
       </transition>
 
-      <br />
       <!-- <label for="brand">Make</label><br />
       <input
         class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
@@ -157,9 +156,9 @@
 
       <!-- <br /> -->
 
-      <div class="flex space-x-4">
+      <div class="flex space-x-4 mb-4">
         <div class="flex-1">
-          <label for="min-price">Min prce</label>
+          <label for="min-price">Min pirce</label>
           <div class="relative z-10">
             <input
               class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
@@ -188,13 +187,38 @@
         </div>
       </div>
 
-      <br />
+      <p class="flex mb-4 justify-between">
+        <button
+          class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
+          type="button"
+        >
+          <span
+            class="material-icons text-black text-opacity-60 mr-2"
+            style="font-size: 18px"
+            >tune</span
+          >
+          <span>More options</span>
+        </button>
+
+        <button
+          class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
+          type="button"
+        >
+          <span
+            class="material-icons text-black text-opacity-60 mr-2"
+            style="font-size: 18px"
+            >restore</span
+          >
+          <span>Reset</span>
+        </button>
+      </p>
 
       <button
-        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
+        class="flex items-center justify-center w-full bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium uppercase"
         type="submit"
       >
-        Search
+        <span>Search</span>
+        <span class="material-icons ml-2">search</span>
       </button>
     </form>
   </div>
