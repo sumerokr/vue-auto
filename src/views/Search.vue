@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl mb-8" @click="hideSelector">Search for a car</h1>
+    <h1 class="text-2xl mb-8">Search for a car</h1>
 
     <form @submit.prevent="onSearch">
       <button
@@ -17,7 +17,7 @@
         >
       </button>
 
-      <transition name="slide">
+      <transition name="slide-top">
         <div
           v-if="isSelectorVisible"
           class="fixed right-0 bottom-0 left-0 z-50 bg-white rounded-t flex flex-col"
@@ -35,16 +35,46 @@
           </div>
           <div class="flex-grow p-4 overflow-y-auto">
             <ul>
-              <li v-for="car in cars" :key="car" class="flex py-3">
-                <span class="flex-grow">{{ car }}</span>
-                <span class="material-icons p-3 -my-3">expand_more</span>
+              <li v-for="car in cars" :key="car" @click="expand(car)">
+                <div class="flex py-3">
+                  <span class="flex-grow">{{ car }}</span>
+                  <span
+                    class="material-icons p-3 -my-3 transform transition-transform"
+                    :class="{ 'rotate-180': expanded[car] }"
+                    >expand_more</span
+                  >
+                </div>
+
+                <!-- <transition name="slide-bottom"> -->
+                <div v-if="expanded[car]">
+                  <div
+                    class="flex items-center"
+                    v-for="model in [
+                      'Insignia',
+                      'M3',
+                      'Crossland',
+                      'Tucson',
+                      'Pajero',
+                    ]"
+                    :key="model"
+                  >
+                    <span
+                      class="material-icons p-2 mr-6 text-black text-opacity-60"
+                      :class="{ 'rotate-180': expanded[car] }"
+                      >check_box_outline_blank</span
+                    >
+                    <label>{{ model }}</label>
+                  </div>
+                </div>
+                <!-- </transition> -->
               </li>
             </ul>
           </div>
           <div class="bg-gray-50 p-4 flex justify-end">
             <button
               class="text-black text-opacity-60 px-4 py-2 rounded mr-4 font-medium"
-              type="submit"
+              type="button"
+              @click="hideSelector"
             >
               Cancel
             </button>
@@ -176,9 +206,15 @@ export default defineComponent({
     const router = useRouter();
     const isSelectorVisible = ref(true);
 
+    interface Expanded {
+      [key: string]: boolean;
+    }
+    const expanded = ref<Expanded>({});
+
     return {
       cars: [...new Set(cars.map((c) => c.brand))].sort(),
       isSelectorVisible,
+      expanded,
       onSearch: () => {
         router.push({
           name: "Cars",
@@ -190,21 +226,38 @@ export default defineComponent({
       hideSelector: () => {
         isSelectorVisible.value = false;
       },
+      expand: (car: string) => {
+        if (expanded.value[car]) {
+          expanded.value[car] = false;
+        } else {
+          expanded.value[car] = true;
+        }
+      },
     };
   },
 });
 </script>
 
 <style scoped>
-.slide-enter-active {
+.slide-top-enter-active {
   transition: transform 0.3s ease-out;
 }
-.slide-leave-active {
+.slide-top-leave-active {
   transition: transform 0.3s ease-in;
 }
-
-.slide-enter-from,
-.slide-leave-to {
+.slide-top-enter-from,
+.slide-top-leave-to {
   transform: translateY(100%);
 }
+
+/* .slide-bottom-enter-active {
+  transition: transform 0.3s ease-out;
+}
+.slide-bottom-leave-active {
+  transition: transform 0.3s ease-in;
+}
+.slide-bottom-enter-from,
+.slide-bottom-leave-to {
+  transform: translateY(-100%);
+} */
 </style>
