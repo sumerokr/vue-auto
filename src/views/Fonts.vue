@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4" id="page">
+  <div class="p-4">
     <h1 class="text-7xl mb-2">Heading</h1>
     <h1 class="text-6xl mb-2">Heading</h1>
     <h1 class="text-5xl mb-2">Heading</h1>
@@ -65,24 +65,24 @@ export default defineComponent({
     const fonts: string[] = [
       "ABeeZee",
       "Alegreya Sans",
-      "Andika New Basic",
+      // "Andika New Basic",
       "Archivo",
       "Archivo Narrow",
       "Arimo",
       "Asap", // !
       "Asap Condensed", // !
-      "Assistant",
-      "Barlow",
-      "Barlow Condensed",
-      "Barlow Semi Condensed",
+      // "Assistant",
+      // "Barlow",
+      // "Barlow Condensed",
+      // "Barlow Semi Condensed",
       "Cabin",
       "Cairo",
       "Cantarell", // !
       "Catamaran",
       "Cuprum",
       "DM Sans",
-      "Dosis",
-      "Exo",
+      // "Dosis",
+      // "Exo",
       "Exo 2",
       "Fira Sans",
       "Fira Sans Condensed",
@@ -134,9 +134,9 @@ export default defineComponent({
 
     watch(currentFont, () => {
       const link = document.querySelector("#font") as HTMLLinkElement;
-      const page = document.querySelector("#page") as HTMLElement;
+      const body = document.querySelector("body") as HTMLElement;
 
-      if (link === null || page === null) {
+      if (link === null || body === null) {
         return;
       }
 
@@ -144,7 +144,7 @@ export default defineComponent({
         " ",
         "+"
       )}:wght@400;500;600;700&display=swap`;
-      page.style.fontFamily = currentFont.value;
+      body.style.fontFamily = `"${currentFont.value}", sans-serif`;
     });
 
     return {
