@@ -66,4 +66,31 @@ const cars = new Array(500).fill(null).map(() => ({
   drivetrain: f.random.arrayElement(["FWD", "RWD", "AWD"]),
 }));
 
-export { cars };
+const generateMakes = (count: number) =>
+  new Array(count)
+    .fill(null)
+    .map(() => f.vehicle.manufacturer())
+    .sort();
+const uniqueMakes = (makes: string[]) => [...new Set(makes)];
+
+const generateModels = (count: number) =>
+  new Array(count)
+    .fill(null)
+    .map(() => f.vehicle.model())
+    .sort();
+const uniqueModels = (models: string[]) => [...new Set(models)];
+
+const makes = uniqueMakes(generateMakes(500));
+const makeModels = makes.map((make) => ({
+  make,
+  models: uniqueModels(
+    generateModels(
+      f.random.number({
+        min: 1,
+        max: 10,
+      })
+    )
+  ),
+}));
+
+export { cars, makeModels };

@@ -35,32 +35,26 @@
           </div>
           <div class="flex-grow p-4 overflow-y-auto">
             <ul>
-              <li v-for="car in cars" :key="car" @click="expand(car)">
-                <div class="flex py-3">
-                  <span class="flex-grow">{{ car }}</span>
+              <li v-for="makeModel in makeModels" :key="makeModel.make">
+                <div class="flex py-3" @click="expand(makeModel.make)">
+                  <span class="flex-grow">{{ makeModel.make }}</span>
                   <span
                     class="material-icons p-3 -my-3 transform transition-transform"
-                    :class="{ 'rotate-180': expanded[car] }"
+                    :class="{ 'rotate-180': expanded[makeModel.make] }"
                     >expand_more</span
                   >
                 </div>
 
                 <!-- <transition name="slide-bottom"> -->
-                <div v-if="expanded[car]">
+                <div v-if="expanded[makeModel.make]">
                   <div
                     class="flex items-center"
-                    v-for="model in [
-                      'Insignia',
-                      'M3',
-                      'Crossland',
-                      'Tucson',
-                      'Pajero',
-                    ]"
+                    v-for="model in makeModel.models"
                     :key="model"
                   >
                     <span
-                      class="material-icons p-2 mr-6 text-black text-opacity-60"
-                      :class="{ 'rotate-180': expanded[car] }"
+                      class="material-icons p-2 mr-2 text-black text-opacity-60"
+                      :class="{ 'rotate-180': expanded[makeModel.make] }"
                       >check_box_outline_blank</span
                     >
                     <label>{{ model }}</label>
@@ -197,7 +191,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { cars } from "@/faker/cars.ts";
+import { makeModels } from "@/faker/cars.ts";
 
 export default defineComponent({
   name: "Search",
@@ -212,7 +206,7 @@ export default defineComponent({
     const expanded = ref<Expanded>({});
 
     return {
-      cars: [...new Set(cars.map((c) => c.brand))].sort(),
+      makeModels,
       isSelectorVisible,
       expanded,
       onSearch: () => {
