@@ -63,73 +63,74 @@ export default defineComponent({
   setup: () => {
     const currentFont = ref("");
     const fonts: string[] = [
-      "Roboto",
-      "Andika New Basic",
-      "Open Sans",
-      "Padauk",
-      "Lato",
-      "Montserrat",
-      "Roboto Condensed",
-      "Oswald",
-      "Poppins",
-      "Raleway",
-      "Noto Sans",
-      "PT Sans",
-      "Ubuntu",
-      "Nunito",
-      "Open Sans Condensed",
-      "Work Sans",
-      "Rubik",
-      "Mukta",
-      "Hind Siliguri",
-      "Fira Sans",
-      "Nunito Sans",
-      "Titillium Web",
-      "Quicksand",
-      "Nanum Gothic",
-      "Karla",
-      "Yanone Kaffeesatz",
-      "Heebo",
-      "Barlow",
-      "Oxygen",
-      "PT Sans Narrow",
-      "Arimo",
-      "Dosis",
-      "Cabin",
-      "Barlow Condensed",
-      "Libre Franklin",
-      "Inter",
-      "Teko",
-      "Overpass",
-      "Exo 2",
-      "Cairo",
-      "Kanit",
-      "Questrial",
-      "Asap",
-      "Assistant",
-      "Prompt",
-      "DM Sans",
-      "Archivo Narrow",
-      "Play",
-      "Catamaran",
-      "Fira Sans Condensed",
-      "Signika",
-      "Exo",
-      "Archivo",
-      "Tajawal",
       "ABeeZee",
       "Alegreya Sans",
+      "Andika New Basic",
+      "Archivo",
+      "Archivo Narrow",
+      "Arimo",
+      "Asap", // !
+      "Asap Condensed", // !
+      "Assistant",
+      "Barlow",
+      "Barlow Condensed",
       "Barlow Semi Condensed",
-      "Yantramanav",
-      "Ubuntu Condensed",
-      "Cantarell",
-      "M PLUS Rounded 1c",
-      "Mulish",
-      "M PLUS 1p",
+      "Cabin",
+      "Cairo",
+      "Cantarell", // !
+      "Catamaran",
       "Cuprum",
+      "DM Sans",
+      "Dosis",
+      "Exo",
+      "Exo 2",
+      "Fira Sans",
+      "Fira Sans Condensed",
+      "Heebo",
+      "Hind Siliguri",
+      "Inter",
+      "Kanit", // !
+      "Karla",
+      "Lato", // !
+      "Libre Franklin",
+      "M PLUS 1p",
+      "M PLUS Rounded 1c",
+      "Maven Pro", // !
       "Merriweather Sans",
-      "Maven Pro",
-    ].sort();
+      "Montserrat",
+      "Mukta",
+      "Mulish", // !
+      "Nanum Gothic",
+      "Noto Sans", // !
+      "Nunito",
+      "Nunito Sans",
+      "Open Sans", // !
+      "Open Sans Condensed",
+      "Oswald",
+      "Overpass",
+      "Oxygen", // !
+      "PT Sans", // !
+      "PT Sans Narrow",
+      "Padauk",
+      "Play", // !
+      "Poppins", // ?
+      "Prompt",
+      "Questrial",
+      "Quicksand",
+      "Raleway",
+      "Roboto",
+      "Roboto Condensed",
+      "Rubik",
+      "Signika",
+      "Tajawal",
+      "Teko",
+      "Titillium Web", // !
+      "Ubuntu", // !
+      "Ubuntu Condensed", // !
+      "Work Sans", // !
+      "Yanone Kaffeesatz",
+      "Yantramanav",
+    ];
 
     watch(currentFont, () => {
       const link = document.querySelector("#font") as HTMLLinkElement;
@@ -142,7 +143,7 @@ export default defineComponent({
       link.href = `https://fonts.googleapis.com/css2?family=${currentFont.value.replaceAll(
         " ",
         "+"
-      )}:wght@400;500&display=swap`;
+      )}:wght@400;500;600;700&display=swap`;
       page.style.fontFamily = currentFont.value;
     });
 
