@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-3xl mb-8">Cars</h1>
+    <h1 class="text-3xl mb-8" @click="changeVariant">Cars</h1>
 
     <ul class="flex space-x-4 mb-8">
       <li class="flex-1">
@@ -24,142 +24,52 @@
     </ul>
 
     <ul class="space-y-4">
-      <li class="shadow rounded" v-for="car in cars" :key="car.id">
-        <div class="p-4">
-          <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
-          <p class="text-xl">{{ numberFormatter.format(car.price) }} €</p>
-        </div>
-        <div>
-          <p>
-            <img
-              class="w-full"
-              src="https://via.placeholder.com/320x240"
-              :srcset="`
-                https://via.placeholder.com/320x240.webp   320w,
-                https://via.placeholder.com/640x480.webp   640w,
-                https://via.placeholder.com/960x720.webp   960w,
-                https://via.placeholder.com/1280x960.webp 1280w,
-                https://via.placeholder.com/1600x1200.webp 1600w
-              `"
-              sizes="
-                (min-width: 1312px) 1600px,
-                (min-width: 992px)  1280px,
-                (min-width: 672px)  960px,
-                (min-width: 352px)  640px,
-                320px
-              "
-              width="320"
-              height="240"
-              alt=""
-            />
-          </p>
-        </div>
-        <div></div>
-      </li>
-
-      <li
-        class="border-b border-solid border-gray-200 pb-4"
+      <component
+        :is="currentVariant"
         v-for="car in cars"
         :key="car.id"
-      >
-        <router-link
-          class="block"
-          :to="{ name: 'Car', params: { id: car.id } }"
-        >
-          <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
-          <p class="text-xl mb-2">{{ numberFormatter.format(car.price) }} €</p>
-          <ul
-            class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
-            style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
-          >
-            <li class="flex-shrink-0 w-3">&nbsp;</li>
-            <li
-              v-for="(image, index) in car.images"
-              :key="image['320']"
-              class="flex-shrink-0"
-              style="
-                scroll-snap-align: start;
-                width: calc(100% - 2rem);
-                max-width: 300px;
-              "
-            >
-              <img
-                class="max-w-full rounded"
-                :src="image['320']"
-                :srcset="`
-                  ${image['320']}   320w,
-                  ${image['640']}   640w,
-                  ${image['960']}   960w,
-                  ${image['1280']} 1280w,
-                  ${image['1600']} 1600w
-                `"
-                width="320"
-                height="240"
-                alt=""
-                :loading="index > 0 ? 'lazy' : 'auto'"
-              />
-            </li>
-            <li class="flex-shrink-0 w-3">&nbsp;</li>
-          </ul>
-          <ul class="mb-4" style="columns: 2">
-            <li
-              class="text-sm"
-              v-for="item in [
-                car.mileage,
-                car.gearbox,
-                car.color,
-                car.fuel,
-                car.drivetrain,
-                car.type,
-              ]"
-              :key="item"
-            >
-              {{ item }}
-            </li>
-          </ul>
-        </router-link>
-        <p class="flex items-center">
-          <span class="mr-3 material-icons">{{
-            car.price % 2 === 0 || car.price % 3 === 0 ? "person" : "business"
-          }}</span>
-          <span class="mr-3">John Doe</span>
-          <button class="border-2 border-gray-200 px-2 py-2 rounded">
-            <span class="material-icons align-top">call</span>
-          </button>
-          <button class="ml-auto border-2 border-gray-200 px-2 py-2 rounded">
-            <span class="material-icons align-top">bookmark_border</span>
-          </button>
-        </p>
-      </li>
+        :car="car"
+      />
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from "vue";
-import { firestore } from "@/firebase/firestore.ts";
+import { defineComponent, ref } from "vue";
+import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
+import CarListItemTwo from "@/components/car-list-items/CarListItemTwo.vue";
 
 export default defineComponent({
   name: "Cars",
 
+  components: {
+    CarListItemOne,
+    CarListItemTwo,
+  },
+
   setup: () => {
-    const cars: Ref<object[]> = ref([]);
-    const carsRef = firestore.collection("cars");
-    carsRef
-      .limit(20)
-      .get()
-      .then((qs) => {
-        qs.forEach((doc) => {
-          cars.value.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-      });
+    const cars = ref([]);
+    const getCars = async () => {
+      cars.value = await fetch("/api/cars").then((res) => res.json());
+    };
+
+    const variants = ["CarListItemOne", "CarListItemTwo"];
+    const currentVariant = ref(variants[0]);
+    const changeVariant = () => {
+      const currentViewIndex = variants.findIndex(
+        (i) => i === currentVariant.value
+      );
+      currentVariant.value = variants[currentViewIndex + 1] || variants[0];
+    };
+
+    getCars();
 
     return {
       cars,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
+
+      currentVariant,
+      changeVariant,
     };
   },
 });

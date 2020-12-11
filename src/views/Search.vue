@@ -82,21 +82,40 @@
         </div>
       </transition>
 
-      <!-- <label for="brand">Make</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-        type="text"
-        id="make"
-      /><br /><br />
+      <!-- <br /> -->
 
-      <label for="model">Model</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-        type="text"
-        id="model"
-      /><br /><br /> -->
+      <div class="flex space-x-4 mb-4">
+        <div class="flex-1">
+          <label for="min-price">Min pirce</label>
+          <div class="relative z-10">
+            <input
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
+              type="number"
+              id="min-price"
+            />
+            <span
+              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
+              >€</span
+            >
+          </div>
+        </div>
+        <div class="flex-1">
+          <label for="max-price">Max price</label>
+          <div class="relative z-10">
+            <input
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
+              type="number"
+              id="max-price"
+            />
+            <span
+              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
+              >€</span
+            >
+          </div>
+        </div>
+      </div>
 
-      <!-- <div class="flex space-x-4">
+      <div v-if="isMore" class="flex space-x-4 mb-4">
         <div class="flex-1">
           <label for="model">Min year</label><br />
           <select
@@ -131,57 +150,34 @@
             </option>
           </select>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <br /> -->
-
-      <!-- <div class="flex space-x-4">
+      <div v-if="isMore" class="flex space-x-4 mb-4">
         <div class="flex-1">
-          <label for="model">Min mileage</label><br />
-          <input
-            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            type="text"
-            id="model"
-          />
-        </div>
-        <div class="flex-1">
-          <label for="model">Max mileage</label><br />
-          <input
-            class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            type="text"
-            id="model"
-          />
-        </div>
-      </div> -->
-
-      <!-- <br /> -->
-
-      <div class="flex space-x-4 mb-4">
-        <div class="flex-1">
-          <label for="min-price">Min pirce</label>
+          <label for="model">Min mileage</label>
           <div class="relative z-10">
             <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
-              type="number"
-              id="min-price"
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+              type="text"
+              id="model"
             />
             <span
               class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >€</span
+              >km</span
             >
           </div>
         </div>
         <div class="flex-1">
-          <label for="max-price">Max price</label>
+          <label for="model">Max mileage</label>
           <div class="relative z-10">
             <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
-              type="number"
-              id="max-price"
+              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+              type="text"
+              id="model"
             />
             <span
               class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >€</span
+              >km</span
             >
           </div>
         </div>
@@ -191,6 +187,11 @@
         <button
           class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
           type="button"
+          @click="
+            () => {
+              isMore = true;
+            }
+          "
         >
           <span
             class="material-icons text-black text-opacity-60 mr-2"
@@ -235,6 +236,7 @@ export default defineComponent({
   setup: () => {
     const router = useRouter();
     const isSelectorVisible = ref(false);
+    const isMore = ref(false);
 
     interface Expanded {
       [key: string]: boolean;
@@ -245,6 +247,7 @@ export default defineComponent({
       makeModels,
       isSelectorVisible,
       expanded,
+      isMore,
       onSearch: () => {
         router.push({
           name: "Cars",

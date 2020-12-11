@@ -34,19 +34,34 @@ import f from "faker";
 //   "silver",
 // ];
 
-const cars = new Array(500).fill(null).map(() => ({
+const cars = new Array(40).fill(null).map(() => ({
   brand: f.vehicle.manufacturer(),
   model: f.vehicle.model(),
   type: f.vehicle.type(),
   fuel: f.vehicle.fuel(),
   color: f.vehicle.color(),
-  image: f.image.imageUrl(320, 240, undefined, true, true),
+  image: `https://via.placeholder.com/320x240.webp/${f.internet
+    .color()
+    .slice(1)}/${f.internet.color().slice(1)}`,
   images: new Array(5).fill(null).map(() => ({
-    320: f.image.imageUrl(320, 240, undefined, true, true),
-    640: f.image.imageUrl(640, 480, undefined, true, true),
-    960: f.image.imageUrl(960, 720, undefined, true, true),
-    1280: f.image.imageUrl(1280, 960, undefined, true, true),
-    1600: f.image.imageUrl(1600, 1200, undefined, true, true),
+    320: `https://via.placeholder.com/320x240.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
+    640: `https://via.placeholder.com/640x480.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
+    960: `https://via.placeholder.com/960x720.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
+    1280: `https://via.placeholder.com/1280x960.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
+    1600: `https://via.placeholder.com/1600x1200.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
+    1920: `https://via.placeholder.com/1920x1440.webp/${f.internet
+      .color()
+      .slice(1)}/${f.internet.color().slice(1)}`,
   })),
   mileage: f.random.number({
     min: 0,
