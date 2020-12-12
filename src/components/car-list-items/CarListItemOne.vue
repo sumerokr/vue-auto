@@ -27,7 +27,10 @@
         />
       </p>
       <div class="p-4">
-        <p class="text-xl">{{ numberFormatter.format(car.price) }} €</p>
+        <p class="text-xl flex items-center justify-between">
+          {{ numberFormatter.format(car.price) }} €
+          <span class="material-icons">bookmark</span>
+        </p>
         <h2 class="text-sm mb-3 opacity-60">{{ car.brand }} {{ car.model }}</h2>
 
         <p class="mb-3 text-sm opacity-60">
