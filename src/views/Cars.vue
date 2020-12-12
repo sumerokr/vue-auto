@@ -38,6 +38,7 @@
 import { defineComponent, ref } from "vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import CarListItemTwo from "@/components/car-list-items/CarListItemTwo.vue";
+import CarListItemThree from "@/components/car-list-items/CarListItemThree.vue";
 
 export default defineComponent({
   name: "Cars",
@@ -45,6 +46,7 @@ export default defineComponent({
   components: {
     CarListItemOne,
     CarListItemTwo,
+    CarListItemThree,
   },
 
   setup: () => {
@@ -1194,7 +1196,7 @@ export default defineComponent({
       cars.value = await fetch("/api/cars").then((res) => res.json());
     };
 
-    const variants = ["CarListItemOne", "CarListItemTwo"];
+    const variants = ["CarListItemOne", "CarListItemTwo", "CarListItemThree"];
     const currentVariant = ref(variants[0]);
     const changeVariant = () => {
       const currentViewIndex = variants.findIndex(

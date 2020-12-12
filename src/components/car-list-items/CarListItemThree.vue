@@ -1,10 +1,11 @@
 <template>
   <li class="shadow rounded overflow-hidden">
-    <p>
-      <img
-        class="w-full"
-        :src="car.images[0]['320']"
-        :srcset="`
+    <div class="flex gap-x-4">
+      <p class="flex-1">
+        <img
+          class="w-full"
+          :src="car.images[0]['320']"
+          :srcset="`
             ${car.images[0]['320']}   320w,
             ${car.images[0]['640']}   640w,
             ${car.images[0]['960']}   960w,
@@ -12,7 +13,7 @@
             ${car.images[0]['1600']} 1600w,
             ${car.images[0]['1920']} 1920w
           `"
-        sizes="
+          sizes="
             (min-width: 1952px) 1920px,
             (min-width: 1312px) 1600px,
             (min-width: 992px)  1280px,
@@ -20,23 +21,30 @@
             (min-width: 352px)  640px,
             320px
           "
-        width="320"
-        height="240"
-        alt=""
-      />
-    </p>
+          width="320"
+          height="240"
+          alt=""
+        />
+      </p>
+      <div class="flex-1">
+        <div class="p-4">
+          <p class="text-xl flex items-center justify-between">
+            {{ numberFormatter.format(car.price) }} €
+            <span class="material-icons opacity-60">bookmark</span>
+          </p>
+          <h2 class="text-sm mb-4 opacity-60">
+            {{ car.brand }} {{ car.model }}
+          </h2>
+
+          <p class="text-sm opacity-60">
+            {{ car.year }} / {{ numberFormatter.format(car.mileage) }} km /
+            {{ car.gearbox }}
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="p-4">
-      <p class="text-xl flex items-center justify-between">
-        {{ numberFormatter.format(car.price) }} €
-        <span class="material-icons opacity-60">bookmark</span>
-      </p>
-      <h2 class="text-sm mb-4 opacity-60">{{ car.brand }} {{ car.model }}</h2>
-
-      <p class="mb-4 text-sm opacity-60">
-        {{ car.year }} / {{ numberFormatter.format(car.mileage) }} km /
-        {{ car.gearbox }}
-      </p>
-
       <ul class="flex flex-wrap mb-4 gap-1" v-if="Math.random() < 0.4">
         <li class="px-3 py-1 bg-red-100 text-black text-opacity-60 rounded">
           First owner
@@ -76,7 +84,7 @@ import { defineComponent } from "vue";
 import f from "faker";
 
 export default defineComponent({
-  name: "CarListItemOne",
+  name: "CarListItemThree",
 
   props: {
     car: {
