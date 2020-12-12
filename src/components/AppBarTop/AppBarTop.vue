@@ -1,10 +1,13 @@
 <template>
-  <div class="app-bar-top fixed z-50 top-0 p-4 right-0 left-0 bg-blue-700">
+  <div
+    class="app-bar-top fixed z-50 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
+  >
     <span
       class="material-icons align-top mr-8 text-white"
       @click="$emit('click')"
       >menu</span
     >
+    <span class="text-white text-2xl -mt-1 font-medium italic">vozila</span>
   </div>
 </template>
 
