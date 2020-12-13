@@ -15,15 +15,12 @@
               ${car.images[0]['1920']} 1920w
             `"
             sizes="
-              (min-width: 1952px) 1920px,
-              (min-width: 1312px) 1600px,
-              (min-width: 992px)  1280px,
-              (min-width: 672px)  960px,
-              (min-width: 352px)  640px,
-              320px
+              (min-width: 1361px)  960px,
+              (min-width: 721px)  640px,
+              300px
             "
-            width="320"
-            height="240"
+            width="300"
+            height="225"
             alt=""
           />
         </p>

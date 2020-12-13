@@ -168,6 +168,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "fonts" */ "../views/Fonts.vue"),
   },
+  {
+    path: "/file-list",
+    name: "FileList",
+    component: () =>
+      import(/* webpackChunkName: "file-list" */ "../views/FileList.vue"),
+  },
 ];
 
 const router = createRouter({
