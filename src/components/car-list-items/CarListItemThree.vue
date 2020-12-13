@@ -1,33 +1,35 @@
 <template>
   <li class="shadow rounded overflow-hidden">
-    <div class="flex gap-x-4">
-      <p class="flex-1">
-        <img
-          class="w-full"
-          :src="car.images[0]['320']"
-          :srcset="`
-            ${car.images[0]['320']}   320w,
-            ${car.images[0]['640']}   640w,
-            ${car.images[0]['960']}   960w,
-            ${car.images[0]['1280']} 1280w,
-            ${car.images[0]['1600']} 1600w,
-            ${car.images[0]['1920']} 1920w
-          `"
-          sizes="
-            (min-width: 1952px) 1920px,
-            (min-width: 1312px) 1600px,
-            (min-width: 992px)  1280px,
-            (min-width: 672px)  960px,
-            (min-width: 352px)  640px,
-            320px
-          "
-          width="320"
-          height="240"
-          alt=""
-        />
-      </p>
+    <div class="flex gap-4">
       <div class="flex-1">
-        <div class="p-4">
+        <p class="pl-4 pt-4">
+          <img
+            class="w-full rounded"
+            :src="car.images[0]['320']"
+            :srcset="`
+              ${car.images[0]['320']}   320w,
+              ${car.images[0]['640']}   640w,
+              ${car.images[0]['960']}   960w,
+              ${car.images[0]['1280']} 1280w,
+              ${car.images[0]['1600']} 1600w,
+              ${car.images[0]['1920']} 1920w
+            `"
+            sizes="
+              (min-width: 1952px) 1920px,
+              (min-width: 1312px) 1600px,
+              (min-width: 992px)  1280px,
+              (min-width: 672px)  960px,
+              (min-width: 352px)  640px,
+              320px
+            "
+            width="320"
+            height="240"
+            alt=""
+          />
+        </p>
+      </div>
+      <div class="flex-1">
+        <div class="pt-4 pr-4">
           <p class="text-xl flex items-center justify-between">
             {{ numberFormatter.format(car.price) }} €
             <span class="material-icons opacity-60">bookmark</span>
@@ -72,8 +74,8 @@
             ? f.name.firstName()
             : f.company.companyName()
         }}</span>
-        <span class="ml-auto mr-6 material-icons opacity-60">message</span>
-        <span class="material-icons opacity-60">call</span>
+        <span class="ml-auto mr-3 material-icons opacity-60">place</span>
+        <span class="opacity-60">Podgorica</span>
       </p>
     </div>
   </li>

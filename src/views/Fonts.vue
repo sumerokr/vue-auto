@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
-    <h1 class="text-7xl mb-2">Heading</h1>
-    <h1 class="text-6xl mb-2">Heading</h1>
+    <!-- <h1 class="text-7xl mb-2">Heading</h1> -->
+    <!-- <h1 class="text-6xl mb-2">Heading</h1> -->
     <h1 class="text-5xl mb-2">Heading</h1>
     <h1 class="text-4xl mb-2">Heading</h1>
     <h1 class="text-3xl mb-2">Heading</h1>
@@ -21,6 +21,18 @@
     </h1>
 
     <p class="mb-4">
+      The use of typography as a principal design element in the latest trends,
+      means Google Fonts is now a more valuable resource than ever. Its
+      interface and download system is very intuitive and comfortable.
+    </p>
+
+    <p class="text-sm mb-4">
+      The use of typography as a principal design element in the latest trends,
+      means Google Fonts is now a more valuable resource than ever. Its
+      interface and download system is very intuitive and comfortable.
+    </p>
+
+    <p class="text-xs mb-4">
       The use of typography as a principal design element in the latest trends,
       means Google Fonts is now a more valuable resource than ever. Its
       interface and download system is very intuitive and comfortable.

@@ -5,21 +5,21 @@
         class="w-full"
         :src="car.images[0]['320']"
         :srcset="`
-            ${car.images[0]['320']}   320w,
-            ${car.images[0]['640']}   640w,
-            ${car.images[0]['960']}   960w,
-            ${car.images[0]['1280']} 1280w,
-            ${car.images[0]['1600']} 1600w,
-            ${car.images[0]['1920']} 1920w
-          `"
+          ${car.images[0]['320']}   320w,
+          ${car.images[0]['640']}   640w,
+          ${car.images[0]['960']}   960w,
+          ${car.images[0]['1280']} 1280w,
+          ${car.images[0]['1600']} 1600w,
+          ${car.images[0]['1920']} 1920w
+        `"
         sizes="
-            (min-width: 1952px) 1920px,
-            (min-width: 1312px) 1600px,
-            (min-width: 992px)  1280px,
-            (min-width: 672px)  960px,
-            (min-width: 352px)  640px,
-            320px
-          "
+          (min-width: 1952px) 1920px,
+          (min-width: 1312px) 1600px,
+          (min-width: 992px)  1280px,
+          (min-width: 672px)  960px,
+          (min-width: 352px)  640px,
+          320px
+        "
         width="320"
         height="240"
         alt=""
@@ -64,8 +64,8 @@
             ? f.name.firstName()
             : f.company.companyName()
         }}</span>
-        <span class="ml-auto mr-6 material-icons opacity-60">message</span>
-        <span class="material-icons opacity-60">call</span>
+        <span class="ml-auto mr-3 material-icons opacity-60">place</span>
+        <span class="opacity-60">Podgorica</span>
       </p>
     </div>
   </li>
