@@ -18,14 +18,14 @@
         >
           <img
             class="max-w-full rounded"
-            :src="car.images[0]['320']"
+            :src="car.images[index]['320']"
             :srcset="`
-              ${car.images[0]['320']}   320w,
-              ${car.images[0]['640']}   640w,
-              ${car.images[0]['960']}   960w,
-              ${car.images[0]['1280']} 1280w,
-              ${car.images[0]['1600']} 1600w,
-              ${car.images[0]['1920']} 1920w
+              ${car.images[index]['320']}   320w,
+              ${car.images[index]['640']}   640w,
+              ${car.images[index]['960']}   960w,
+              ${car.images[index]['1280']} 1280w,
+              ${car.images[index]['1600']} 1600w,
+              ${car.images[index]['1920']} 1920w
             `"
             sizes="
               300px

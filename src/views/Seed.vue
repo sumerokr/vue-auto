@@ -46,7 +46,7 @@
 import { defineComponent, ref } from "vue";
 import { firestore } from "@/firebase/firestore.ts";
 import { companies } from "@/faker/companies.ts";
-import { cars } from "@/faker/cars.ts";
+import { getCars } from "@/faker/cars.ts";
 
 const seed = async (secret: string, collection: string, data: object[]) => {
   if (secret !== "1984") {
@@ -81,7 +81,7 @@ export default defineComponent({
         seed(secret.value, "companies", companies);
       },
       seedCars: () => {
-        seed(secret.value, "cars", cars);
+        seed(secret.value, "cars", getCars());
         // console.log({ cars });
       },
     };
