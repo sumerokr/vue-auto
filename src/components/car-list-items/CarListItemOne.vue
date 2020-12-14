@@ -38,17 +38,19 @@
       </p>
 
       <ul class="flex flex-wrap mb-4 gap-1" v-if="Math.random() < 0.4">
-        <li class="px-3 py-1 bg-red-100 text-black text-opacity-60 rounded">
+        <li
+          class="px-2 py-0.5 bg-red-100 text-black text-sm text-opacity-60 rounded"
+        >
           First owner
         </li>
         <li
-          class="px-3 py-1 bg-blue-100 text-black text-opacity-60 rounded"
+          class="px-2 py-0.5 bg-blue-100 text-black text-sm text-opacity-60 rounded"
           v-if="Math.random() < 0.3"
         >
           Second owner
         </li>
         <li
-          class="px-3 py-1 bg-green-100 text-black text-opacity-60 rounded"
+          class="px-2 py-0.5 bg-green-100 text-black text-sm text-opacity-60 rounded"
           v-if="Math.random() < 0.3"
         >
           Zero crashes
@@ -56,16 +58,23 @@
       </ul>
 
       <p class="flex items-start">
-        <span class="mr-3 material-icons opacity-60">{{
-          car.price % 2 === 0 || car.price % 3 === 0 ? "person" : "business"
-        }}</span
-        ><span class="opacity-60">{{
+        <span
+          class="mr-3 material-icons opacity-60"
+          style="font-size: 18px; padding: 1px"
+          >{{
+            car.price % 2 === 0 || car.price % 3 === 0 ? "person" : "business"
+          }}</span
+        ><span class="text-sm opacity-60">{{
           car.price % 2 === 0 || car.price % 3 === 0
             ? f.name.firstName()
             : f.company.companyName()
         }}</span>
-        <span class="ml-auto mr-3 material-icons opacity-60">place</span>
-        <span class="opacity-60">Podgorica</span>
+        <span
+          class="ml-auto mr-3 material-icons opacity-60"
+          style="font-size: 18px; padding: 1px"
+          >place</span
+        >
+        <span class="text-sm opacity-60">Podgorica</span>
       </p>
     </div>
   </li>
