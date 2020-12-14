@@ -40,7 +40,7 @@
       </ul>
       <p class="text-xl flex items-center justify-between">
         {{ numberFormatter.format(car.price) }} €
-        <span class="material-icons opacity-60">bookmark</span>
+        <span class="material-icons opacity-60">bookmark_border</span>
       </p>
       <h2 class="text-sm mb-4 opacity-60">{{ car.brand }} {{ car.model }}</h2>
 
