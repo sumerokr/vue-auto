@@ -83,11 +83,11 @@ export default defineComponent({
   setup: () => {
     const currentFont = ref("");
     const fonts: string[] = [
-      "ABeeZee",
+      // "ABeeZee",
       "Abel",
       // "Aclonica",
       // "Acme",
-      "Actor",
+      // "Actor",
       // "Advent Pro",
       "Alata",
       "Alatsi",
