@@ -1,18 +1,19 @@
 <template>
   <div class="navigation-drawer fixed z-50 top-0 bottom-0 left-0 bg-white w-64">
-    <div class="p-4">
+    <div class="p-4 flex items-center">
       <span class="material-icons align-top" @click="$emit('click')"
         >close</span
       >
+      <span class="text-2xl ml-8 font-medium italic">vozila</span>
     </div>
     <ul>
       <li v-for="item in items" :key="item.name" @click="$emit('click')">
-        <RouterLink
-          class="block px-4 py-3 text-black text-opacity-90"
-          :to="{ name: item.name }"
-        >
-          <span class="material-icons align-top mr-8">{{ item.icon }}</span>
-          {{ item.text }}
+        <RouterLink class="block px-4 py-3" :to="{ name: item.name }">
+          <span
+            class="material-icons align-top mr-8 text-black text-opacity-60"
+            >{{ item.icon }}</span
+          >
+          <span class="text-black text-opacity-90">{{ item.text }}</span>
         </RouterLink>
       </li>
     </ul>
