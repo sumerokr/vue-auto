@@ -249,6 +249,7 @@ const getCars = () => {
     localPhotos.splice(usedIndex, 1);
 
     return {
+      id: f.random.uuid(),
       brand: f.vehicle.manufacturer(),
       model: f.vehicle.model(),
       type: f.vehicle.type(),

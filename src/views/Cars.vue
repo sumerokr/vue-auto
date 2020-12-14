@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { getCars as getLocalCars } from "@/faker/cars";
+import { useStore } from "vuex";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import CarListItemTwo from "@/components/car-list-items/CarListItemTwo.vue";
 import CarListItemThree from "@/components/car-list-items/CarListItemThree.vue";
@@ -56,10 +56,8 @@ export default defineComponent({
   },
 
   setup: () => {
-    const cars = ref(getLocalCars());
-    // const getCars = async () => {
-    //   cars.value = await fetch("/api/cars").then((res) => res.json());
-    // };
+    const store = useStore();
+    const cars = store.state.cars;
 
     const variants = ["CarListItemThree", "CarListItemTwo", "CarListItemOne"];
     const currentVariant = ref(variants[0]);
@@ -69,8 +67,6 @@ export default defineComponent({
       );
       currentVariant.value = variants[currentViewIndex + 1] || variants[0];
     };
-
-    // getCars();
 
     return {
       cars,

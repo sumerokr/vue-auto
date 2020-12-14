@@ -1,6 +1,6 @@
 <template>
   <li class="-mx-4 p-4 relative shadow">
-    <router-link class="block" :to="{ name: 'Car', params: { id: car.id } }">
+    <RouterLink :to="{ name: 'Car', params: { id: car.id } }">
       <ul
         class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
         style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
@@ -88,7 +88,7 @@
         >
         <span class="text-sm opacity-60">Podgorica</span>
       </p>
-    </router-link>
+    </RouterLink>
     <span
       class="absolute right-0 -bottom-4 left-0 h-4 bg-gray-100"
       style="z-index: -1"

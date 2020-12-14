@@ -31,6 +31,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { mutationTypes } from "@/store/types";
+import { getCars } from "@/faker/cars";
 // import AppNav from "@/components/AppNav/AppNav.vue";
 import AppBarTop from "@/components/AppBarTop/AppBarTop.vue";
 import NavigationDrawer from "@/components/NavigationDrawer/NavigationDrawer.vue";
@@ -45,7 +48,10 @@ export default defineComponent({
   },
 
   setup: () => {
+    const store = useStore();
     const isNavVisible = ref(false);
+
+    store.commit(mutationTypes.setCars, getCars());
 
     return {
       isNavVisible,

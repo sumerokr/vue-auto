@@ -86,7 +86,7 @@
 
       <div class="flex space-x-4 mb-4">
         <div class="flex-1">
-          <label for="min-price">Min pirce</label>
+          <label class="text-sm font-medium" for="min-price">Min pirce</label>
           <div class="relative z-10">
             <input
               class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"

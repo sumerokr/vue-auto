@@ -86,9 +86,7 @@
             ['City', car.city],
             [
               'Registered till',
-              dateFormatter.format(
-                new Date(Date.now() + car.registeredTill.seconds)
-              ),
+              dateFormatter.format(new Date(car.registeredTill)),
             ],
             ['Drivetrain', car.drivetrain],
           ]"
@@ -103,16 +101,39 @@
     <br />
 
     <h3 class="text-xl mb-2">Description</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Mattis pellentesque id
-      nibh tortor id aliquet. Nullam ac tortor vitae purus faucibus ornare.
-      Lectus nulla at volutpat diam. Donec enim diam vulputate ut pharetra sit
-      amet aliquam. Urna porttitor rhoncus dolor purus non enim praesent
-      elementum. Nunc sed augue lacus viverra. Amet aliquam id diam maecenas
-      ultricies. Tristique magna sit amet purus gravida quis. Rhoncus dolor
-      purus non enim. Id faucibus nisl tincidunt eget. Purus semper eget duis at
-      tellus.
+
+    <p class="text-lg mb-4">
+      Lato is a sans serif typeface family started in the summer of 2010 by
+      Warsaw-based designer Łukasz Dziedzic (“Lato” means “Summer” in Polish).
+      In December 2010 the Lato family was published under the Open Font License
+      by his foundry tyPoland, with support from Google.
+    </p>
+
+    <p class="text-base mb-4">
+      In the last ten or so years, during which Łukasz has been designing type,
+      most of his projects were rooted in a particular design task that he
+      needed to solve. With Lato, it was no different. Originally, the family
+      was conceived as a set of corporate fonts for a large client — who in the
+      end decided to go in different stylistic direction, so the family became
+      available for a public release.
+    </p>
+
+    <p class="text-sm mb-4">
+      When working on Lato, Łukasz tried to carefully balance some potentially
+      conflicting priorities. He wanted to create a typeface that would seem
+      quite “transparent” when used in body text but would display some original
+      traits when used in larger sizes. He used classical proportions
+      (particularly visible in the uppercase) to give the letterforms familiar
+      harmony and elegance. At the same time, he created a sleek sans serif
+      look, which makes evident the fact that Lato was designed in 2010 — even
+      though it does not follow any current trend.
+    </p>
+
+    <p class="text-xs mb-4">
+      The semi-rounded details of the letters give Lato a feeling of warmth,
+      while the strong structure provides stability and seriousness. “Male and
+      female, serious but friendly. With the feeling of the Summer,” says
+      Łukasz. Learn more at www.latofonts.com
     </p>
 
     <br />
@@ -130,24 +151,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from "vue";
-import { firestore } from "@/firebase/firestore.ts";
-import { useRoute } from "vue-router";
+import { defineComponent, ref, computed } from "vue";
+import { useStore } from "vuex";
+
+interface Car {
+  id: string;
+  brand: string;
+  model: string;
+}
 
 export default defineComponent({
   name: "Car",
-  setup() {
+
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
+
+  setup: (props) => {
+    const store = useStore();
     const isGalleryActive = ref(false);
-    const route = useRoute();
-    const car: Ref<any> = ref(null);
 
-    const carRef = firestore.collection("cars").doc(String(route.params.id));
-
-    carRef.get().then((doc) => {
-      car.value = doc.data();
-    });
+    console.log(props.id);
 
     return {
+      car: computed(() =>
+        store.state.cars.find((car: Car) => car.id === props.id)
+      ),
       isGalleryActive,
       activateGallery: () => {
         isGalleryActive.value = true;
@@ -155,10 +187,8 @@ export default defineComponent({
       deactivateGallry: () => {
         isGalleryActive.value = false;
       },
-      car,
-      language: window.navigator.language,
-      dateFormatter: new Intl.DateTimeFormat("ru-RU"),
-      numberFormatter: new Intl.NumberFormat("ru-RU"),
+      dateFormatter: new Intl.DateTimeFormat(window.navigator.language),
+      numberFormatter: new Intl.NumberFormat(window.navigator.language),
     };
   },
 });

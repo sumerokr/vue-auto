@@ -28,6 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/cars/:id",
     name: "Car",
     component: () => import(/* webpackChunkName: "car" */ "../views/Car.vue"),
+    props: true,
   },
   {
     path: "/companies",
