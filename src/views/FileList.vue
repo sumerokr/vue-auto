@@ -14,7 +14,7 @@ export default defineComponent({
     const storage = firebase.storage();
     const storageRef = storage.ref();
 
-    const stelvioRef = storageRef.child("/focus/");
+    const stelvioRef = storageRef.child("/golf/");
 
     stelvioRef
       .listAll()

@@ -217,6 +217,56 @@ const photos = [
       1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/focus%2F07_1920x1440.jpeg?alt=media&token=da9a1f47-31c3-4eb0-a4ef-f47798f027b6",
     },
   ],
+  [
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_320x240.jpeg?alt=media&token=621091af-0560-4333-93e7-38589ef69a9a",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_640x480.jpeg?alt=media&token=ad38c50f-0d3f-49cc-b9b7-17f8f7d769cc",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_960x720.jpeg?alt=media&token=0b7a7c77-975a-4705-b2a8-ed57899bd654",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_1280x960.jpeg?alt=media&token=19d3fd44-dae8-4399-ab2c-8d8af19f3798",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_1600x1200.jpeg?alt=media&token=afcfcd50-4e1c-4b0d-8581-11618a20357b",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F01_1920x1440.jpeg?alt=media&token=c29d3698-e023-4870-8284-c75dfd49340f",
+    },
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_320x240.jpeg?alt=media&token=72950660-b8ce-46a2-85aa-a327e2db0adf",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_640x480.jpeg?alt=media&token=47b528e1-fb47-4031-9a6b-ad505b699577",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_960x720.jpeg?alt=media&token=0f5c7dec-7957-4ff1-8654-4260c7f06b55",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_1280x960.jpeg?alt=media&token=8f7842f1-ccd9-4f8c-ab97-3f24f609bed8",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_1600x1200.jpeg?alt=media&token=01925ce4-473f-4649-9c79-915e80c2039e",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F02_1920x1440.jpeg?alt=media&token=f29c5f22-4428-4391-b758-c7c6e929064f",
+    },
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_320x240.jpeg?alt=media&token=3918f22f-d857-4773-815f-d88968c110d6",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_640x480.jpeg?alt=media&token=a12682a3-1fe3-46f0-b19f-a5df30b3d892",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_960x720.jpeg?alt=media&token=daae6315-2b88-4487-b1b4-b1ffda8a8d41",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_1280x960.jpeg?alt=media&token=9fe289ef-e332-496c-bb11-ba35ae03d29c",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_1600x1200.jpeg?alt=media&token=4dea630f-8ac1-4d86-9447-6896ac4f3881",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F03_1920x1440.jpeg?alt=media&token=b6c69bdb-906f-4e77-b531-32a5f88f1eef",
+    },
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_320x240.jpeg?alt=media&token=7b1cfa1f-a220-4787-88f8-83affec6b1b0",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_640x480.jpeg?alt=media&token=5282f46d-b297-4e11-a5c9-bd141546b057",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_960x720.jpeg?alt=media&token=cf10bb57-dbeb-4955-893d-025f572f0701",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_1280x960.jpeg?alt=media&token=465d1a0b-196e-4a79-aa22-eae254a16353",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_1600x1200.jpeg?alt=media&token=a223345b-426c-497b-bf9e-375f0795d833",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F04_1920x1440.jpeg?alt=media&token=0055ea75-dc78-45ae-bc92-172fca9b5e5d",
+    },
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_320x240.jpeg?alt=media&token=272dc6ff-7210-4faf-ab33-cb593ee9c8ce",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_640x480.jpeg?alt=media&token=c56ad0a2-3f71-47a0-ad0c-3ff2998569f3",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_960x720.jpeg?alt=media&token=5faeedb3-4fd1-46c8-93ab-09b077d61c03",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_1280x960.jpeg?alt=media&token=7a4770cb-dec4-4044-8af2-4fcd9dfd46cf",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_1600x1200.jpeg?alt=media&token=9763f731-2839-4c72-bce9-f97369d0eb87",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F05_1920x1440.jpeg?alt=media&token=04650072-e219-4c01-9814-eba9dfe08311",
+    },
+    {
+      320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_320x240.jpeg?alt=media&token=907f09ce-4ab5-4a9d-b725-12ce37194484",
+      640: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_640x480.jpeg?alt=media&token=b458886e-fddb-4a32-ae9e-5d30a69c1756",
+      960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_960x720.jpeg?alt=media&token=97125881-7765-4b9c-a41a-efa0f08614d3",
+      1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_1280x960.jpeg?alt=media&token=06a67b9d-2e70-4f04-9db0-83e5001f1e14",
+      1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_1600x1200.jpeg?alt=media&token=90c8ab7c-dc8c-40ef-9ac1-100a51887c72",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/golf%2F06_1920x1440.jpeg?alt=media&token=a7845c2d-8134-4dd8-9f13-7c59f11612d0",
+    },
+  ],
 ];
 
 const getCars = () => {
