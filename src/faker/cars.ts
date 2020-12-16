@@ -272,7 +272,7 @@ const photos = [
 const getCars = () => {
   const localPhotos = photos.slice();
 
-  return new Array(40).fill(null).map(() => {
+  return new Array(20).fill(null).map(() => {
     const photoSrc = localPhotos.length
       ? f.random.arrayElement(localPhotos)
       : new Array(5).fill(null).map(() => ({
