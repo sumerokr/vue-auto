@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
-    <h1 class="flex justify-between items-center text-3xl mb-8">
+    <h1 class="flex items-center text-3xl mb-8">
       <span>Cars</span>
-      <span class="material-icons opacity-60" @click="changeVariant"
+      <span class="material-icons opacity-60 ml-auto" @click="changeVariant"
         >view_list</span
       >
     </h1>
@@ -28,7 +28,14 @@
       </li>
     </ul>
 
-    <ul class="space-y-4">
+    <ul
+      :class="{
+        grid: currentVariant === 'CarListItemFour',
+        'space-y-4': currentVariant !== 'CarListItemFour',
+        'gap-4': currentVariant === 'CarListItemFour',
+        'grid-cols-2': currentVariant === 'CarListItemFour',
+      }"
+    >
       <component
         :is="currentVariant"
         v-for="car in cars"
@@ -45,6 +52,7 @@ import { useStore } from "vuex";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import CarListItemTwo from "@/components/car-list-items/CarListItemTwo.vue";
 import CarListItemThree from "@/components/car-list-items/CarListItemThree.vue";
+import CarListItemFour from "@/components/car-list-items/CarListItemFour.vue";
 
 export default defineComponent({
   name: "Cars",
@@ -53,14 +61,20 @@ export default defineComponent({
     CarListItemOne,
     CarListItemTwo,
     CarListItemThree,
+    CarListItemFour,
   },
 
   setup: () => {
     const store = useStore();
     const cars = store.state.cars;
 
-    const variants = ["CarListItemThree", "CarListItemTwo", "CarListItemOne"];
-    const currentVariant = ref(variants[0]);
+    const variants = [
+      "CarListItemThree",
+      "CarListItemTwo",
+      "CarListItemOne",
+      "CarListItemFour",
+    ];
+    const currentVariant = ref(variants[3]);
     const changeVariant = () => {
       const currentViewIndex = variants.findIndex(
         (i) => i === currentVariant.value

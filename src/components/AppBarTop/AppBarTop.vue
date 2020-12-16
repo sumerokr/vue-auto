@@ -10,7 +10,7 @@
     <span class="text-white text-2xl font-semibold italic">vo</span>
     <span class="text-white text-2xl font-medium italic">zi</span>
     <span class="text-white text-2xl italic">la</span>
-    <div class="relative z-10 w-48 ml-auto mr-6">
+    <div class="relative z-10 w-32 ml-auto mr-6">
       <span
         class="absolute top-0 -z-10 left-0 right-0 bg-blue-500 bg-opacity-50"
         style="height: 4px"
@@ -69,7 +69,7 @@ export default defineComponent({
     const currentFont = ref(font || "");
     const fonts: string[] = [
       // "ABeeZee",
-      "Abel",
+      // "Abel",
       // "Aclonica",
       // "Acme",
       // "Actor",

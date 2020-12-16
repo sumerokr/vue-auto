@@ -1,8 +1,42 @@
 <template>
   <div class="p-4" v-if="car">
-    <h1 class="text-3xl mb-8">Car</h1>
-    <h2>{{ car.brand }} {{ car.model }}, {{ car.year }}</h2>
-    <p class="text-xl mb-2">{{ numberFormatter.format(car.price) }} €</p>
+    <h1 class="text-3xl mb-4">
+      {{ car.brand }} {{ car.model }}, {{ car.year }}
+    </h1>
+    <p class="text-2xl mb-2">{{ numberFormatter.format(car.price) }} €</p>
+
+    <!-- main slider -->
+    <ul
+      class="slider flex overflow-x-scroll -mx-4 mb-4"
+      style="scroll-snap-type: x mandatory"
+    >
+      <li
+        v-for="(image, index) in car.images"
+        :key="image['320']"
+        class="flex-shrink-0 w-full"
+        style="scroll-snap-align: start"
+      >
+        <img
+          class="w-full"
+          :src="image['320']"
+          :srcset="`
+            ${image['320']}   320w,
+            ${image['640']}   640w,
+            ${image['960']}   960w,
+            ${image['1280']} 1280w,
+            ${image['1600']} 1600w
+          `"
+          width="320"
+          height="240"
+          alt=""
+          :loading="index > 0 ? 'lazy' : 'auto'"
+          @click="activateGallery"
+        />
+      </li>
+    </ul>
+    <!-- /main slider -->
+
+    <!-- thumbs -->
     <ul
       class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
       style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
@@ -15,7 +49,12 @@
         style="
           scroll-snap-align: start;
           width: calc(100% - 2rem);
-          max-width: 300px;
+          max-width: 80px;
+        "
+        @click="
+          () => {
+            goTo(index);
+          }
         "
       >
         <img
@@ -32,29 +71,37 @@
           height="240"
           alt=""
           :loading="index > 0 ? 'lazy' : 'auto'"
-          @click="activateGallery"
         />
       </li>
       <li class="flex-shrink-0 w-3">&nbsp;</li>
     </ul>
+    <!-- /thumbs -->
 
+    <!-- gallery -->
     <div
       v-if="isGalleryActive"
-      class="fixed z-50 inset-0 bg-black bg-opacity-50 mb-0 flex items-center"
+      class="fixed z-50 inset-0 flex flex-col bg-black bg-opacity-90"
       @click.self="deactivateGallry"
     >
-      <ul
-        class="flex overflow-x-scroll space-x-0"
-        style="scroll-snap-type: x mandatory; scroll-padding-left: 0"
-      >
+      <div class="p-4 flex items-center justify-end">
+        <span
+          class="material-icons text-white"
+          @click="
+            () => {
+              isGalleryActive = false;
+            }
+          "
+          >close</span
+        >
+      </div>
+      <ul class="overflow-y-auto space-y-2 bg-white">
         <li
           v-for="(image, index) in car.images"
           :key="image['320']"
-          class="flex-shrink-0"
-          style="scroll-snap-align: start"
+          class="shadow"
         >
           <img
-            class="w-full rounded"
+            class="w-full"
             :src="image['320']"
             :srcset="`
               ${image['320']}   320w,
@@ -72,6 +119,7 @@
         </li>
       </ul>
     </div>
+    <!-- /gallery -->
 
     <h3 class="text-xl mb-2">Options</h3>
     <table>
@@ -186,6 +234,17 @@ export default defineComponent({
       },
       deactivateGallry: () => {
         isGalleryActive.value = false;
+      },
+      goTo: (index: number) => {
+        const slider = document.querySelector(".slider");
+        if (!slider) {
+          return;
+        }
+        slider.children[index].scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "end",
+        });
       },
       dateFormatter: new Intl.DateTimeFormat(window.navigator.language),
       numberFormatter: new Intl.NumberFormat(window.navigator.language),
