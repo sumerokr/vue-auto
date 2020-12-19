@@ -300,6 +300,22 @@ const getCars = () => {
     const ownerType = f.random.arrayElement(["business", "person"]);
     const ownerName =
       ownerType === "business" ? f.company.companyName() : f.name.firstName();
+    const getTags = () => {
+      return [
+        {
+          name: "First owner",
+          color: "rgb(254, 226, 226)",
+        },
+        {
+          name: "No crashes",
+          color: "rgb(209, 250, 229)",
+        },
+        {
+          name: "Registered",
+          color: "rgb(219, 234, 254)",
+        },
+      ].filter(() => Math.random() >= 0.75);
+    };
 
     return {
       id: f.random.uuid(),
@@ -338,6 +354,7 @@ const getCars = () => {
       drivetrain: f.random.arrayElement(["FWD", "RWD", "AWD"]),
       ownerType,
       ownerName,
+      tags: getTags(),
     };
   });
 };

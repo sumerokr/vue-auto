@@ -1,5 +1,5 @@
 <template>
-  <li class="shadow-1 rounded overflow-hidden">
+  <li class="card shadow-1 rounded overflow-hidden" ref="root">
     <RouterLink :to="{ name: 'Car', params: { id: car.id } }">
       <p>
         <img
@@ -27,64 +27,63 @@
         />
       </p>
       <div class="p-2">
-        <p class="flex font-medium items-center justify-between">
+        <h2 class="mb-1 text-xs flex items-center justify-between font-medium">
+          <span class="text-black text-opacity-90"
+            >{{ car.brand }} {{ car.model }}</span
+          >
+          <button
+            class="-m-2.5 ml-4 p-2.5 flex items-center hover:bg-gray-100 active:bg-gray-200 focus:outline-none rounded-full"
+            type="button"
+            @click.prevent="toogleIsBookmared"
+          >
+            <span class="material-icons opacity-60">{{
+              isBookmarked ? "bookmark" : "bookmark_border"
+            }}</span>
+          </button>
+        </h2>
+
+        <p class="mb-2 text-xl font-semibold">
           {{ numberFormatter.format(car.price) }} €
-          <span class="material-icons opacity-60">bookmark_border</span>
         </p>
-        <h2 class="text-sm mb-2 opacity-60">{{ car.brand }} {{ car.model }}</h2>
 
         <p class="mb-2 text-xs opacity-60">
           {{ car.year }} / {{ numberFormatter.format(car.mileage) }} km /
           {{ car.gearbox }}
         </p>
 
-        <ul class="flex flex-wrap mb-2 gap-1" v-if="Math.random() < 0.4">
+        <ul v-if="car.tags.length" class="flex flex-wrap mb-2 gap-1">
           <li
-            class="px-1 bg-red-100 text-black text-xs text-opacity-60 rounded-sm"
+            v-for="tag in car.tags"
+            :key="tag.name"
+            class="px-1 text-black text-xs text-opacity-60 rounded"
+            :style="`background-color: ${tag.color}`"
           >
-            First owner
-          </li>
-          <li
-            class="px-1 bg-blue-100 text-black text-xs text-opacity-60 rounded-sm"
-            v-if="Math.random() < 0.3"
-          >
-            Second owner
-          </li>
-          <li
-            class="px-1 bg-green-100 text-black text-xs text-opacity-60 rounded-sm"
-            v-if="Math.random() < 0.3"
-          >
-            Zero crashes
+            {{ tag.name }}
           </li>
         </ul>
 
-        <p class="flex items-start">
-          <span
-            class="mr-0.5 material-icons opacity-60"
-            style="font-size: 12px; padding: 2px"
-            >{{
-              car.price % 2 === 0 || car.price % 3 === 0 ? "person" : "business"
-            }}</span
-          ><span class="text-xs opacity-60">{{
-            car.price % 2 === 0 || car.price % 3 === 0
-              ? f.name.firstName()
-              : f.company.companyName()
-          }}</span>
-          <span
-            class="ml-auto mr-0.5 material-icons opacity-60"
-            style="font-size: 12px; padding: 2px"
-            >place</span
-          >
-          <span class="text-xs opacity-60">{{ car.city }}</span>
-        </p>
+        <div class="meta">
+          <p class="flex items-center">
+            <span
+              class="mr-2 material-icons opacity-60"
+              style="font-size: 12px"
+              >{{ car.ownerType }}</span
+            ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
+          </p>
+          <p class="flex items-center">
+            <span class="mr-2 material-icons opacity-60" style="font-size: 12px"
+              >place</span
+            >
+            <span class="text-xs opacity-60">{{ car.city }}</span>
+          </p>
+        </div>
       </div>
     </RouterLink>
   </li>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import f from "faker";
+import { defineComponent, ref, onMounted } from "vue";
 
 export default defineComponent({
   name: "CarListItemFour",
@@ -97,10 +96,53 @@ export default defineComponent({
   },
 
   setup: () => {
+    const root = ref(null);
+    // @ts-expect-error
+    const ro = new window.ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const cr = entry.contentRect;
+        const bps = [320, 420];
+        const relevantBps = bps.filter((bp) => bp <= cr.width);
+        entry.target.dataset.mq = relevantBps.join(",");
+      }
+    });
+    onMounted(() => {
+      ro.observe(root.value);
+    });
+
+    const isBookmarked = ref(false);
+    const toogleIsBookmared = () => {
+      isBookmarked.value = !isBookmarked.value;
+    };
+
     return {
-      f,
+      root,
+      isBookmarked,
+      toogleIsBookmared,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },
 });
 </script>
+
+<style scoped>
+.params {
+  display: grid;
+  gap: 2px 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card[data-mq*="320"] .params {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.meta {
+  display: grid;
+  gap: 2px 8px;
+  justify-content: space-between;
+}
+
+.card[data-mq*="320"] .meta {
+  grid-template-columns: repeat(2, minmax(0, auto));
+}
+</style>

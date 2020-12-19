@@ -54,23 +54,14 @@
           <li>{{ car.drivetrain }}</li>
         </ul>
 
-        <ul class="flex flex-wrap mb-4 gap-1" v-if="Math.random() < 0.4">
+        <ul v-if="car.tags.length" class="flex flex-wrap mb-4 gap-1">
           <li
-            class="px-2 py-0.5 bg-red-100 text-black text-sm text-opacity-60 rounded"
+            v-for="tag in car.tags"
+            :key="tag.name"
+            class="px-2 py-0.5 text-black text-sm text-opacity-60 rounded"
+            :style="`background-color: ${tag.color}`"
           >
-            First owner
-          </li>
-          <li
-            class="px-2 py-0.5 bg-blue-100 text-black text-sm text-opacity-60 rounded"
-            v-if="Math.random() < 0.3"
-          >
-            Second owner
-          </li>
-          <li
-            class="px-2 py-0.5 bg-green-100 text-black text-sm text-opacity-60 rounded"
-            v-if="Math.random() < 0.3"
-          >
-            Zero crashes
+            {{ tag.name }}
           </li>
         </ul>
 
@@ -78,12 +69,12 @@
           <p class="flex items-center">
             <span
               class="mr-2 material-icons opacity-60"
-              style="font-size: 16px"
+              style="font-size: 12px"
               >{{ car.ownerType }}</span
             ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
           </p>
           <p class="flex items-center">
-            <span class="mr-2 material-icons opacity-60" style="font-size: 16px"
+            <span class="mr-2 material-icons opacity-60" style="font-size: 12px"
               >place</span
             >
             <span class="text-xs opacity-60">{{ car.city }}</span>
@@ -96,7 +87,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import f from "faker";
 
 export default defineComponent({
   name: "CarListItemOne",
@@ -129,7 +119,6 @@ export default defineComponent({
     };
 
     return {
-      f,
       root,
       isBookmarked,
       toogleIsBookmared,
