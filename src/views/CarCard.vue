@@ -1,19 +1,19 @@
 <template>
   <div class="p-4">
-    <CarListItemOne :car="car" />
+    <CarListItemTwo :car="car" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
-import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
+import CarListItemTwo from "@/components/car-list-items/CarListItemTwo.vue";
 
 export default defineComponent({
   name: "CarCard",
 
   components: {
-    CarListItemOne,
+    CarListItemTwo,
   },
 
   setup: () => {
