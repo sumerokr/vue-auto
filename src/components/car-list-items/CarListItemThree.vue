@@ -1,5 +1,5 @@
 <template>
-  <li class="shadow rounded overflow-hidden">
+  <li class="shadow-1 rounded overflow-hidden">
     <RouterLink :to="{ name: 'Car', params: { id: car.id } }">
       <div class="flex space-x-4">
         <div class="flex-1">
@@ -82,7 +82,7 @@
             style="font-size: 18px; padding: 1px"
             >place</span
           >
-          <span class="text-sm opacity-60">Podgorica</span>
+          <span class="text-sm opacity-60">{{ car.city }}</span>
         </p>
       </div>
     </RouterLink>

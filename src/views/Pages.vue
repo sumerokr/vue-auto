@@ -39,6 +39,10 @@ export default defineComponent({
           name: "Pricing",
           text: "Pricing",
         },
+        {
+          name: "CarCard",
+          text: "Car Card",
+        },
       ],
     };
   },

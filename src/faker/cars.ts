@@ -42,7 +42,7 @@ const photos = [
       960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F01_960x720.jpeg?alt=media&token=ea886114-04bb-4bf4-920a-bb59320034d7",
       1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F01_1280x960.jpeg?alt=media&token=35c7f7af-7918-46f0-8ae5-e4c51f57af27",
       1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F01_1600x1200.jpeg?alt=media&token=b0add761-ff9d-4949-899b-857f386ae76a",
-      1900: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F01_1920x1440.jpeg?alt=media&token=529658c5-028b-4555-ba82-f1d712601da4",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F01_1920x1440.jpeg?alt=media&token=529658c5-028b-4555-ba82-f1d712601da4",
     },
     {
       320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_320x240.jpeg?alt=media&token=2fe23bdc-c92c-4166-bec2-7a6f3755c183",
@@ -50,7 +50,7 @@ const photos = [
       960: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_960x720.jpeg?alt=media&token=f13fe59d-a702-443e-8fca-e1d0e3ba0091",
       1280: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_1280x960.jpeg?alt=media&token=1bf2d207-0375-4997-ada2-446827b39843",
       1600: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_1600x1200.jpeg?alt=media&token=a2b1efcc-83b3-46ad-98b6-ac79dcff1a60",
-      1900: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_1920x1440.jpeg?alt=media&token=1382378a-09ed-455e-993f-bc7b73beee66",
+      1920: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F02_1920x1440.jpeg?alt=media&token=1382378a-09ed-455e-993f-bc7b73beee66",
     },
     {
       320: "https://firebasestorage.googleapis.com/v0/b/vue-auto.appspot.com/o/stelvio%2F03_320x240.jpeg?alt=media&token=8c13f3fb-827c-40c7-96c1-987e00a7a01c",
@@ -297,6 +297,9 @@ const getCars = () => {
         }));
     const usedIndex = localPhotos.indexOf(photoSrc);
     localPhotos.splice(usedIndex, 1);
+    const ownerType = f.random.arrayElement(["business", "person"]);
+    const ownerName =
+      ownerType === "business" ? f.company.companyName() : f.name.firstName();
 
     return {
       id: f.random.uuid(),
@@ -318,13 +321,23 @@ const getCars = () => {
         min: 1980,
         max: 2020,
       }),
+      month: f.random.number({
+        min: 0,
+        max: 11,
+      }),
       price: f.random.number({
         min: 500,
         max: 50000,
       }),
+      power: f.random.number({
+        min: 50,
+        max: 500,
+      }),
       city: f.address.city(),
       registeredTill: f.date.future(1),
       drivetrain: f.random.arrayElement(["FWD", "RWD", "AWD"]),
+      ownerType,
+      ownerName,
     };
   });
 };

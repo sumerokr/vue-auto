@@ -1,5 +1,5 @@
 <template>
-  <li class="shadow rounded overflow-hidden">
+  <li class="shadow-1 rounded overflow-hidden">
     <RouterLink :to="{ name: 'Car', params: { id: car.id } }">
       <p>
         <img
@@ -75,7 +75,7 @@
             style="font-size: 12px; padding: 2px"
             >place</span
           >
-          <span class="text-xs opacity-60">Podgorica</span>
+          <span class="text-xs opacity-60">{{ car.city }}</span>
         </p>
       </div>
     </RouterLink>

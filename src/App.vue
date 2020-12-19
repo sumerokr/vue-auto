@@ -26,19 +26,23 @@
       "
     ></div>
   </transition>
-  <AppBarBottom
-    @click="
-      () => {
-        isNavVisible = true;
-      }
-    "
-  />
+  <transition name="slide-top">
+    <AppBarBottom
+      v-if="route.name === 'Cars'"
+      @click="
+        () => {
+          isNavVisible = true;
+        }
+      "
+    />
+  </transition>
   <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import { mutationTypes } from "@/store/types";
 import { getCars } from "@/faker/cars";
 // import AppNav from "@/components/AppNav/AppNav.vue";
@@ -58,11 +62,13 @@ export default defineComponent({
 
   setup: () => {
     const store = useStore();
+    const route = useRoute();
     const isNavVisible = ref(false);
 
     store.commit(mutationTypes.setCars, getCars());
 
     return {
+      route,
       isNavVisible,
     };
   },
@@ -76,20 +82,28 @@ export default defineComponent({
 .slide-leave-active {
   transition: transform 0.2s ease-in;
 }
-
 .slide-enter-from,
 .slide-leave-to {
   transform: translateX(-100%);
 }
 
+.slide-top-enter-active {
+  transition: transform 0.2s ease-out;
+}
+.slide-top-leave-active {
+  transition: transform 0.2s ease-in;
+}
+.slide-top-enter-from,
+.slide-top-leave-to {
+  transform: translateY(100%);
+}
+
 .fade-enter-active {
   transition: opacity 0.2s ease-out;
 }
-
 .fade-leave-active {
   transition: opacity 0.2s ease-in;
 }
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

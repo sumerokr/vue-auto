@@ -1,10 +1,11 @@
 <template>
   <div class="navigation-drawer fixed z-50 top-0 bottom-0 left-0 bg-white w-64">
-    <div class="p-4 flex items-center">
+    <div class="px-4 py-3 flex items-center">
       <span class="material-icons align-top" @click="$emit('click')"
         >close</span
       >
-      <span class="text-2xl ml-8 font-medium italic">vozila</span>
+      <span class="text-2xl ml-8 font-medium italic">Logo</span>
+      <!-- <span class="text-2xl ml-8 font-medium italic">vozila</span> -->
     </div>
     <ul>
       <li v-for="item in items" :key="item.name" @click="$emit('click')">

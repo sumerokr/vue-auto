@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-bar-top fixed z-40 bottom-0 px-4 py-2.5 right-0 left-0 flex items-center justify-end bg-blue-700"
+    class="shadow-8 fixed z-40 bottom-0 px-4 py-2.5 right-0 left-0 flex items-center justify-end bg-blue-700"
   >
     <!-- <span
       class="material-icons align-top mr-8 text-white"
@@ -9,7 +9,7 @@
     > -->
     <button
       type="button"
-      class="mr-4 flex items-center bg-white bg-opacity-10 text-sm uppercase text-white px-3 py-2 rounded text-opacity-70 font-medium"
+      class="mr-4 shadow-1 flex items-center bg-white bg-opacity-10 text-sm uppercase text-white px-3 py-2 rounded text-opacity-70 font-medium"
     >
       <span class="material-icons mr-2" style="font-size: 18px">save</span>
       <span class="">save</span>
@@ -17,13 +17,13 @@
 
     <button
       type="button"
-      class="mr-4 flex items-center bg-white bg-opacity-10 text-sm uppercase text-white px-3 py-2 rounded text-opacity-70 font-medium"
+      class="mr-4 shadow-1 flex items-center bg-white bg-opacity-10 text-sm uppercase text-white px-3 py-2 rounded text-opacity-70 font-medium"
     >
       <span class="material-icons mr-2" style="font-size: 18px">sort</span>
       <span class="">sort</span>
     </button>
     <button
-      class="fab p-4 bg-yellow-400 rounded-full -my-4 transform -translate-y-1/2"
+      class="shadow-12 p-4 bg-yellow-400 rounded-full -my-4 transform -translate-y-1/2"
       type="button"
     >
       <span
@@ -392,14 +392,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.app-bar-top {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.fab {
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-</style>
+<style></style>
