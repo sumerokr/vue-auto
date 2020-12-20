@@ -50,7 +50,7 @@
 
         <div class="col-span-3">
           <ul class="params text-sm opacity-60">
-            <li>{{ String(car.month).padStart(2, "0") }}/{{ car.year }}</li>
+            <li>{{ String(car.month + 1).padStart(2, "0") }}/{{ car.year }}</li>
             <li>{{ car.fuel }}</li>
             <li>{{ numberFormatter.format(car.mileage) }} km</li>
             <li>{{ car.gearbox }}</li>
