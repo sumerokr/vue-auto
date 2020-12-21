@@ -2,6 +2,8 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Home</h1>
 
+    <AppInput />
+
     <ul>
       <li v-for="item in items" :key="item.name">
         <RouterLink
@@ -38,9 +40,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
+import AppInput from "@/components/AppInput/AppInput.vue";
 
 export default defineComponent({
   name: "Home",
+
+  components: {
+    AppInput,
+  },
 
   setup: () => {
     const store = useStore();
