@@ -2,7 +2,7 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">User details</h1>
 
-    <form @submit.prevent="onEdit">
+    <!-- <form @submit.prevent="onEdit">
       <label for="name">Name</label><br />
       <input
         class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
@@ -49,12 +49,14 @@
       >
         Update
       </button>
-    </form>
+    </form> -->
+
+    <p v-if="email">Email: {{ email }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -62,8 +64,25 @@ export default defineComponent({
 
   setup: () => {
     const router = useRouter();
+    const email = ref("");
+
+    const getProfile = async () => {
+      try {
+        const response = await fetch(
+          "https://example.com/api/v1/profile"
+        ).then((res) => res.json());
+        alert("success! see console for details");
+        console.log(response);
+      } catch (error) {
+        alert("failure! see console for details");
+        console.log(error);
+      }
+    };
+
+    getProfile();
 
     return {
+      email,
       onEdit: () => {
         router.push({
           name: "User",

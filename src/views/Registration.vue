@@ -2,49 +2,32 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Registration</h1>
 
-    <p>
-      Already registered?
-      <router-link class="text-blue-700" :to="{ name: 'Login' }">
-        Log in</router-link
-      >
-    </p>
-    <br />
-
-    <p>Type</p>
-    <ul class="space-y-2">
-      <li>
-        <label class="block border-2 border-gray-200 p-2 rounded" for="personal"
-          ><input type="radio" id="personal" name="type" value="personal" />
-          Personal</label
+    <form class="grid gap-4" @submit.prevent="register">
+      <p>
+        Already registered?
+        <router-link class="text-blue-700" :to="{ name: 'Login' }">
+          Log in</router-link
         >
-      </li>
-      <li>
-        <label class="block border-2 border-gray-200 p-2 rounded" for="company"
-          ><input type="radio" id="company" name="type" value="company" />
-          Company</label
-        >
-      </li>
-    </ul>
+      </p>
 
-    <br />
-
-    <form @submit.prevent="onRegistration">
-      <label for="email">Email</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+      <AppInput
+        v-model="email"
         type="email"
+        label="Email"
         id="email"
-      /><br /><br />
+        required
+      />
 
-      <label for="password">Password</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+      <AppInput
+        v-model="password"
         type="password"
+        label="Password"
         id="password"
-      /><br /><br />
+        required
+      />
 
       <button
-        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
+        class="bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Register
@@ -54,16 +37,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import AppInput from "@/components/AppInput/AppInput.vue";
 
 export default defineComponent({
   name: "Registration",
 
+  components: {
+    AppInput,
+  },
+
   setup: () => {
+    const email = ref("");
+    const password = ref("");
+
+    const register = async () => {
+      try {
+        const response = await fetch("https://example.com/api/v1/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }).then((res) => res.json());
+        alert("success! see console for details");
+        console.log(response);
+      } catch (error) {
+        alert("failure! see console for details");
+        console.log(error);
+      }
+    };
+
     return {
-      onRegistration: () => {
-        alert("Registration attempt");
-      },
+      email,
+      password,
+      register,
     };
   },
 });

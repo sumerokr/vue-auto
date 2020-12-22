@@ -2,39 +2,39 @@
   <div class="p-4">
     <h1 class="text-3xl mb-8">Login</h1>
 
-    <p>
-      Don't have an account?
-      <router-link class="text-blue-700" :to="{ name: 'Registration' }">
-        Register</router-link
-      >
-    </p>
-    <br />
+    <form class="grid gap-4" @submit.prevent="login">
+      <p>
+        Don't have an account?
+        <router-link class="text-blue-700" :to="{ name: 'Registration' }">
+          Register</router-link
+        >
+      </p>
 
-    <form @submit.prevent="onLogin">
-      <label for="email">Email</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+      <AppInput
+        v-model="email"
         type="email"
+        label="Email"
         id="email"
-      /><br /><br />
+        required
+      />
 
-      <label for="password">Password</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+      <AppInput
+        v-model="password"
         type="password"
+        label="Password"
         id="password"
-      /><br />
-      <p class="mt-2">
+        required
+      />
+
+      <p>
         Forgot password?
         <router-link class="text-blue-700" :to="{ name: 'RestorePassword' }">
           Restore</router-link
         >
       </p>
-      <br />
-      <br />
 
       <button
-        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
+        class="bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium"
         type="submit"
       >
         Log in
@@ -44,16 +44,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import AppInput from "@/components/AppInput/AppInput.vue";
 
 export default defineComponent({
   name: "Login",
 
+  components: {
+    AppInput,
+  },
+
   setup: () => {
+    const email = ref("");
+    const password = ref("");
+
+    const register = async () => {
+      try {
+        const response = await fetch("https://example.com/api/v1/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }).then((res) => res.json());
+        alert("success! see console for details");
+        console.log(response);
+      } catch (error) {
+        alert("failure! see console for details");
+        console.log(error);
+      }
+    };
+
     return {
-      onLogin: () => {
-        alert("Log in attempt");
-      },
+      email,
+      password,
+      register,
     };
   },
 });
