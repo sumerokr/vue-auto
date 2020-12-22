@@ -1,114 +1,32 @@
 <template>
   <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
+    class="wrapper relative z-10"
+    :class="{ filled: modelValue && modelValue.trim() !== '' }"
   >
     <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
-    >
-    <input
-      class="w-full px-3.5 py-1 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
-    />
-  </div>
-
-  <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
-  >
-    <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
-    >
-    <input
-      class="w-full px-3.5 py-1.5 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
-    />
-  </div>
-
-  <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
-  >
-    <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
-    >
-    <input
-      class="w-full px-3.5 py-2 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
-    />
-  </div>
-
-  <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
-  >
-    <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
+      class="label px-1 cursor-text font-medium transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
+      :for="$attrs.id"
+      >{{ label }}</label
     >
     <input
       class="w-full px-3.5 py-2.5 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
-    />
-  </div>
-
-  <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
-  >
-    <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
-    >
-    <input
-      class="w-full px-3.5 py-3 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
-    />
-  </div>
-
-  <div
-    class="wrapper w-1/2 group relative z-10 mb-6"
-    :class="{ filled: value.trim() !== '' }"
-  >
-    <label
-      class="label px-1 transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
-      for=""
-      >Hello my darling</label
-    >
-    <input
-      class="w-full px-3.5 py-3.5 border-2 rounded transition-all focus:border-blue-700 outline-none"
-      type="text"
-      v-model="value"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "AppInput",
 
-  setup: () => {
-    const value = ref("");
+  inheritAttrs: false,
 
-    return {
-      value,
-    };
-  },
+  props: ["modelValue", "label"],
+  emits: ["update:modelValue"],
 });
 </script>
 
@@ -116,9 +34,13 @@ export default defineComponent({
 .wrapper.filled .label,
 .wrapper:focus-within .label {
   top: 1px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #1d4ed8;
+  font-size: 0.75rem;
+  line-height: 1rem;
   background-color: #fff;
+  cursor: default;
+}
+
+.wrapper:focus-within .label {
+  color: #1d4ed8;
 }
 </style>
