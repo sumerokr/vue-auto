@@ -69,7 +69,10 @@ export default defineComponent({
     const getProfile = async () => {
       try {
         const response = await fetch(
-          "https://example.com/api/v1/profile"
+          "https://oll9kk9mhi.execute-api.eu-central-1.amazonaws.com/test/profile",
+          {
+            credentials: "include",
+          }
         ).then((res) => res.json());
         alert("success! see console for details");
         console.log(response);

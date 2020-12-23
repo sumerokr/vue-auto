@@ -58,15 +58,19 @@ export default defineComponent({
     const email = ref("");
     const password = ref("");
 
-    const register = async () => {
+    const login = async () => {
       try {
-        const response = await fetch("https://example.com/api/v1/login", {
-          method: "POST",
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }).then((res) => res.json());
+        const response = await fetch(
+          "https://oll9kk9mhi.execute-api.eu-central-1.amazonaws.com/test/login",
+          {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          }
+        ).then((res) => res.json());
         alert("success! see console for details");
         console.log(response);
       } catch (error) {
@@ -78,7 +82,7 @@ export default defineComponent({
     return {
       email,
       password,
-      register,
+      login,
     };
   },
 });
