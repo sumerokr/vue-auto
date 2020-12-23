@@ -98,7 +98,7 @@
         id="max-price"
       />
 
-      <AppSelect v-model="minYear" id="min-year" label="Min year">
+      <AppSelect v-if="isMore" v-model="minYear" id="min-year" label="Min year">
         <option value="" hidden selected></option>
         <option
           v-for="year in new Array(20)
@@ -111,7 +111,7 @@
         </option>
       </AppSelect>
 
-      <AppSelect v-model="maxYear" id="max-year" label="Max year">
+      <AppSelect v-if="isMore" v-model="maxYear" id="max-year" label="Max year">
         <option value="" hidden selected></option>
         <option
           v-for="year in new Array(20)
@@ -125,6 +125,7 @@
       </AppSelect>
 
       <AppInput
+        v-if="isMore"
         v-model="minMileage"
         label="Min mileage, km"
         type="number"
@@ -132,6 +133,7 @@
       />
 
       <AppInput
+        v-if="isMore"
         v-model="maxMileage"
         label="Max mileage, km"
         type="number"
