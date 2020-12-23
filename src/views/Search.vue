@@ -2,9 +2,9 @@
   <div class="p-4">
     <h1 class="text-2xl mb-8">Search for a car</h1>
 
-    <form @submit.prevent="onSearch">
+    <form class="grid gap-4 grid-cols-2" @submit.prevent="onSearch">
       <button
-        class="mb-4 border-2 border-gray-200 rounded bg-white p-2 w-full flex"
+        class="col-span-2 border-2 border-gray-200 rounded bg-white px-3.5 py-2.5 w-full flex"
         type="button"
         @click="showSelector"
       >
@@ -28,7 +28,7 @@
         >
           <div class="p-4">
             <input
-              class="border-2 border-gray-200 bg-gray-50 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+              class="border-2 border-gray-200 bg-gray-50 rounded focus:outline-none focus:border-blue-400 px-3.5 py-2.5 w-full"
               type="text"
               id="make"
             />
@@ -84,106 +84,61 @@
 
       <!-- <br /> -->
 
-      <div class="flex space-x-4 mb-4">
-        <div class="flex-1">
-          <label class="text-sm font-medium" for="min-price">Min pirce</label>
-          <div class="relative z-10">
-            <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
-              type="number"
-              id="min-price"
-            />
-            <span
-              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >€</span
-            >
-          </div>
-        </div>
-        <div class="flex-1">
-          <label for="max-price">Max price</label>
-          <div class="relative z-10">
-            <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 py-2 pl-2 pr-12 w-full text-right"
-              type="number"
-              id="max-price"
-            />
-            <span
-              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >€</span
-            >
-          </div>
-        </div>
-      </div>
+      <AppInput
+        v-model="minPrice"
+        label="Min price, €"
+        type="number"
+        id="min-price"
+      />
 
-      <div v-if="isMore" class="flex space-x-4 mb-4">
-        <div class="flex-1">
-          <label for="model">Min year</label><br />
-          <select
-            class="border-2 border-gray-200 bg-transparent rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            id="model"
-          >
-            <option
-              v-for="year in new Array(20)
-                .fill(null)
-                .map((item, index) => 2020 - index)"
-              :value="year"
-              :key="year"
-            >
-              {{ year }}
-            </option>
-          </select>
-        </div>
-        <div class="flex-1">
-          <label for="model">Max year</label><br />
-          <select
-            class="border-2 border-gray-200 bg-transparent rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-            id="model"
-          >
-            <option
-              v-for="year in new Array(20)
-                .fill(null)
-                .map((item, index) => 2020 - index)"
-              :value="year"
-              :key="year"
-            >
-              {{ year }}
-            </option>
-          </select>
-        </div>
-      </div>
+      <AppInput
+        v-model="maxPrice"
+        label="Max price, €"
+        type="number"
+        id="max-price"
+      />
 
-      <div v-if="isMore" class="flex space-x-4 mb-4">
-        <div class="flex-1">
-          <label for="model">Min mileage</label>
-          <div class="relative z-10">
-            <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-              type="text"
-              id="model"
-            />
-            <span
-              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >km</span
-            >
-          </div>
-        </div>
-        <div class="flex-1">
-          <label for="model">Max mileage</label>
-          <div class="relative z-10">
-            <input
-              class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
-              type="text"
-              id="model"
-            />
-            <span
-              class="absolute top-0.5 right-0.5 bottom-0.5 bg-gray-100 w-10 flex items-center justify-center text-black text-opacity-60"
-              >km</span
-            >
-          </div>
-        </div>
-      </div>
+      <AppSelect v-model="minYear" id="min-year" label="Min year">
+        <option value="" hidden selected></option>
+        <option
+          v-for="year in new Array(20)
+            .fill(null)
+            .map((item, index) => 2020 - index)"
+          :value="year"
+          :key="year"
+        >
+          {{ year }}
+        </option>
+      </AppSelect>
 
-      <p class="flex mb-4 justify-between">
+      <AppSelect v-model="maxYear" id="max-year" label="Max year">
+        <option value="" hidden selected></option>
+        <option
+          v-for="year in new Array(20)
+            .fill(null)
+            .map((item, index) => 2020 - index)"
+          :value="year"
+          :key="year"
+        >
+          {{ year }}
+        </option>
+      </AppSelect>
+
+      <AppInput
+        v-model="minMileage"
+        label="Min mileage, km"
+        type="number"
+        id="min-mileage"
+      />
+
+      <AppInput
+        v-model="maxMileage"
+        label="Max mileage, km"
+        type="number"
+        id="max-mileage"
+      />
+
+      <p class="col-span-2 flex justify-between">
         <button
           class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
           type="button"
@@ -215,7 +170,7 @@
       </p>
 
       <button
-        class="flex items-center justify-center w-full bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium uppercase"
+        class="col-span-2 flex items-center justify-center w-full bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium uppercase"
         type="submit"
       >
         <span>Search</span>
@@ -227,16 +182,32 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import AppInput from "@/components/AppInput/AppInput.vue";
+import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import { useRouter } from "vue-router";
 import { makeModels } from "@/faker/cars.ts";
 
 export default defineComponent({
   name: "Search",
 
+  components: {
+    AppInput,
+    AppSelect,
+  },
+
   setup: () => {
     const router = useRouter();
     const isSelectorVisible = ref(false);
     const isMore = ref(false);
+
+    const make = ref("");
+    const model = ref("");
+    const minPrice = ref("");
+    const maxPrice = ref("");
+    const minYear = ref("");
+    const maxYear = ref("");
+    const minMileage = ref("");
+    const maxMileage = ref("");
 
     interface Expanded {
       [key: string]: boolean;
@@ -244,6 +215,14 @@ export default defineComponent({
     const expanded = ref<Expanded>({});
 
     return {
+      make,
+      model,
+      minPrice,
+      maxPrice,
+      minYear,
+      maxYear,
+      minMileage,
+      maxMileage,
       makeModels,
       isSelectorVisible,
       expanded,
