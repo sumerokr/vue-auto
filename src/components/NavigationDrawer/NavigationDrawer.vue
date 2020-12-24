@@ -1,9 +1,9 @@
 <template>
   <div class="navigation-drawer fixed z-50 top-0 bottom-0 left-0 bg-white w-64">
     <div class="px-4 py-3 flex items-center">
-      <span class="material-icons align-top" @click="$emit('click')"
-        >close</span
-      >
+      <IconButton class="-m-3" @click="$emit('click')">
+        <span class="material-icons align-top">close</span>
+      </IconButton>
       <span class="text-2xl ml-8 font-medium italic">Logo</span>
       <!-- <span class="text-2xl ml-8 font-medium italic">vozila</span> -->
     </div>
@@ -21,12 +21,19 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
+
+export default defineComponent({
   name: "NavigationDrawer",
 
   emits: {
     click: null,
+  },
+
+  components: {
+    IconButton,
   },
 
   setup: () => {
@@ -44,7 +51,7 @@ export default {
       ],
     };
   },
-};
+});
 </script>
 
 <style>

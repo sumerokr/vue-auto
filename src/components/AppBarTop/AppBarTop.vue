@@ -2,11 +2,9 @@
   <div
     class="app-bar-top fixed z-40 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
   >
-    <span
-      class="material-icons align-top mr-8 text-white"
-      @click="$emit('click')"
-      >menu</span
-    >
+    <IconButton class="-m-3 mr-5" @click="$emit('click')">
+      <span class="material-icons text-white">menu</span>
+    </IconButton>
     <span class="text-white text-2xl font-medium italic">Logo</span>
     <!-- <span class="text-white text-2xl font-semibold italic">vo</span>
     <span class="text-white text-2xl font-medium italic">zi</span>
@@ -51,18 +49,25 @@
         style="height: 4px"
       ></span>
     </div>
-    <span class="material-icons text-white" @click="pickNext">format_size</span>
+    <IconButton class="-m-3" @click="pickNext">
+      <span class="material-icons text-white">format_size</span>
+    </IconButton>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
 
 export default defineComponent({
   name: "AppBarTop",
 
   emits: {
     click: null,
+  },
+
+  components: {
+    IconButton,
   },
 
   setup: () => {
