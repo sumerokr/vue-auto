@@ -141,43 +141,29 @@
       />
 
       <p class="col-span-2 flex justify-between">
-        <button
-          class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
-          type="button"
-          @click="
-            () => {
-              isMore = true;
-            }
-          "
+        <AppButton
+          before="tune"
+          appearance="secondary"
+          size="36"
+          @click="isMore = true"
+          >More options</AppButton
         >
-          <span
-            class="material-icons text-black text-opacity-60 mr-2"
-            style="font-size: 18px"
-            >tune</span
-          >
-          <span>More options</span>
-        </button>
 
-        <button
-          class="flex items-center bg-blue-50 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
-          type="button"
+        <AppButton before="restore" appearance="secondary" size="36"
+          >Reset</AppButton
         >
-          <span
-            class="material-icons text-black text-opacity-60 mr-2"
-            style="font-size: 18px"
-            >restore</span
-          >
-          <span>Reset</span>
-        </button>
       </p>
 
-      <button
-        class="col-span-2 flex items-center justify-center w-full bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium uppercase"
-        type="submit"
-      >
-        <span>Search</span>
-        <span class="material-icons ml-2">search</span>
-      </button>
+      <div class="col-span-2">
+        <AppButton
+          before="search"
+          appearance="primary"
+          size="48"
+          type="submit"
+          is-block
+          >Search</AppButton
+        >
+      </div>
     </form>
   </div>
 </template>
@@ -186,6 +172,7 @@
 import { defineComponent, ref } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
 import { makeModels } from "@/faker/cars.ts";
 
@@ -195,6 +182,7 @@ export default defineComponent({
   components: {
     AppInput,
     AppSelect,
+    AppButton,
   },
 
   setup: () => {

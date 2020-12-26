@@ -1,9 +1,9 @@
 <template>
   <div class="card shadow-1 rounded overflow-hidden" ref="root">
-    <RouterLink :to="{ name: 'Car', params: { id: car.id } }">
-      <p>
+    <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
+      <p class="image-wrapper">
         <img
-          class="w-full"
+          class="w-full align-top"
           :src="car.images[0]['320']"
           :srcset="`
             ${car.images[0]['320']}   320w,
@@ -26,26 +26,28 @@
           alt=""
         />
       </p>
-      <div class="px-4 py-3">
-        <h2 class="mb-0.5 flex items-center justify-between font-medium">
-          <span class="text-black text-opacity-90"
-            >{{ car.brand }} {{ car.model }}</span
-          >
-          <button
-            class="-m-2.5 ml-4 p-2.5 flex items-center hover:bg-gray-100 active:bg-gray-200 focus:outline-none rounded-full"
+
+      <div class="content">
+        <h2 class="title flex items-start justify-between font-medium">
+          <span class="title-text">{{ car.brand }} {{ car.model }}</span>
+          <IconButton
+            hidden
+            class="bookmark"
             type="button"
+            :is-dense="!relevantBps.includes(288)"
             @click.prevent="toogleIsBookmared"
           >
-            <span class="material-icons opacity-60">{{
+            <span class="bookmark-icon material-icons">{{
               isBookmarked ? "bookmark" : "bookmark_border"
             }}</span>
-          </button>
+          </IconButton>
         </h2>
-        <p class="mb-2 text-2xl font-semibold">
+
+        <p class="price font-semibold">
           {{ numberFormatter.format(car.price) }} €
         </p>
 
-        <ul class="params mb-4 text-sm opacity-60">
+        <ul class="params">
           <li>{{ String(car.month + 1).padStart(2, "0") }}/{{ car.year }}</li>
           <li>{{ car.fuel }}</li>
           <li>{{ numberFormatter.format(car.mileage) }} km</li>
@@ -54,11 +56,11 @@
           <li>{{ car.drivetrain }}</li>
         </ul>
 
-        <ul v-if="car.tags.length" class="flex flex-wrap mb-4 gap-1">
+        <ul v-if="car.tags.length" class="tags flex flex-wrap gap-1">
           <li
             v-for="tag in car.tags"
             :key="tag.name"
-            class="px-2 py-0.5 text-black text-sm text-opacity-60 rounded"
+            class="tag rounded font-condensed"
             :style="`background-color: ${tag.color}`"
           >
             {{ tag.name }}
@@ -66,18 +68,13 @@
         </ul>
 
         <div class="meta">
-          <p class="flex items-center">
-            <span
-              class="mr-2 material-icons opacity-60"
-              style="font-size: 12px"
-              >{{ car.ownerType }}</span
-            ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
+          <p class="flex items-start">
+            <span class="meta-icon material-icons">{{ car.ownerType }}</span
+            ><span class="meta-text">{{ car.ownerName }}</span>
           </p>
-          <p class="flex items-center">
-            <span class="mr-2 material-icons opacity-60" style="font-size: 12px"
-              >place</span
-            >
-            <span class="text-xs opacity-60">{{ car.city }}</span>
+          <p class="flex items-start">
+            <span class="meta-icon material-icons">place</span>
+            <span class="meta-text">{{ car.city }}</span>
           </p>
         </div>
       </div>
@@ -87,9 +84,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
 
 export default defineComponent({
   name: "CarListItemOne",
+
+  components: {
+    IconButton,
+  },
 
   props: {
     car: {
@@ -100,13 +102,14 @@ export default defineComponent({
 
   setup: () => {
     const root = ref(null);
+    const relevantBps = ref<number[]>([]);
     // @ts-expect-error
     const ro = new window.ResizeObserver((entries) => {
       for (const entry of entries) {
         const cr = entry.contentRect;
-        const bps = [320, 420];
-        const relevantBps = bps.filter((bp) => bp <= cr.width);
-        entry.target.dataset.mq = relevantBps.join(",");
+        const bps = [188, 288, 420];
+        relevantBps.value = bps.filter((bp) => bp <= cr.width);
+        entry.target.dataset.mq = relevantBps.value.join(",");
       }
     });
     onMounted(() => {
@@ -120,6 +123,7 @@ export default defineComponent({
 
     return {
       root,
+      relevantBps,
       isBookmarked,
       toogleIsBookmared,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
@@ -129,23 +133,166 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.params {
-  display: grid;
-  gap: 2px 8px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.card {
+  display: flex;
 }
 
-.card[data-mq*="320"] .params {
+.link {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.card[data-mq*="188"] .content {
+  padding: 12px;
+}
+
+.card[data-mq*="288"] .content {
+  padding: 16px;
+}
+
+.title {
+  margin-bottom: 6px;
+}
+
+.card[data-mq*="288"] .title {
+  margin-bottom: 8px;
+}
+
+.title-text {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: var(--font-family-condensed);
+  color: var(--color-text-primary);
+}
+
+.card[data-mq*="188"] .title-text {
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.card[data-mq*="288"] .title-text {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 16px;
+  font-family: var(--font-family-default);
+  line-height: 22px;
+}
+
+.bookmark {
+  margin: -10px -10px -10px 4px;
+}
+
+.card[data-mq*="288"] .bookmark {
+  margin: -12px;
+}
+
+.bookmark-icon {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+}
+
+.card[data-mq*="288"] .bookmark-icon {
+  font-size: 24px;
+}
+
+.price {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-family: var(--font-family-default);
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.card[data-mq*="188"] .price {
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+.card[data-mq*="288"] .price {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.params {
+  margin-bottom: 6px;
+  display: grid;
+  gap: 0px 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  font-size: 12px;
+  font-family: var(--font-family-condensed);
+  color: var(--color-text-secondary);
+}
+
+.card[data-mq*="188"] .params {
+  gap: 1px 8px;
+  margin-bottom: 8px;
+  font-family: var(--font-family-default);
+  font-size: 14px;
+}
+
+.card[data-mq*="288"] .params {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.tags {
+  margin-bottom: 8px;
+}
+
+.card[data-mq*="288"] .tags {
+  margin-bottom: 12px;
+}
+
+.tag {
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-text-quite);
 }
 
 .meta {
+  margin-top: auto;
   display: grid;
   gap: 2px 8px;
   justify-content: space-between;
+  align-items: start;
 }
 
-.card[data-mq*="320"] .meta {
+.card[data-mq*="288"] .meta {
   grid-template-columns: repeat(2, minmax(0, auto));
+}
+
+.meta-icon {
+  margin-right: 6px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 14px;
+  color: var(--color-text-quite);
+}
+
+.card[data-mq*="188"] .meta-icon {
+  margin-right: 8px;
+}
+
+.meta-text {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--font-family-default);
+  color: var(--color-text-quite);
+}
+
+.card[data-mq*="288"] .meta-text {
+  font-family: var(--font-family-default);
 }
 </style>

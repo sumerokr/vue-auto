@@ -1,22 +1,22 @@
 <template>
-  <div class="p-4 space-y-4">
-    <CarListItemThree :car="car0" />
-    <CarListItemThree :car="car1" />
-    <CarListItemThree :car="car2" />
-    <CarListItemThree :car="car3" />
+  <div class="p-4 grid grid-cols-1 gap-4">
+    <CarListItemOne :car="car0" />
+    <CarListItemOne :car="car1" />
+    <CarListItemOne :car="car2" />
+    <CarListItemOne :car="car3" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
-import CarListItemThree from "@/components/car-list-items/CarListItemThree.vue";
+import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 
 export default defineComponent({
   name: "CarCard",
 
   components: {
-    CarListItemThree,
+    CarListItemOne,
   },
 
   setup: () => {

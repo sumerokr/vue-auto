@@ -76,6 +76,15 @@ export default defineComponent({
 </script>
 
 <style>
+:root {
+  --font-family-default: "Asap", sans-serif;
+  --font-family-condensed: "Asap Condensed", sans-serif;
+  --color-text-primary: rgba(0, 0, 0, 0.9);
+  --color-text-secondary: rgba(0, 0, 0, 0.75);
+  --color-text-quite: rgba(0, 0, 0, 0.6);
+  --color-text-mute: rgba(0, 0, 0, 0.4);
+}
+
 .slide-enter-active {
   transition: transform 0.2s ease-out;
 }
