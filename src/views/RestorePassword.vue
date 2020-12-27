@@ -11,32 +11,38 @@
 
     <br />
 
-    <form @submit.prevent="onRestore">
-      <label for="email">Email</label><br />
-      <input
-        class="border-2 border-gray-200 rounded focus:outline-none focus:border-blue-400 p-2 w-full"
+    <form class="grid gap-4" @submit.prevent="onRestore">
+      <AppInput
+        v-model="email"
         type="email"
+        label="Email"
         id="email"
-      /><br /><br />
+        required
+      />
 
-      <button
-        class="bg-blue-700 text-white px-4 py-2 rounded text-opacity-90 font-medium"
-        type="submit"
-      >
-        Restore
-      </button>
+      <AppButton size="48" appearance="primary">Restore</AppButton>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import AppInput from "@/components/AppInput/AppInput.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
 
 export default defineComponent({
   name: "RestorePassword",
 
+  components: {
+    AppInput,
+    AppButton,
+  },
+
   setup: () => {
+    const email = ref("");
+
     return {
+      email,
       onRestore: () => {
         alert("Restore password attempt");
       },

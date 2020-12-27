@@ -107,7 +107,7 @@ export default defineComponent({
     const ro = new window.ResizeObserver((entries) => {
       for (const entry of entries) {
         const cr = entry.contentRect;
-        const bps = [188, 288, 420];
+        const bps = [188, 238, 288, 420];
         relevantBps.value = bps.filter((bp) => bp <= cr.width);
         entry.target.dataset.mq = relevantBps.value.join(",");
       }
@@ -175,16 +175,19 @@ export default defineComponent({
 }
 
 .card[data-mq*="188"] .title-text {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.card[data-mq*="238"] .title-text {
   font-size: 18px;
   line-height: 20px;
 }
 
 .card[data-mq*="288"] .title-text {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-size: 16px;
+  font-size: 20px;
   font-family: var(--font-family-default);
-  line-height: 22px;
+  line-height: 24px;
 }
 
 .bookmark {

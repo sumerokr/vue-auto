@@ -131,19 +131,15 @@
     </div>
     <!-- /gallery -->
 
-    <h1 class="mb-2 text-xl flex items-center justify-between">
+    <h1 class="mb-2.5 text-xl flex items-center justify-between">
       <span class="text-black text-opacity-90 font-medium"
         >{{ car.brand }} {{ car.model }}</span
       >
-      <button
-        class="-m-2.5 ml-4 p-2.5 flex items-center hover:bg-gray-100 active:bg-gray-200 focus:outline-none rounded-full"
-        type="button"
-        @click.prevent="toogleIsBookmared"
-      >
-        <span class="material-icons opacity-60">{{
+      <IconButton class="-m-3 ml-3" @click.prevent="toogleIsBookmared">
+        <span class="material-icons text-black text-opacity-60">{{
           isBookmarked ? "bookmark" : "bookmark_border"
         }}</span>
-      </button>
+      </IconButton>
     </h1>
 
     <p class="flex items-center mb-6 text-3xl font-semibold">
@@ -194,7 +190,7 @@
     <!-- description -->
     <h3 class="text-xl mb-2">Description</h3>
     <div class="mb-4 border-l-2 pl-4">
-      <p class="mb-4 text">
+      <p class="mb-4 text-black text-opacity-90">
         Lato is a sans serif typeface family started in the summer of 2010 by
         Warsaw-based designer Łukasz Dziedzic (“Lato” means “Summer” in Polish).
         In December 2010 the Lato family was published under the Open Font
@@ -343,6 +339,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
 import { useStore } from "vuex";
 import f from "faker";
 
@@ -355,6 +352,10 @@ interface Car {
 export default defineComponent({
   name: "Car",
 
+  components: {
+    IconButton,
+  },
+
   props: {
     id: {
       type: String,
@@ -366,8 +367,15 @@ export default defineComponent({
     const store = useStore();
     const isGalleryActive = ref(false);
 
+    const isBookmarked = ref(false);
+    const toogleIsBookmared = () => {
+      isBookmarked.value = !isBookmarked.value;
+    };
+
     return {
       f,
+      isBookmarked,
+      toogleIsBookmared,
       car: computed(
         () =>
           store.state.cars.find((car: Car) => car.id === props.id) ||

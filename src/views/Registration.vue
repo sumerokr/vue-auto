@@ -26,12 +26,7 @@
         required
       />
 
-      <button
-        class="bg-blue-700 text-white px-4 py-3 rounded text-opacity-90 font-medium"
-        type="submit"
-      >
-        Register
-      </button>
+      <AppButton size="48" appearance="primary">Register</AppButton>
     </form>
   </div>
 </template>
@@ -39,12 +34,14 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
 
 export default defineComponent({
   name: "Registration",
 
   components: {
     AppInput,
+    AppButton,
   },
 
   setup: () => {

@@ -18,6 +18,15 @@
         </RouterLink>
       </li>
     </ul>
+    <div class="p-4">
+      <IconButton class="-m-3">
+        <span class="material-icons align-top">close</span>
+      </IconButton>
+      <br />
+      <IconButton class="-m-3" style="touch-action: manipulation">
+        <span class="material-icons align-top">close</span>
+      </IconButton>
+    </div>
   </div>
 </template>
 
