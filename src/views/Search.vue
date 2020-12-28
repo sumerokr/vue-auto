@@ -84,21 +84,26 @@
 
       <!-- <br /> -->
 
-      <AppInput
+      <AppInputAlt
         v-model="minPrice"
         label="Min price, €"
         type="number"
         id="min-price"
       />
 
-      <AppInput
+      <AppInputAlt
         v-model="maxPrice"
         label="Max price, €"
         type="number"
         id="max-price"
       />
 
-      <AppSelect v-if="isMore" v-model="minYear" id="min-year" label="Min year">
+      <AppSelectAlt
+        v-if="isMore"
+        v-model="minYear"
+        id="min-year"
+        label="Min year"
+      >
         <option value="" hidden selected></option>
         <option
           v-for="year in new Array(20)
@@ -109,9 +114,14 @@
         >
           {{ year }}
         </option>
-      </AppSelect>
+      </AppSelectAlt>
 
-      <AppSelect v-if="isMore" v-model="maxYear" id="max-year" label="Max year">
+      <AppSelectAlt
+        v-if="isMore"
+        v-model="maxYear"
+        id="max-year"
+        label="Max year"
+      >
         <option value="" hidden selected></option>
         <option
           v-for="year in new Array(20)
@@ -122,9 +132,9 @@
         >
           {{ year }}
         </option>
-      </AppSelect>
+      </AppSelectAlt>
 
-      <AppInput
+      <AppInputAlt
         v-if="isMore"
         v-model="minMileage"
         label="Min mileage, km"
@@ -132,7 +142,7 @@
         id="min-mileage"
       />
 
-      <AppInput
+      <AppInputAlt
         v-if="isMore"
         v-model="maxMileage"
         label="Max mileage, km"
@@ -170,8 +180,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import AppInput from "@/components/AppInput/AppInput.vue";
-import AppSelect from "@/components/AppSelect/AppSelect.vue";
+import AppInputAlt from "@/components/AppInputAlt/AppInputAlt.vue";
+import AppSelectAlt from "@/components/AppSelectAlt/AppSelectAlt.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
 import { makeModels } from "@/faker/cars.ts";
@@ -180,8 +190,8 @@ export default defineComponent({
   name: "Search",
 
   components: {
-    AppInput,
-    AppSelect,
+    AppInputAlt,
+    AppSelectAlt,
     AppButton,
   },
 
