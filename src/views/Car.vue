@@ -209,51 +209,20 @@
 
     <!-- options -->
     <h3 class="text-xl mb-2">Options</h3>
-    <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">Comfort</h4>
-    <ul class="mb-4 list-disc list-inside">
-      <li
-        class="text-black text-opacity-90"
-        v-for="n in f.random.number({ min: 3, max: 10 })"
-        :key="n"
-      >
-        {{ f.random.words() }}
-      </li>
-    </ul>
-
-    <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
-      Multimedia
-    </h4>
-    <ul class="mb-4 list-disc list-inside">
-      <li
-        class="text-black text-opacity-90"
-        v-for="n in f.random.number({ min: 3, max: 10 })"
-        :key="n"
-      >
-        {{ f.random.words() }}
-      </li>
-    </ul>
-
-    <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">Safety</h4>
-    <ul class="mb-4 list-disc list-inside">
-      <li
-        class="text-black text-opacity-90"
-        v-for="n in f.random.number({ min: 3, max: 10 })"
-        :key="n"
-      >
-        {{ f.random.words() }}
-      </li>
-    </ul>
-
-    <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">Extra</h4>
-    <ul class="mb-4 list-disc list-inside">
-      <li
-        class="text-black text-opacity-90"
-        v-for="n in f.random.number({ min: 3, max: 10 })"
-        :key="n"
-      >
-        {{ f.random.words() }}
-      </li>
-    </ul>
+    <template v-for="option in car.options" :key="option">
+      <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+        {{ option.category }}
+      </h4>
+      <ul class="mb-4 list-disc list-inside">
+        <li
+          v-for="item in option.items"
+          :key="item.id"
+          class="text-black text-opacity-90"
+        >
+          {{ item.value }}
+        </li>
+      </ul>
+    </template>
     <!-- options -->
 
     <br />

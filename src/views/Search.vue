@@ -134,22 +134,6 @@
         </option>
       </AppSelectAlt>
 
-      <AppInputAlt
-        v-if="isMore"
-        v-model="minMileage"
-        label="Min mileage, km"
-        type="number"
-        id="min-mileage"
-      />
-
-      <AppInputAlt
-        v-if="isMore"
-        v-model="maxMileage"
-        label="Max mileage, km"
-        type="number"
-        id="max-mileage"
-      />
-
       <p class="col-span-2 flex justify-between">
         <AppButton
           before="tune"

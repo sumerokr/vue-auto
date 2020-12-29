@@ -181,7 +181,6 @@ export default defineComponent({
 
 .card[data-mq*="238"] .title-text {
   font-size: 18px;
-  line-height: 20px;
 }
 
 .card[data-mq*="288"] .title-text {
@@ -217,12 +216,12 @@ export default defineComponent({
 
 .card[data-mq*="188"] .price {
   margin-bottom: 12px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .card[data-mq*="288"] .price {
   margin-bottom: 12px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .params {

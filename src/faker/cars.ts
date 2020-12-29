@@ -317,6 +317,22 @@ const getCars = () => {
       ].filter(() => Math.random() >= 0.75);
     };
 
+    const optionCategories = ["Comfort", "Multimedia", "Safety", "Extra"];
+    const optionContent = optionCategories.map((oc) => ({
+      category: oc,
+      items: new Array(
+        f.random.number({
+          min: 3,
+          max: 10,
+        })
+      )
+        .fill(null)
+        .map(() => ({
+          id: f.random.uuid(),
+          value: f.random.words(),
+        })),
+    }));
+
     return {
       id: f.random.uuid(),
       brand: f.vehicle.manufacturer(),
@@ -349,6 +365,7 @@ const getCars = () => {
         min: 50,
         max: 500,
       }),
+      options: optionContent,
       city: f.address.city(),
       registeredTill: f.date.future(1),
       drivetrain: f.random.arrayElement(["FWD", "RWD", "AWD"]),

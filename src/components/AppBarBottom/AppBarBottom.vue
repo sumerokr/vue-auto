@@ -26,9 +26,7 @@
       class="shadow-12 p-4 bg-yellow-400 rounded-full -my-4 transform -translate-y-1/2"
       type="button"
     >
-      <span
-        class="material-icons text-black text-opacity-60 align-top"
-        @click="pickNext"
+      <span class="material-icons text-black text-opacity-60 align-top"
         >tune</span
       >
     </button>
