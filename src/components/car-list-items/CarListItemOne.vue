@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-1 rounded">
+  <div class="card shadow-1 rounded" ref="root">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <p class="image-wrapper">
         <img
@@ -65,11 +65,11 @@
         </ul>
 
         <div class="meta">
-          <p class="flex items-start">
+          <p class="meta-item">
             <span class="meta-icon material-icons">{{ car.ownerType }}</span
             ><span class="meta-text">{{ car.ownerName }}</span>
           </p>
-          <p class="flex items-start">
+          <p class="meta-item">
             <span class="meta-icon material-icons">place</span>
             <span class="meta-text">{{ car.city }}</span>
           </p>
@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
 
 export default defineComponent({
@@ -98,12 +98,29 @@ export default defineComponent({
   },
 
   setup: () => {
+    const root = ref(null);
+    const relevantBps = ref<number[]>([]);
+    // @ts-expect-error
+    const ro = new window.ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const cr = entry.contentRect;
+        const bps = [300];
+        relevantBps.value = bps.filter((bp) => bp <= cr.width);
+        entry.target.dataset.mq = relevantBps.value.join(",");
+      }
+    });
+    onMounted(() => {
+      ro.observe(root.value);
+    });
+
     const isBookmarked = ref(false);
     const toogleIsBookmared = () => {
       isBookmarked.value = !isBookmarked.value;
     };
 
     return {
+      root,
+      relevantBps,
       isBookmarked,
       toogleIsBookmared,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
@@ -166,15 +183,20 @@ export default defineComponent({
   margin-bottom: 12px;
   display: grid;
   gap: 4px 8px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   font-size: 16px;
   line-height: 20px;
   font-family: var(--font-family-default);
   color: var(--color-text-secondary);
 }
 
+.card[data-mq*="300"] .params {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   margin-bottom: 12px;
 }
@@ -183,14 +205,29 @@ export default defineComponent({
   padding: 2px 8px;
   font-size: 14px;
   font-weight: 400;
+  font-family: var(--font-family-condensed);
   line-height: 18px;
   color: var(--color-text-quite);
 }
 
+.card[data-mq*="300"] .tag {
+  font-family: var(--font-family-default);
+}
+
 .meta {
   margin-top: auto;
-  display: flex;
+  display: grid;
+  gap: 2px 8px;
+}
+
+.card[data-mq*="300"] .meta {
   justify-content: space-between;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, auto));
+}
+
+.meta-item {
+  display: flex;
   align-items: flex-start;
 }
 
