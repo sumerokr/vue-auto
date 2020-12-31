@@ -19,7 +19,7 @@
     </ul>
 
     <ul
-      class="grid gap-4"
+      class="grid grid-cols-2 gap-4"
       :class="{
         'grid-cols-1': currentVariant === 'full',
         'grid-cols-2': currentVariant === 'short',

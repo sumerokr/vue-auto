@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-drawer fixed z-50 top-0 bottom-0 left-0 bg-white w-64">
+  <div class="navigation-drawer shadow-16">
     <div class="px-4 py-3 flex items-center">
       <IconButton class="-m-3" @click="$emit('click')">
         <span class="material-icons align-top">close</span>
@@ -9,12 +9,9 @@
     </div>
     <ul>
       <li v-for="item in items" :key="item.name" @click="$emit('click')">
-        <RouterLink class="block px-4 py-3" :to="{ name: item.name }">
-          <span
-            class="material-icons align-top mr-8 text-black text-opacity-60"
-            >{{ item.icon }}</span
-          >
-          <span class="text-black text-opacity-90">{{ item.text }}</span>
+        <RouterLink class="link" :to="{ name: item.name }">
+          <span class="material-icons icon">{{ item.icon }}</span>
+          <span class="text">{{ item.text }}</span>
         </RouterLink>
       </li>
     </ul>
@@ -63,9 +60,50 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .navigation-drawer {
-  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2),
-    0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 256px;
+  background-color: #fff;
+}
+
+.theme-reply .navigation-drawer {
+  background-color: #344955;
+}
+
+.link {
+  display: flex;
+  padding: 0.75rem 1rem;
+  color: var(--color-text-primary);
+}
+
+.icon {
+  margin-right: 2rem;
+  color: var(--color-text-quite);
+}
+
+.theme-reply .icon {
+  color: #b4c1cc;
+}
+
+.theme-reply .router-link-active .icon {
+  color: #f9aa33;
+}
+
+.text {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.theme-reply .text {
+  color: #b4c1cc;
+}
+
+.theme-reply .router-link-active .text {
+  color: #f9aa33;
 }
 </style>
