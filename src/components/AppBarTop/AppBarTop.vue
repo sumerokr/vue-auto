@@ -198,7 +198,7 @@ export default defineComponent({
       "IBM Plex Sans",
       "IBM Plex Sans Condensed",
       // "Imprima",
-      "Inder",
+      // "Inder",
       "Inria Sans",
       "Inter",
       // "Istok Web",

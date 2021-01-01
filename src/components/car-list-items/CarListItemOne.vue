@@ -80,8 +80,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
+import { mq } from "@/utils";
 
 export default defineComponent({
   name: "CarListItemOne",
@@ -99,19 +100,7 @@ export default defineComponent({
 
   setup: () => {
     const root = ref(null);
-    const relevantBps = ref<number[]>([]);
-    // @ts-expect-error
-    const ro = new window.ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const cr = entry.contentRect;
-        const bps = [300];
-        relevantBps.value = bps.filter((bp) => bp <= cr.width);
-        entry.target.dataset.mq = relevantBps.value.join(",");
-      }
-    });
-    onMounted(() => {
-      ro.observe(root.value);
-    });
+    const relevantBps = mq({ refEl: root, bps: [240, 320] });
 
     const isBookmarked = ref(false);
     const toogleIsBookmared = () => {
@@ -145,6 +134,10 @@ export default defineComponent({
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  padding: 11px 12px;
+}
+
+.card[data-mq*="240"] .content {
   padding: 14px 16px;
 }
 
@@ -158,8 +151,13 @@ export default defineComponent({
 .title-text {
   font-size: 20px;
   font-weight: 500;
+  font-family: var(--font-family-condensed);
   line-height: 24px;
   color: var(--color-text-primary);
+}
+
+.card[data-mq*="240"] .title-text {
+  font-family: var(--font-family-default);
 }
 
 .bookmark {
@@ -186,11 +184,17 @@ export default defineComponent({
   grid-template-columns: repeat(2, minmax(0, 1fr));
   font-size: 16px;
   line-height: 20px;
-  font-family: var(--font-family-default);
+  font-family: var(--font-family-condensed);
   color: var(--color-text-secondary);
 }
 
-.card[data-mq*="300"] .params {
+.card[data-mq*="240"] .params {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: var(--font-family-default);
+}
+
+.card[data-mq*="320"] .params {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -210,7 +214,7 @@ export default defineComponent({
   color: var(--color-text-quite);
 }
 
-.card[data-mq*="300"] .tag {
+.card[data-mq*="320"] .tag {
   font-family: var(--font-family-default);
 }
 
@@ -220,7 +224,7 @@ export default defineComponent({
   gap: 2px 8px;
 }
 
-.card[data-mq*="300"] .meta {
+.card[data-mq*="320"] .meta {
   justify-content: space-between;
   align-items: start;
   grid-template-columns: repeat(2, minmax(0, auto));
