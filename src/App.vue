@@ -26,16 +26,6 @@
       "
     ></div>
   </transition>
-  <transition name="slide-top">
-    <AppBarBottom
-      v-if="route.name === 'Cars'"
-      @click="
-        () => {
-          isNavVisible = true;
-        }
-      "
-    />
-  </transition>
   <router-view />
 </template>
 
@@ -47,7 +37,6 @@ import { mutationTypes } from "@/store/types";
 import { getCars } from "@/faker/cars";
 // import AppNav from "@/components/AppNav/AppNav.vue";
 import AppBarTop from "@/components/AppBarTop/AppBarTop.vue";
-import AppBarBottom from "@/components/AppBarBottom/AppBarBottom.vue";
 import NavigationDrawer from "@/components/NavigationDrawer/NavigationDrawer.vue";
 
 export default defineComponent({
@@ -57,7 +46,6 @@ export default defineComponent({
     // AppNav,
     NavigationDrawer,
     AppBarTop,
-    AppBarBottom,
   },
 
   setup: () => {

@@ -31,7 +31,6 @@
         <h2 class="title">
           <span class="title-text">{{ car.brand }} {{ car.model }}</span>
           <IconButton
-            hidden
             class="bookmark"
             type="button"
             @click.prevent="toogleIsBookmared"

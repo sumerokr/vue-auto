@@ -144,17 +144,7 @@
 
     <p class="flex items-center mb-6 text-3xl font-semibold">
       <span>{{ numberFormatter.format(car.price) }} €</span>
-      <button
-        class="ml-6 flex items-center bg-yellow-400 bg-opacity-10 text-sm uppercase text-black px-3 py-2 rounded text-opacity-90 font-medium"
-        type="button"
-      >
-        <span
-          class="material-icons text-black text-opacity-60 mr-2"
-          style="font-size: 18px"
-          >timeline</span
-        >
-        <span>Price history</span>
-      </button>
+      <AppButton class="ml-6" before="timeline">Price history</AppButton>
     </p>
 
     <h3 class="text-xl mb-2">Details</h3>
@@ -309,6 +299,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
 import { useStore } from "vuex";
 import f from "faker";
 
@@ -323,6 +314,7 @@ export default defineComponent({
 
   components: {
     IconButton,
+    AppButton,
   },
 
   props: {

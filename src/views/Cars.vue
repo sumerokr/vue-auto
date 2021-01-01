@@ -4,12 +4,18 @@
       <span>Cars</span>
     </h1>
 
-    <ul class="flex space-x-4 mb-8">
-      <li class="flex-1">
-        <AppButton is-block before="filter_list">Filter</AppButton>
+    <ul
+      class="flex gap-2 mb-8"
+      style="font-family: var(--font-family-condensed)"
+    >
+      <li class="mr-auto">
+        <AppButton before="list">View</AppButton>
       </li>
-      <li class="flex-1">
-        <AppButton is-block before="sort">Sort</AppButton>
+      <li class="">
+        <AppButton before="sort">Sort</AppButton>
+      </li>
+      <li class="">
+        <AppButton before="tune">Filter</AppButton>
       </li>
     </ul>
 
