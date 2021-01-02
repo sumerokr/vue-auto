@@ -1,29 +1,13 @@
 <template>
   <!-- <AppNav /> -->
-  <AppBarTop
-    @click="
-      () => {
-        isNavVisible = true;
-      }
-    "
-  /><transition name="slide">
-    <NavigationDrawer
-      v-if="isNavVisible"
-      @click="
-        () => {
-          isNavVisible = false;
-        }
-      "
+  <AppBarTop @click="isNavVisible = true" /><transition name="slide">
+    <NavigationDrawer v-if="isNavVisible" @click="isNavVisible = false"
   /></transition>
   <transition name="fade">
     <div
       v-if="isNavVisible"
-      class="fixed z-40 top-0 right-0 bottom-0 left-0 bg-black bg-opacity-20"
-      @click="
-        () => {
-          isNavVisible = false;
-        }
-      "
+      class="fixed z-40 top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50"
+      @click="isNavVisible = false"
     ></div>
   </transition>
   <router-view />
