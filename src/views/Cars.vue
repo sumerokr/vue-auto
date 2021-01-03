@@ -4,7 +4,7 @@
       <span>Cars</span>
     </h1>
 
-    <ul class="actions flex gap-2 mb-8" ref="actions">
+    <ul class="actions flex space-x-2 mb-8" ref="actions">
       <li class="mr-auto">
         <AppButton before="view_module">View</AppButton>
       </li>
