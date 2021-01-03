@@ -39,6 +39,7 @@ export default defineComponent({
   color: var(--color-text-quite);
   transform: translateY(8px);
   transition: all 0.1s;
+  pointer-events: none;
 }
 
 .wrapper.filled .label,

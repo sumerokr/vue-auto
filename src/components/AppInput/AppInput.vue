@@ -31,6 +31,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.label {
+  pointer-events: none;
+}
+
 .wrapper.filled .label,
 .wrapper:focus-within .label {
   top: 1px;
@@ -38,6 +42,7 @@ export default defineComponent({
   line-height: 1rem;
   background-color: #fff;
   cursor: default;
+  pointer-events: all;
 }
 
 .wrapper:focus-within .label {
