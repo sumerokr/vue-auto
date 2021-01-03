@@ -1,5 +1,5 @@
 <template>
-  <form class="grid grid-cols-2 gap-4" @submit.prevent="submit">
+  <form class="grid grid-cols-2 gap-4" @submit.prevent="onSearch">
     <AppSelect v-model="make" id="make" label="Make">
       <option value="" hidden selected></option>
       <option
@@ -11,15 +11,17 @@
       </option>
     </AppSelect>
 
-    <AppSelect v-model="model" id="model" label="Model">
+    <AppSelect v-model="model" id="model" label="Model" :disabled="make === ''">
       <option value="" hidden selected></option>
-      <option
-        v-for="makeModel in makeModels"
-        :value="makeModel.make"
-        :key="makeModel.make"
-      >
-        {{ makeModel.make }}
-      </option>
+      <template v-if="make">
+        <option
+          v-for="model in makeModels.find((mm) => mm.make === make).models"
+          :value="model"
+          :key="model"
+        >
+          {{ model }}
+        </option>
+      </template>
     </AppSelect>
 
     <AppInput
@@ -106,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
@@ -129,6 +131,9 @@ export default defineComponent({
 
     const make = ref("");
     const model = ref("");
+    watch(make, () => {
+      model.value = "";
+    });
     const minPrice = ref("");
     const maxPrice = ref("");
     const minYear = ref("");

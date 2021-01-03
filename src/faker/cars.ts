@@ -396,7 +396,7 @@ const makeModels = makes.map((make) => ({
   models: uniqueModels(
     generateModels(
       f.random.number({
-        min: 1,
+        min: 2,
         max: 10,
       })
     )

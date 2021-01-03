@@ -9,7 +9,7 @@
       >{{ label }}</label
     >
     <select
-      class="w-full bg-white appearance-none px-3.5 py-2.5 border-2 rounded transition-all focus:border-blue-700 outline-none"
+      class="select w-full bg-white appearance-none px-3.5 py-2.5 border-2 rounded transition-all focus:border-blue-700 outline-none"
       v-bind="$attrs"
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
@@ -49,5 +49,9 @@ export default defineComponent({
 
 .wrapper:focus-within .label {
   color: #1d4ed8;
+}
+
+.select:disabled {
+  opacity: 0.5;
 }
 </style>
