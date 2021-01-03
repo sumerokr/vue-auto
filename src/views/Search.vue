@@ -2,7 +2,9 @@
   <div class="p-4">
     <h1 class="text-2xl mb-8">Search for a car</h1>
 
-    <form class="grid gap-4 grid-cols-2" @submit.prevent="onSearch">
+    <AppSearch />
+
+    <form class="grid gap-4 grid-cols-2 hidden" @submit.prevent="onSearch">
       <button
         class="col-span-2 border-2 border-gray-200 rounded bg-white px-3.5 py-2.5 w-full flex"
         type="button"
@@ -81,108 +83,13 @@
           </div>
         </div>
       </transition>
-
-      <!-- <br /> -->
-
-      <AppInputAlt
-        v-model="minPrice"
-        label="Min price, €"
-        type="number"
-        id="min-price"
-      />
-
-      <AppInputAlt
-        v-model="maxPrice"
-        label="Max price, €"
-        type="number"
-        id="max-price"
-      />
-
-      <AppSelectAlt
-        v-if="isMore"
-        v-model="minYear"
-        id="min-year"
-        label="Min year"
-      >
-        <option value="" hidden selected></option>
-        <option
-          v-for="year in new Array(20)
-            .fill(null)
-            .map((item, index) => 2020 - index)"
-          :value="year"
-          :key="year"
-        >
-          {{ year }}
-        </option>
-      </AppSelectAlt>
-
-      <AppSelectAlt
-        v-if="isMore"
-        v-model="maxYear"
-        id="max-year"
-        label="Max year"
-      >
-        <option value="" hidden selected></option>
-        <option
-          v-for="year in new Array(20)
-            .fill(null)
-            .map((item, index) => 2020 - index)"
-          :value="year"
-          :key="year"
-        >
-          {{ year }}
-        </option>
-      </AppSelectAlt>
-
-      <AppInputAlt
-        v-if="isMore"
-        v-model="minMileage"
-        label="Min mileage, km"
-        type="number"
-        id="min-mileage"
-      />
-
-      <AppInputAlt
-        v-if="isMore"
-        v-model="maxMileage"
-        label="Max mileage, km"
-        type="number"
-        id="max-mileage"
-      />
-
-      <p class="col-span-2 flex justify-between">
-        <AppButton
-          before="tune"
-          appearance="secondary"
-          size="36"
-          @click="isMore = true"
-          >More options</AppButton
-        >
-
-        <AppButton before="restore" appearance="secondary" size="36"
-          >Reset</AppButton
-        >
-      </p>
-
-      <div class="col-span-2">
-        <AppButton
-          before="search"
-          appearance="primary"
-          size="48"
-          type="submit"
-          is-block
-          >Search</AppButton
-        >
-      </div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import AppInputAlt from "@/components/AppInputAlt/AppInputAlt.vue";
-import AppSelectAlt from "@/components/AppSelectAlt/AppSelectAlt.vue";
-import AppButton from "@/components/AppButton/AppButton.vue";
+import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import { useRouter } from "vue-router";
 import { makeModels } from "@/faker/cars.ts";
 
@@ -190,9 +97,7 @@ export default defineComponent({
   name: "Search",
 
   components: {
-    AppInputAlt,
-    AppSelectAlt,
-    AppButton,
+    AppSearch,
   },
 
   setup: () => {

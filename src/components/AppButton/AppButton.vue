@@ -6,11 +6,9 @@
       isBlock ? 'is-block' : ''
     }`"
   >
-    <span class="material-icons before">{{ before }}</span>
-    <div v-if="$slots.before" class="before"><slot name="before"></slot></div>
+    <span v-if="before" class="material-icons before">{{ before }}</span>
     <slot></slot>
-    <div v-if="$slots.before" class="after"><slot name="after"></slot></div>
-    <span class="material-icons after">{{ after }}</span>
+    <span v-if="after" class="material-icons after">{{ after }}</span>
   </button>
 </template>
 
@@ -103,14 +101,14 @@ export default defineComponent({
   background-color: #bfdbfe;
 }
 
+.before,
+.after {
+  color: var(--color-text-quite);
+}
+
 .appearance-primary .before,
 .appearance-primary .after {
   color: rgba(255, 255, 255, 0.7);
-}
-
-.appearance-secondary .before,
-.appearance-secondary .after {
-  color: var(--color-text-quite);
 }
 
 .before {

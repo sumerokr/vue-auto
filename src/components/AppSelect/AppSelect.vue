@@ -4,7 +4,7 @@
     :class="{ filled: modelValue && modelValue.trim() !== '' }"
   >
     <label
-      class="label px-1 cursor-text font-medium transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
+      class="label px-1 font-medium transition-all absolute top-1/2 left-3 text-black text-opacity-60 transform -translate-y-1/2"
       :for="$attrs.id"
       >{{ label }}</label
     >
