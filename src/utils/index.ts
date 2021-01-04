@@ -6,8 +6,11 @@ export const mq = ({ refEl, bps }: { refEl: any; bps: number[] }) => {
   const ro = new window.ResizeObserver((entries) => {
     for (const entry of entries) {
       const cr = entry.contentRect;
-      abps.value = bps.filter((bp) => bp <= cr.width);
-
+      const filtered = bps.filter((bp) => bp <= cr.width);
+      if (filtered.length === abps.value.length) {
+        return;
+      }
+      abps.value = filtered;
       entry.target.dataset.mq = abps.value.join(",");
     }
   });

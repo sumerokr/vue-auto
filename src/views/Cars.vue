@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import SortOptions from "@/components/SortOptions/SortOptions.vue";
@@ -94,28 +94,58 @@ export default defineComponent({
   },
 
   setup: () => {
-    const carlist = ref(null);
-    mq({
+    const isCompactView = ref(false);
+    const carlist = ref<null | HTMLElement>(null);
+    const compactBps = [
+      380,
+      577,
+      873,
+      1169,
+      1465,
+      1761,
+      2057,
+      2353,
+      2649,
+      2945,
+    ];
+    const normalBps = [421, 857, 1293, 1729, 2165, 2601, 3037, 3473];
+    const carlistBps = mq({
       refEl: carlist,
-      bps: [
-        421,
-        472,
-        642,
-        776,
-        856,
-        928,
-        1080,
-        1232,
-        1292,
-        1384,
-        1536,
-        1688,
-        1728,
-        1840,
-        1992,
-        2144,
-        2164,
-      ],
+      bps: [...new Set([...compactBps, ...normalBps])].sort((a, b) => a - b),
+    });
+
+    watch([carlistBps, isCompactView], () => {
+      if (carlist.value === null) {
+        return;
+      }
+      const triggerBp = carlistBps.value.slice(-1)[0];
+      if (!triggerBp) {
+        carlist.value.style.setProperty("--columns", "1");
+        return;
+      }
+      if (isCompactView.value) {
+        const biggest = compactBps
+          .slice()
+          .reverse()
+          .find((i) => carlistBps.value.includes(i));
+        if (biggest) {
+          const index = compactBps.indexOf(biggest);
+          carlist.value.style.setProperty("--columns", String(index + 2));
+        } else {
+          carlist.value.style.setProperty("--columns", "1");
+        }
+      } else {
+        const biggest = normalBps
+          .slice()
+          .reverse()
+          .find((i) => carlistBps.value.includes(i));
+        if (biggest) {
+          const index = normalBps.indexOf(biggest);
+          carlist.value.style.setProperty("--columns", String(index + 2));
+        } else {
+          carlist.value.style.setProperty("--columns", "1");
+        }
+      }
     });
 
     const actions = ref(null);
@@ -124,7 +154,6 @@ export default defineComponent({
       bps: [320],
     });
 
-    const isCompactView = ref(false);
     const isSortVisible = ref(false);
     const isFilterVisible = ref(false);
 
@@ -157,76 +186,9 @@ export default defineComponent({
   font-family: var(--font-family-condensed);
 }
 
-.carlist[data-mq*="421"] {
-  grid-template-columns: repeat(2, minmax(200px, 1fr));
-}
-
-.carlist[data-mq*="856"] {
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
-}
-
-.carlist[data-mq*="1292"] {
-  grid-template-columns: repeat(4, minmax(200px, 1fr));
-}
-
-.carlist[data-mq*="1728"] {
-  grid-template-columns: repeat(5, minmax(200px, 1fr));
-}
-
-.carlist[data-mq*="2164"] {
-  grid-template-columns: repeat(6, minmax(200px, 1fr));
-}
-
-.carlist.is-compact {
-  grid-template-columns: repeat(2, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="472"] {
-  grid-template-columns: repeat(3, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="642"] {
-  grid-template-columns: repeat(4, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="776"] {
-  grid-template-columns: repeat(5, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="928"] {
-  grid-template-columns: repeat(6, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1080"] {
-  grid-template-columns: repeat(7, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1232"] {
-  grid-template-columns: repeat(8, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1384"] {
-  grid-template-columns: repeat(9, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1536"] {
-  grid-template-columns: repeat(10, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1688"] {
-  grid-template-columns: repeat(11, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1840"] {
-  grid-template-columns: repeat(12, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="1992"] {
-  grid-template-columns: repeat(13, minmax(auto, 1fr));
-}
-
-.carlist.is-compact[data-mq*="2144"] {
-  grid-template-columns: repeat(14, minmax(auto, 1fr));
+.carlist {
+  --columns: 1;
+  grid-template-columns: repeat(var(--columns), 1fr);
 }
 
 .slide-top-enter-active {
