@@ -21,3 +21,6 @@ export const mq = ({ refEl, bps }: { refEl: any; bps: number[] }) => {
 
   return abps;
 };
+
+export const delay = async (ms: number) =>
+  new Promise((res) => setTimeout(res, ms));

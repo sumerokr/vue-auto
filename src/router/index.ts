@@ -129,6 +129,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "seed" */ "../views/Seed.vue"),
   },
   {
+    path: "/dev",
+    name: "Dev",
+    component: () => import(/* webpackChunkName: "dev" */ "../views/Dev.vue"),
+  },
+  {
     path: "/pricing",
     name: "Pricing",
     component: () =>
