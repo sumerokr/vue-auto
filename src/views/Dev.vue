@@ -11,7 +11,12 @@
         >
           <div style="overflow-y: scroll">
             <ul>
-              <li v-for="make in filtered" class="item" :key="make">
+              <li
+                v-for="make in filtered"
+                class="item"
+                :class="{ 'is-expanded': expanded[make] }"
+                :key="make"
+              >
                 <button class="button" type="button" @click="toggleMake(make)">
                   <span class="content">{{ make }}</span>
                   <span class="material-icons after">{{
@@ -140,6 +145,12 @@ export default defineComponent({
   padding: 12px 16px;
   text-align: left;
   outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  transition: all 0.1s;
+}
+
+.button:active {
+  background-color: #d1d5db;
 }
 
 .content {
@@ -157,5 +168,10 @@ export default defineComponent({
 
 .after {
   margin-left: 32px;
+}
+
+.is-expanded {
+  box-shadow: inset 0 1px 0 0px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 0 0px rgba(0, 0, 0, 0.12);
 }
 </style>

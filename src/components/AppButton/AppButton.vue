@@ -75,13 +75,19 @@ export default defineComponent({
   font-size: 16px;
 }
 
+/* APPEARANCE */
 .button.appearance-default {
-  color: var(--text-color-primary);
+  color: var(--color-text-primary);
   background-color: #f3f4f6;
 }
 
 .button.appearance-default:active {
   background-color: #d1d5db;
+}
+
+.button.appearance-default[disabled] {
+  color: var(--color-text-mute);
+  background-color: hsl(220, 14%, 98%);
 }
 
 .button.appearance-primary {
@@ -93,6 +99,11 @@ export default defineComponent({
   background-color: #1e3a8a;
 }
 
+.button.appearance-primary[disabled] {
+  color: rgba(255, 255, 255, 0.4);
+  background-color: hsl(224, 76%, 60%);
+}
+
 .button.appearance-secondary {
   background-color: #eff6ff;
 }
@@ -100,17 +111,9 @@ export default defineComponent({
 .button.appearance-secondary:active {
   background-color: #bfdbfe;
 }
+/* /APPEARANCE */
 
-.before,
-.after {
-  color: var(--color-text-quite);
-}
-
-.appearance-primary .before,
-.appearance-primary .after {
-  color: rgba(255, 255, 255, 0.7);
-}
-
+/* ICONS */
 .before {
   margin-right: 8px;
   margin-left: -4px;
@@ -121,6 +124,23 @@ export default defineComponent({
   margin-left: 8px;
 }
 
+.button.appearance-default .before,
+.button.appearance-default .after {
+  color: var(--color-text-quite);
+}
+
+.appearance-primary .before,
+.appearance-primary .after {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button.appearance-default[disabled] .before,
+.button.appearance-default[disabled] .after {
+  color: var(--color-text-mute);
+}
+/* /ICONS */
+
+/* SIZES */
 .size-36 .before,
 .size-36 .after {
   font-size: 20px;
@@ -130,4 +150,5 @@ export default defineComponent({
 .size-48 .after {
   font-size: 24px;
 }
+/* /SIZES */
 </style>
