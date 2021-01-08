@@ -31,14 +31,11 @@
         <h2 class="title">
           <span class="title-text">{{ car.brand }} {{ car.model }}</span>
           <IconButton
+            :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
             class="bookmark"
             type="button"
             @click.prevent="toogleIsBookmared"
-          >
-            <span class="bookmark-icon material-icons">{{
-              isBookmarked ? "bookmark" : "bookmark_border"
-            }}</span>
-          </IconButton>
+          />
         </h2>
 
         <p class="price">{{ numberFormatter.format(car.price) }} €</p>

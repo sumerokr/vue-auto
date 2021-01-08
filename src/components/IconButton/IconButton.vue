@@ -1,9 +1,9 @@
 <template>
   <button
-    class="button flex items-start bg-black bg-opacity-0 active:bg-opacity-10 rounded-full"
-    :class="{ 'is-dense': isDense }"
+    class="icon-button flex items-start bg-black bg-opacity-0 active:bg-opacity-10 rounded-full"
+    :class="`theme-${theme}`"
   >
-    <slot></slot>
+    <span class="icon material-icons">{{ icon }}</span>
   </button>
 </template>
 
@@ -14,23 +14,31 @@ export default defineComponent({
   name: "IconButton",
 
   props: {
-    isDense: {
-      type: Boolean,
-      default: false,
+    icon: {
+      type: String,
+      required: true,
+    },
+    theme: {
+      type: String,
+      default: "dark",
     },
   },
 });
 </script>
 
 <style scoped>
-.button {
+.icon-button {
   padding: 12px;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   outline: none;
   transition: all 0.1s;
 }
 
-.button.is-dense {
-  padding: 10px;
+.theme-light .icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.theme-dark .icon {
+  color: var(--color-text-quite);
 }
 </style>

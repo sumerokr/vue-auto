@@ -2,8 +2,12 @@
   <div
     class="app-bar-top fixed z-40 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
   >
-    <IconButton class="-m-3 mr-5" @click="$emit('click')">
-      <span class="material-icons text-white">menu</span>
+    <IconButton
+      class="-m-3 mr-5"
+      icon="menu"
+      theme="light"
+      @click="$emit('click')"
+    >
     </IconButton>
     <span class="text-white text-2xl font-medium italic">Logo</span>
     <!-- <span class="text-white text-2xl font-semibold italic">vo</span>
@@ -49,9 +53,12 @@
         style="height: 4px"
       ></span>
     </div>
-    <IconButton class="-m-3" @click="pickNext">
-      <span class="material-icons text-white">format_size</span>
-    </IconButton>
+    <IconButton
+      icon="format_size"
+      theme="light"
+      class="-m-3"
+      @click="pickNext"
+    />
   </div>
 </template>
 

@@ -135,11 +135,11 @@
       <span class="text-black text-opacity-90 font-medium"
         >{{ car.brand }} {{ car.model }}</span
       >
-      <IconButton class="-m-3 ml-3" @click.prevent="toogleIsBookmared">
-        <span class="material-icons text-black text-opacity-60">{{
-          isBookmarked ? "bookmark" : "bookmark_border"
-        }}</span>
-      </IconButton>
+      <IconButton
+        class="-m-3 ml-3"
+        :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
+        @click.prevent="toogleIsBookmared"
+      />
     </h1>
 
     <p class="flex items-center mb-6 text-3xl font-semibold">

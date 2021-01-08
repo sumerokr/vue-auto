@@ -5,21 +5,21 @@
     <h2 class="text-lg mb-2">Default</h2>
     <div class="space-y-2">
       <AppButton>Default</AppButton>
-      <AppButton disabled>Default</AppButton>
-      <AppButton before="person">Default</AppButton>
-      <AppButton after="person">Default</AppButton>
-      <AppButton disabled after="person">Default</AppButton>
+      <AppButton disabled>Disabled</AppButton>
+      <AppButton before="person">Icon before</AppButton>
+      <AppButton after="person">Icon after</AppButton>
+      <AppButton disabled before="person">Icon disabled</AppButton>
     </div>
 
     <br />
     <h2 class="text-lg mb-2">Primary</h2>
     <div class="space-y-2">
       <AppButton appearance="primary">Default</AppButton>
-      <AppButton appearance="primary" disabled>Default</AppButton>
-      <AppButton appearance="primary" before="person">Default</AppButton>
-      <AppButton appearance="primary" after="person">Default</AppButton>
+      <AppButton appearance="primary" disabled>Disabled</AppButton>
+      <AppButton appearance="primary" before="person">Icon before</AppButton>
+      <AppButton appearance="primary" after="person">Icon after</AppButton>
       <AppButton appearance="primary" disabled after="person"
-        >Default</AppButton
+        >Icon disabled</AppButton
       >
     </div>
   </div>

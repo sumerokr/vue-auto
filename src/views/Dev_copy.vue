@@ -11,20 +11,45 @@
         >
           <div style="overflow-y: scroll">
             <ul>
-              <AppListItemInteractive
+              <li
                 v-for="make in filtered"
                 class="item"
                 :class="{ 'is-expanded': expanded[make] }"
                 :key="make"
               >
-                <template #before>
-                  <IconButton icon="check_box_outline_blank" />
-                </template>
-                <template #after>
-                  <IconButton icon="expand_more" />
-                </template>
-                {{ make }}
-              </AppListItemInteractive>
+                <button class="button" type="button" @click="toggleMake(make)">
+                  <span class="content">{{ make }}</span>
+                  <span class="material-icons after">{{
+                    expanded[make] ? "expand_less" : "expand_more"
+                  }}</span>
+                </button>
+
+                <div v-if="expanded[make]">
+                  <ul v-if="models[make]">
+                    <li
+                      v-for="model in models[make]"
+                      class="sub-item"
+                      :key="model"
+                    >
+                      <button
+                        class="button"
+                        type="button"
+                        @click="toggleModel(make, model)"
+                      >
+                        <span class="material-icons before">{{
+                          selected[make] && selected[make].includes(model)
+                            ? "check_box"
+                            : "check_box_outline_blank"
+                        }}</span>
+                        <span class="content">{{ model }}</span>
+                      </button>
+                    </li>
+                  </ul>
+                  <div v-else>
+                    <p class="py-3 px-4">No data, or loading...</p>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -42,15 +67,13 @@
 import { defineComponent, ref, computed } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
-import AppListItemInteractive from "@/components/AppList/AppListItemInteractive.vue";
 import { delay } from "@/utils";
 import { makeModels } from "@/faker/cars.ts";
-import IconButton from "@/components/IconButton/IconButton.vue";
 
 export default defineComponent({
   name: "Cars",
 
-  components: { AppInput, AppButton, AppListItemInteractive, IconButton },
+  components: { AppInput, AppButton },
 
   setup: () => {
     const query = ref("");
@@ -113,4 +136,42 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.button {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 12px 16px;
+  text-align: left;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  transition: all 0.1s;
+}
+
+.button:active {
+  background-color: #d1d5db;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.before,
+.after {
+  color: var(--color-text-quite);
+}
+
+.before {
+  margin-right: 32px;
+}
+
+.after {
+  margin-left: 32px;
+}
+
+.is-expanded {
+  box-shadow: inset 0 1px 0 0px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 0 0px rgba(0, 0, 0, 0.12);
+}
+</style>

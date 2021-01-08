@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button"
+    class="app-button"
     :type="type"
     :class="`size-${size} appearance-${appearance} ${
       isBlock ? 'is-block' : ''
@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.button {
+.app-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +62,7 @@ export default defineComponent({
   transition: all 0.1s;
 }
 
-.button:focus {
+.app-button:focus {
   outline: none;
 }
 
@@ -70,45 +70,45 @@ export default defineComponent({
   width: 100%;
 }
 
-.button.size-48 {
+.app-button.size-48 {
   padding: 12px 16px;
   font-size: 16px;
 }
 
 /* APPEARANCE */
-.button.appearance-default {
+.app-button.appearance-default {
   color: var(--color-text-primary);
   background-color: #f3f4f6;
 }
 
-.button.appearance-default:active {
+.app-button.appearance-default:active {
   background-color: #d1d5db;
 }
 
-.button.appearance-default[disabled] {
+.app-button.appearance-default[disabled] {
   color: var(--color-text-mute);
   background-color: hsl(220, 14%, 98%);
 }
 
-.button.appearance-primary {
+.app-button.appearance-primary {
   color: rgba(255, 255, 255, 0.9);
   background-color: #1d4ed8;
 }
 
-.button.appearance-primary:active {
+.app-button.appearance-primary:active {
   background-color: #1e3a8a;
 }
 
-.button.appearance-primary[disabled] {
+.app-button.appearance-primary[disabled] {
   color: rgba(255, 255, 255, 0.4);
   background-color: hsl(224, 76%, 60%);
 }
 
-.button.appearance-secondary {
+.app-button.appearance-secondary {
   background-color: #eff6ff;
 }
 
-.button.appearance-secondary:active {
+.app-button.appearance-secondary:active {
   background-color: #bfdbfe;
 }
 /* /APPEARANCE */
@@ -124,8 +124,8 @@ export default defineComponent({
   margin-left: 8px;
 }
 
-.button.appearance-default .before,
-.button.appearance-default .after {
+.app-button.appearance-default .before,
+.app-button.appearance-default .after {
   color: var(--color-text-quite);
 }
 
@@ -134,8 +134,8 @@ export default defineComponent({
   color: rgba(255, 255, 255, 0.7);
 }
 
-.button.appearance-default[disabled] .before,
-.button.appearance-default[disabled] .after {
+.app-button.appearance-default[disabled] .before,
+.app-button.appearance-default[disabled] .after {
   color: var(--color-text-mute);
 }
 /* /ICONS */

@@ -1,9 +1,7 @@
 <template>
   <div class="navigation-drawer shadow-16">
     <div class="px-4 py-3 flex items-center">
-      <IconButton class="-m-3" @click="$emit('click')">
-        <span class="material-icons align-top">close</span>
-      </IconButton>
+      <IconButton class="-m-3" icon="close" @click="$emit('click')" />
       <span class="text-2xl ml-8 font-medium italic">Logo</span>
       <!-- <span class="text-2xl ml-8 font-medium italic">vozila</span> -->
     </div>
@@ -15,15 +13,6 @@
         </RouterLink>
       </li>
     </ul>
-    <div class="p-4">
-      <IconButton class="-m-3">
-        <span class="material-icons align-top">close</span>
-      </IconButton>
-      <br />
-      <IconButton class="-m-3" style="touch-action: manipulation">
-        <span class="material-icons align-top">close</span>
-      </IconButton>
-    </div>
   </div>
 </template>
 
