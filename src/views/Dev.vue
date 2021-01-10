@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <div class="fixed z-50 inset-0 p-4 rounded shadow-8 grid bg-white">
+    <div class="fixed z-50 inset-0 p-4 shadow-8 grid bg-white">
       <div class="flex flex-col">
         <AppInput label="Make" v-model="query" />
 
@@ -12,24 +12,55 @@
           <div style="overflow-y: scroll">
             <ul>
               <AppListItemInteractive
-                v-for="make in filtered"
+                v-for="makeModel in filtered"
                 class="item"
-                :class="{ 'is-expanded': expanded[make] }"
-                :key="make"
+                :class="{ 'is-expanded': expanded[makeModel.make] }"
+                :key="makeModel.make"
+                @click-button="toggleMake(makeModel.make)"
               >
-                <template #before>
-                  <IconButton icon="check_box_outline_blank" />
-                </template>
                 <template #after>
-                  <IconButton icon="expand_more" />
+                  <IconButton
+                    :icon="
+                      expanded[makeModel.make] ? 'expand_less' : 'expand_more'
+                    "
+                  />
                 </template>
-                {{ make }}
+                {{ makeModel.make }}
+                <template #nested>
+                  <div v-if="expanded[makeModel.make]">
+                    <ul v-if="models[makeModel.make]">
+                      <AppListItemInteractive
+                        v-for="model in models[makeModel.make]"
+                        class="sub-item"
+                        :interactive="['before']"
+                        :key="model"
+                        @click-button="toggleModel(makeModel.make, model)"
+                      >
+                        <template #before>
+                          <IconButton
+                            :icon="
+                              selected[makeModel.make] &&
+                              selected[makeModel.make].includes(model)
+                                ? 'check_box'
+                                : 'check_box_outline_blank'
+                            "
+                            @click="toggleModel(makeModel.make, model)"
+                          />
+                        </template>
+                        {{ model }}
+                      </AppListItemInteractive>
+                    </ul>
+                    <div v-else>
+                      <p class="py-3 px-4">No data, or loading...</p>
+                    </div>
+                  </div>
+                </template>
               </AppListItemInteractive>
             </ul>
           </div>
         </div>
 
-        <div class="flex space-x-4">
+        <div class="grid grid-cols-2 gap-4">
           <AppButton>Cancel</AppButton>
           <AppButton appearance="primary">Confirm</AppButton>
         </div>
@@ -39,13 +70,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import AppListItemInteractive from "@/components/AppList/AppListItemInteractive.vue";
 import { delay } from "@/utils";
 import { makeModels } from "@/faker/cars.ts";
 import IconButton from "@/components/IconButton/IconButton.vue";
+import { MakesModelsItem } from "@/types.ts";
 
 export default defineComponent({
   name: "Cars",
@@ -55,16 +87,41 @@ export default defineComponent({
   setup: () => {
     const query = ref("");
 
-    const makes = ref<string[]>([]);
-    const filtered = computed(() =>
-      makes.value.filter((i) =>
-        i.toLowerCase().includes(query.value.toLowerCase())
-      )
-    );
+    const makes = ref<MakesModelsItem[]>([]);
+    const filtered = ref<MakesModelsItem[]>(makes.value);
+
+    const getMakesModels = async () => {
+      await delay(300);
+      filtered.value = makeModels.filter((mm) => {
+        const isMakeMatch = mm.make.toLowerCase().includes(query.value);
+        if (isMakeMatch) {
+          return mm;
+        }
+
+        const matchedModels = mm.models.filter((md) => {
+          return md.toLowerCase().includes(query.value);
+        });
+        const isModelsMatch = matchedModels.length > 0;
+        if (isModelsMatch) {
+          return {
+            make: mm.make,
+            models: matchedModels,
+          };
+        }
+      });
+    };
+
+    watch(query, () => {
+      if (query.value.trim() === "") {
+        filtered.value = makes.value;
+      }
+      getMakesModels();
+    });
 
     const getMakes = async () => {
       await delay(300);
-      makes.value = makeModels.map((mm) => mm.make);
+      makes.value = makeModels.map((mm) => ({ make: mm.make, models: [] }));
+      filtered.value = makes.value;
     };
     getMakes();
 
@@ -75,7 +132,10 @@ export default defineComponent({
       await delay(300);
       const makeModel = makeModels.find((mm) => mm.make === make);
       if (makeModel) {
-        models.value[make] = makeModel.models;
+        const match = filtered.value.find((mm) => mm.make === make);
+        if (match) {
+          match.models = makeModel.models;
+        }
       }
     };
 
@@ -113,4 +173,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.item.is-expanded {
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+</style>

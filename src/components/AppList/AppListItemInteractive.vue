@@ -4,15 +4,25 @@
       class="button"
       :class="{ 'has-before': $slots.before, 'has-after': $slots.after }"
       type="button"
+      @click="$emit('click-button')"
     >
       <slot></slot>
     </button>
-    <div v-if="$slots.before" class="before">
+    <div
+      v-if="$slots.before"
+      class="before"
+      :class="{ 'is-interactive': interactive.includes('before') }"
+    >
       <slot name="before"></slot>
     </div>
-    <div v-if="$slots.after" class="after">
+    <div
+      v-if="$slots.after"
+      class="after"
+      :class="{ 'is-interactive': interactive.includes('before') }"
+    >
       <slot name="after"></slot>
     </div>
+    <slot name="nested"></slot>
   </li>
 </template>
 
@@ -22,7 +32,12 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "AppListItemInteractive",
 
-  props: {},
+  props: {
+    interactive: {
+      type: Array,
+      default: () => [],
+    },
+  },
 });
 </script>
 
@@ -61,8 +76,13 @@ export default defineComponent({
 .after {
   position: absolute;
   z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  pointer-events: none;
+}
+
+.before.is-interactive,
+.after.is-interactive {
+  pointer-events: all;
 }
 
 .before {
