@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import AppListItemInteractive from "@/components/AppList/AppListItemInteractive.vue";
@@ -92,31 +92,27 @@ export default defineComponent({
 
     const getMakesModels = async () => {
       await delay(300);
-      filtered.value = makeModels.filter((mm) => {
+      filtered.value = makeModels.reduce((acc, mm) => {
         const isMakeMatch = mm.make.toLowerCase().includes(query.value);
         if (isMakeMatch) {
-          return mm;
+          acc.push(mm);
+          return acc;
         }
 
         const matchedModels = mm.models.filter((md) => {
           return md.toLowerCase().includes(query.value);
         });
-        const isModelsMatch = matchedModels.length > 0;
-        if (isModelsMatch) {
-          return {
+
+        if (matchedModels.length > 0) {
+          acc.push({
             make: mm.make,
             models: matchedModels,
-          };
+          });
         }
-      });
-    };
 
-    watch(query, () => {
-      if (query.value.trim() === "") {
-        filtered.value = makes.value;
-      }
-      getMakesModels();
-    });
+        return acc;
+      }, [] as MakesModelsItem[]);
+    };
 
     const getMakes = async () => {
       await delay(300);
@@ -139,8 +135,10 @@ export default defineComponent({
     };
 
     const toggleMake = (make: string) => {
+      if (query.value.trim() === "") {
+        getModels(make);
+      }
       expanded.value[make] = !expanded.value[make];
-      getModels(make);
     };
 
     const selected = ref<{ [key: string]: string[] }>({});
@@ -158,9 +156,18 @@ export default defineComponent({
       }
     };
 
+    watch(query, () => {
+      if (query.value.trim() === "") {
+        filtered.value = makes.value;
+        return;
+      }
+      getMakesModels();
+      expanded.value = {};
+      selected.value = {};
+    });
+
     return {
       query,
-      makes,
       expanded,
       toggleMake,
       selected,
