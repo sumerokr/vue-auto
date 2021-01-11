@@ -28,9 +28,9 @@
                 {{ makeModel.make }}
                 <template #nested>
                   <div v-if="expanded[makeModel.make]">
-                    <ul v-if="models[makeModel.make]">
+                    <ul v-if="makeModel.models.length">
                       <AppListItemInteractive
-                        v-for="model in models[makeModel.make]"
+                        v-for="model in makeModel.models"
                         class="sub-item"
                         :interactive="['before']"
                         :key="model"
@@ -126,7 +126,6 @@ export default defineComponent({
     getMakes();
 
     const expanded = ref<{ [key: string]: boolean }>({});
-    const models = ref<{ [key: string]: string[] }>({});
 
     const getModels = async (make: string) => {
       await delay(300);
@@ -162,7 +161,6 @@ export default defineComponent({
     return {
       query,
       makes,
-      models,
       expanded,
       toggleMake,
       selected,
