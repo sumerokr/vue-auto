@@ -93,14 +93,16 @@ export default defineComponent({
     const getMakesModels = async () => {
       await delay(300);
       filtered.value = makeModels.reduce((acc, mm) => {
-        const isMakeMatch = mm.make.toLowerCase().includes(query.value);
+        const isMakeMatch = mm.make
+          .toLowerCase()
+          .includes(query.value.toLowerCase());
         if (isMakeMatch) {
           acc.push(mm);
           return acc;
         }
 
         const matchedModels = mm.models.filter((md) => {
-          return md.toLowerCase().includes(query.value);
+          return md.toLowerCase().includes(query.value.toLowerCase());
         });
 
         if (matchedModels.length > 0) {
