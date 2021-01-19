@@ -2,23 +2,15 @@
   <form class="grid grid-cols-2 gap-4" @submit.prevent="onSearch">
     <AppSelect v-model="make" id="make" label="Make">
       <option value="" hidden selected></option>
-      <option
-        v-for="makeModel in makeModels"
-        :value="makeModel.make"
-        :key="makeModel.make"
-      >
-        {{ makeModel.make }}
+      <option v-for="make in makeOptions" :value="make" :key="make">
+        {{ make }}
       </option>
     </AppSelect>
 
     <AppSelect v-model="model" id="model" label="Model" :disabled="make === ''">
       <option value="" hidden selected></option>
       <template v-if="make">
-        <option
-          v-for="model in makeModels.find((mm) => mm.make === make).models"
-          :value="model"
-          :key="model"
-        >
+        <option v-for="model in modelOptions" :value="model" :key="model">
           {{ model }}
         </option>
       </template>
@@ -113,7 +105,7 @@ import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
-import { makeModels } from "@/faker/cars.ts";
+import { getMakes, getModels } from "@/services/make-models";
 
 export default defineComponent({
   name: "AppSearch",
@@ -126,14 +118,30 @@ export default defineComponent({
 
   setup: () => {
     const router = useRouter();
-    const isSelectorVisible = ref(false);
     const isMore = ref(false);
 
+    //#region makes
     const make = ref("");
+    const makeOptions = ref<string[]>([]);
+    const getMakeOptions = async () => {
+      makeOptions.value = await getMakes();
+    };
+    getMakeOptions();
+    //#endregion
+
+    //#region models
     const model = ref("");
+    const modelOptions = ref<string[]>([]);
+    const getModelOptions = async () => {
+      modelOptions.value = await getModels(make.value);
+    };
+
     watch(make, () => {
       model.value = "";
+      getModelOptions();
     });
+    //#endregion
+
     const minPrice = ref("");
     const maxPrice = ref("");
     const minYear = ref("");
@@ -141,41 +149,22 @@ export default defineComponent({
     const minMileage = ref("");
     const maxMileage = ref("");
 
-    interface Expanded {
-      [key: string]: boolean;
-    }
-    const expanded = ref<Expanded>({});
-
     return {
       make,
+      makeOptions,
       model,
+      modelOptions,
       minPrice,
       maxPrice,
       minYear,
       maxYear,
       minMileage,
       maxMileage,
-      makeModels,
-      isSelectorVisible,
-      expanded,
       isMore,
       onSearch: () => {
         router.push({
           name: "Cars",
         });
-      },
-      showSelector: () => {
-        isSelectorVisible.value = true;
-      },
-      hideSelector: () => {
-        isSelectorVisible.value = false;
-      },
-      expand: (car: string) => {
-        if (expanded.value[car]) {
-          expanded.value[car] = false;
-        } else {
-          expanded.value[car] = true;
-        }
       },
     };
   },

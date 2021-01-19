@@ -86,10 +86,10 @@ export default defineComponent({
 }
 
 .before {
-  left: 0;
+  left: 4px;
 }
 
 .after {
-  right: 0;
+  right: 4px;
 }
 </style>

@@ -37,7 +37,7 @@
 import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
-  name: "AppBarTop",
+  name: "AppBarBottom",
 
   emits: {
     click: null,

@@ -35,10 +35,10 @@ export default defineComponent({
 }
 
 .theme-light .icon {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--icon-color, rgba(255, 255, 255, 0.7));
 }
 
 .theme-dark .icon {
-  color: var(--color-text-quite);
+  color: var(--icon-color, var(--color-text-quite));
 }
 </style>

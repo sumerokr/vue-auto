@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-bar-top fixed z-40 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
+    class="app-bar-top shadow-4 fixed z-40 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
   >
     <IconButton
       class="-m-3 mr-5"
@@ -428,9 +428,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.app-bar-top {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
-}
-</style>
+<style scoped></style>

@@ -37,12 +37,43 @@
         @click="isSortVisible = false"
       ></div>
     </transition>
+
     <transition name="slide-top">
-      <SortOptions
+      <div
+        class="p-4 fixed z-40 right-0 bottom-0 left-0 bg-black bg-white"
         v-if="isSortVisible"
-        @click-cancel="isSortVisible = false"
-        @click-sort="isSortVisible = false"
-      />
+      >
+        <h2 class="text-2xl">Sort options</h2>
+        <ul class="py-2">
+          <li
+            class="flex items-center"
+            v-for="sortOption in sortOptions"
+            :key="sortOption.key"
+          >
+            <span class="text-black text-opacity-90 mr-auto">{{
+              sortOption.title
+            }}</span>
+            <IconButton
+              icon="arrow_downward"
+              :style="
+                sortKey === sortOption.key && sortDirection === 'desc'
+                  ? '--icon-color: var(--color-text-primary)'
+                  : false
+              "
+              @click="setSort(sortOption.key, 'desc')"
+            />
+            <IconButton
+              icon="arrow_upward"
+              :style="
+                sortKey === sortOption.key && sortDirection === 'asc'
+                  ? '--icon-color: var(--color-text-primary)'
+                  : false
+              "
+              @click="setSort(sortOption.key, 'asc')"
+            />
+          </li>
+        </ul>
+      </div>
     </transition>
 
     <transition name="fade">
@@ -60,6 +91,7 @@
         </div>
       </div>
     </transition>
+
     <transition name="slide-top">
       <div
         v-if="isFilterVisible"
@@ -71,6 +103,17 @@
         />
       </div>
     </transition>
+
+    <div
+      class="fixed z-10 bottom-4 flex hidden bg-white p-1 shadow-8 rounded-full right-4"
+    >
+      <IconButton
+        :icon="isCompactView ? 'view_stream' : 'view_module'"
+      ></IconButton>
+      <IconButton icon="search"></IconButton>
+      <IconButton icon="sort"></IconButton>
+      <IconButton icon="tune"></IconButton>
+    </div>
   </div>
 </template>
 
@@ -78,18 +121,20 @@
 import { defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex";
 import AppButton from "@/components/AppButton/AppButton.vue";
-import SortOptions from "@/components/SortOptions/SortOptions.vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
 import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import { mq } from "@/utils";
+import { SortOption } from "@/types.ts";
+import { getMakes } from "@/services/make-models";
 
 export default defineComponent({
   name: "Cars",
 
   components: {
     AppButton,
+    IconButton,
     CarListItemOne,
-    SortOptions,
     AppSearch,
   },
 
@@ -154,7 +199,23 @@ export default defineComponent({
       bps: [320],
     });
 
+    //#region sort
+    const sortOptions: SortOption[] = [
+      { key: "createdAt", title: "Created" },
+      { key: "price", title: "Price" },
+      { key: "mileage", title: "Mileage" },
+      { key: "year", title: "Year" },
+    ];
+    const sortKey = ref(sortOptions[0].key);
+    const sortDirection = ref<"desc" | "asc">("desc");
     const isSortVisible = ref(false);
+    const setSort = (key: string, direction: "desc" | "asc"): void => {
+      sortKey.value = key;
+      sortDirection.value = direction;
+      isSortVisible.value = false;
+    };
+    //#endregion
+
     const isFilterVisible = ref(false);
 
     const store = useStore();
@@ -164,6 +225,10 @@ export default defineComponent({
       carlist,
       isCompactView,
       isSortVisible,
+      sortKey,
+      sortDirection,
+      sortOptions,
+      setSort,
       isFilterVisible,
       cars,
       actions,
