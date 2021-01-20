@@ -193,6 +193,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "kit-buttons" */ "../views/kit/Buttons.vue"),
   },
+  {
+    path: "/kit/app-selects",
+    name: "KitAppSelects",
+    component: () =>
+      import(
+        /* webpackChunkName: "kit-app-selects" */ "../views/kit/AppSelects.vue"
+      ),
+  },
 ];
 
 const router = createRouter({

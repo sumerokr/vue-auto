@@ -7,7 +7,13 @@
       </option>
     </AppSelect>
 
-    <AppSelect v-model="model" id="model" label="Model" :disabled="make === ''">
+    <AppSelect
+      v-model="model"
+      id="model"
+      label="Model"
+      :disabled="make === '' || areModelOptionsLoading === true"
+      :loading="areModelOptionsLoading === true"
+    >
       <option value="" hidden selected></option>
       <template v-if="make">
         <option v-for="model in modelOptions" :value="model" :key="model">
@@ -81,7 +87,11 @@
         >More options</AppButton
       >
 
-      <AppButton before="restore" appearance="secondary" size="36"
+      <AppButton
+        before="restore"
+        appearance="secondary"
+        size="36"
+        @click="reset"
         >Reset</AppButton
       >
     </p>
@@ -105,7 +115,7 @@ import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
-import { getMakes, getModels } from "@/services/make-models";
+import { useMakes, useModels } from "@/services/make-models/adapter.ts";
 
 export default defineComponent({
   name: "AppSearch",
@@ -122,23 +132,23 @@ export default defineComponent({
 
     //#region makes
     const make = ref("");
-    const makeOptions = ref<string[]>([]);
-    const getMakeOptions = async () => {
-      makeOptions.value = await getMakes();
-    };
+    const { data: makeOptions, send: getMakeOptions } = useMakes();
     getMakeOptions();
     //#endregion
 
     //#region models
     const model = ref("");
-    const modelOptions = ref<string[]>([]);
-    const getModelOptions = async () => {
-      modelOptions.value = await getModels(make.value);
-    };
+    const {
+      data: modelOptions,
+      isLoading: areModelOptionsLoading,
+      send: getModelOptions,
+    } = useModels();
 
     watch(make, () => {
       model.value = "";
-      getModelOptions();
+      if (make.value) {
+        getModelOptions(make.value);
+      }
     });
     //#endregion
 
@@ -149,11 +159,23 @@ export default defineComponent({
     const minMileage = ref("");
     const maxMileage = ref("");
 
+    const reset = () => {
+      make.value = "";
+      model.value = "";
+      minPrice.value = "";
+      maxPrice.value = "";
+      minYear.value = "";
+      maxYear.value = "";
+      minMileage.value = "";
+      maxMileage.value = "";
+    };
+
     return {
       make,
       makeOptions,
       model,
       modelOptions,
+      areModelOptionsLoading,
       minPrice,
       maxPrice,
       minYear,
@@ -161,6 +183,7 @@ export default defineComponent({
       minMileage,
       maxMileage,
       isMore,
+      reset,
       onSearch: () => {
         router.push({
           name: "Cars",

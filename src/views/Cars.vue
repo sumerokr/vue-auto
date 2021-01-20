@@ -126,7 +126,6 @@ import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import { mq } from "@/utils";
 import { SortOption } from "@/types.ts";
-import { getMakes } from "@/services/make-models";
 
 export default defineComponent({
   name: "Cars",
