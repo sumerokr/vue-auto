@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 
-export const useFetcher = (fn: (...args: any) => Promise<any>) => {
+export const useFetcher = (fn: (...args: any[]) => Promise<any>) => {
   type states = "idle" | "loading" | "success" | "failure";
   const state = ref<states>("idle");
   const data = ref(null);
