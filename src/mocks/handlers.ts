@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { makes, modelsByMake } from "@/db";
+import { makes, modelsByMake, cars } from "@/db";
 
 export const handlers = [
   rest.get("/api/makes", (req, res, ctx) => {
@@ -15,5 +15,9 @@ export const handlers = [
     } else {
       return res(ctx.delay(), ctx.status(400));
     }
+  }),
+
+  rest.get("/api/cars", (req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200), ctx.json(cars));
   }),
 ];
