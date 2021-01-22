@@ -100,5 +100,5 @@ const generateCar = (): Car => {
   };
 };
 
-export const cars = new Array(100).fill(null).map(generateCar);
+export const cars = new Array(500).fill(null).map(generateCar);
 //#endregion

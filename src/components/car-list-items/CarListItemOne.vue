@@ -2,7 +2,7 @@
   <div class="card shadow-1 rounded" ref="root">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <p class="image-wrapper">
-        <img
+        <!-- <img
           class="w-full align-top"
           :src="car.images[0]['320']"
           :srcset="`
@@ -24,7 +24,7 @@
           width="320"
           height="240"
           alt=""
-        />
+        /> -->
       </p>
 
       <div class="content">
@@ -121,6 +121,7 @@ export default defineComponent({
 }
 
 .link {
+  flex-grow: 1; /* importnat to keep horizontal pace */
   display: flex;
   flex-direction: column;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

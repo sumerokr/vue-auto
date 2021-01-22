@@ -27,7 +27,7 @@
       :class="{ 'is-compact': isCompactView }"
       ref="carlist"
     >
-      <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
+      <CarListItemOne v-for="car in cars2" :key="car.id" :car="car" />
     </ul>
 
     <transition name="fade">
@@ -119,12 +119,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import { useStore } from "vuex";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
 import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import { mq } from "@/utils";
+import { useCars } from "@/services/cars/adapter.ts";
 import { SortOption } from "@/types.ts";
 
 export default defineComponent({
@@ -217,19 +217,22 @@ export default defineComponent({
 
     const isFilterVisible = ref(false);
 
-    const store = useStore();
-    const cars = store.state.cars;
+    //#region cars
+    const { data: cars2, send: getCars, isLoading: areCarsLoading } = useCars();
+    getCars();
+    //#endregion
 
     return {
       carlist,
       isCompactView,
       isSortVisible,
       sortKey,
+      cars2,
+      areCarsLoading,
       sortDirection,
       sortOptions,
       setSort,
       isFilterVisible,
-      cars,
       actions,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };

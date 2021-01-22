@@ -7,8 +7,6 @@ export const handlers = [
   }),
 
   rest.get("/api/models", (req, res, ctx) => {
-    console.log(req);
-
     const make = req.url.searchParams.get("make");
     if (make) {
       return res(ctx.delay(), ctx.status(200), ctx.json(modelsByMake[make]));
@@ -17,7 +15,8 @@ export const handlers = [
     }
   }),
 
-  rest.get("/api/cars", (req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(200), ctx.json(cars));
+  rest.post("/api/cars", (req, res, ctx) => {
+    const sliced = cars.slice(0, 20);
+    return res(ctx.delay(), ctx.status(200), ctx.json(sliced));
   }),
 ];
