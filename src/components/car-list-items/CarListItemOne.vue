@@ -2,29 +2,13 @@
   <div class="card shadow-1 rounded" ref="root">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <p class="image-wrapper">
-        <!-- <img
+        <img
           class="w-full align-top"
-          :src="car.images[0]['320']"
-          :srcset="`
-            ${car.images[0]['320']}   320w,
-            ${car.images[0]['640']}   640w,
-            ${car.images[0]['960']}   960w,
-            ${car.images[0]['1280']} 1280w,
-            ${car.images[0]['1600']} 1600w,
-            ${car.images[0]['1920']} 1920w
-          `"
-          sizes="
-            (min-width: 1952px) 1920px,
-            (min-width: 1312px) 1600px,
-            (min-width: 992px)  1280px,
-            (min-width: 672px)  960px,
-            (min-width: 352px)  640px,
-            320px
-          "
+          :src="car.images[0]"
           width="320"
-          height="240"
+          height="180"
           alt=""
-        /> -->
+        />
       </p>
 
       <div class="content">

@@ -66,6 +66,9 @@ const generateCar = (): Car => {
     id: f.random.uuid(),
     make,
     model,
+    images: new Array(8)
+      .fill(null)
+      .map(() => `https://via.placeholder.com/16x9.webp/DBEAFE?text=+`),
     type: f.vehicle.type(),
     fuel: f.vehicle.fuel(),
     color: f.vehicle.color(),
@@ -97,6 +100,7 @@ const generateCar = (): Car => {
     registeredTillMonth,
     registeredTillYear,
     tags,
+    createdAt: f.date.recent(30),
   };
 };
 

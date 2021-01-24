@@ -54,7 +54,7 @@
               sortOption.title
             }}</span>
             <IconButton
-              icon="arrow_downward"
+              icon="sort"
               :style="
                 sortKey === sortOption.key && sortDirection === 'desc'
                   ? '--icon-color: var(--color-text-primary)'
@@ -63,7 +63,8 @@
               @click="setSort(sortOption.key, 'desc')"
             />
             <IconButton
-              icon="arrow_upward"
+              icon="sort"
+              style="transform: rotateX(180deg)"
               :style="
                 sortKey === sortOption.key && sortDirection === 'asc'
                   ? '--icon-color: var(--color-text-primary)'
@@ -219,7 +220,20 @@ export default defineComponent({
 
     //#region cars
     const { data: cars2, send: getCars, isLoading: areCarsLoading } = useCars();
-    getCars();
+    getCars({
+      sort: {
+        sortKey: sortKey.value,
+        sortDirection: sortDirection.value,
+      },
+    });
+    watch([sortKey, sortDirection], () => {
+      getCars({
+        sort: {
+          sortKey: sortKey.value,
+          sortDirection: sortDirection.value,
+        },
+      });
+    });
     //#endregion
 
     return {

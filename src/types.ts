@@ -14,9 +14,11 @@ export type Tag = {
 };
 
 export type Car = {
+  [index: string]: any;
   id: string;
   make: string;
   model: string;
+  images: string[];
   type: string;
   fuel: string;
   color: string;
@@ -33,4 +35,5 @@ export type Car = {
   registeredTillMonth: number;
   registeredTillYear: number;
   tags: Tag[];
+  createdAt: Date;
 };
