@@ -1,13 +1,12 @@
 import { createStore } from "vuex";
-import { mutationTypes } from "./types";
 
 export default createStore({
   state: {
-    cars: [],
+    searchParams: null,
   },
   mutations: {
-    [mutationTypes.setCars]: (state, cars) => {
-      state.cars = cars;
+    setSearchParams: (state, searchParams) => {
+      state.searchParams = searchParams;
     },
   },
   actions: {},

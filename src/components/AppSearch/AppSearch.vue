@@ -1,5 +1,5 @@
 <template>
-  <form class="grid grid-cols-2 gap-4" @submit.prevent="onSearch">
+  <form class="grid grid-cols-2 gap-4" @submit.prevent="onSubmit">
     <AppSelect v-model="make" id="make" label="Make">
       <option value="" hidden selected></option>
       <option v-for="make in makeOptions" :value="make" :key="make">
@@ -78,6 +78,28 @@
       id="max-mileage"
     />
 
+    <AppSelect v-if="isMore" v-model="gearbox" id="gearbox" label="Gearbox">
+      <option value="" hidden selected></option>
+      <option
+        v-for="gearboxOption in ['Automatic', 'Manual']"
+        :value="gearboxOption"
+        :key="gearboxOption"
+      >
+        {{ gearboxOption }}
+      </option>
+    </AppSelect>
+
+    <AppSelect v-if="isMore" v-model="fuel" id="fuel" label="Fuel">
+      <option value="" hidden selected></option>
+      <option
+        v-for="fuelOption in ['Diesel', 'Electric', 'Gasoline', 'Hybrid']"
+        :value="fuelOption"
+        :key="fuelOption"
+      >
+        {{ fuelOption }}
+      </option>
+    </AppSelect>
+
     <p class="col-span-2 flex justify-between">
       <AppButton
         before="tune"
@@ -114,8 +136,9 @@ import { defineComponent, ref, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
-import { useRouter } from "vue-router";
 import { useMakes, useModels } from "@/services/make-models/adapter.ts";
+import { useCarsSearch } from "@/composable/cars-search";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "AppSearch",
@@ -126,23 +149,43 @@ export default defineComponent({
     AppButton,
   },
 
-  setup: () => {
+  emits: {
+    submit: null,
+  },
+
+  setup: (props, { emit }) => {
     const router = useRouter();
+
     const isMore = ref(false);
 
+    const {
+      make,
+      model,
+      minPrice,
+      maxPrice,
+      minYear,
+      maxYear,
+      minMileage,
+      maxMileage,
+      gearbox,
+      fuel,
+    } = useCarsSearch();
+
     //#region makes
-    const make = ref("");
     const { data: makeOptions, send: getMakeOptions } = useMakes();
     getMakeOptions();
     //#endregion
 
     //#region models
-    const model = ref("");
     const {
       data: modelOptions,
       isLoading: areModelOptionsLoading,
       send: getModelOptions,
     } = useModels();
+
+    if (make.value) {
+      getModelOptions(make.value);
+    }
 
     watch(make, () => {
       model.value = "";
@@ -152,22 +195,17 @@ export default defineComponent({
     });
     //#endregion
 
-    const minPrice = ref("");
-    const maxPrice = ref("");
-    const minYear = ref("");
-    const maxYear = ref("");
-    const minMileage = ref("");
-    const maxMileage = ref("");
-
     const reset = () => {
-      make.value = "";
-      model.value = "";
-      minPrice.value = "";
-      maxPrice.value = "";
-      minYear.value = "";
-      maxYear.value = "";
-      minMileage.value = "";
-      maxMileage.value = "";
+      make.value = null;
+      model.value = null;
+      minPrice.value = null;
+      maxPrice.value = null;
+      minYear.value = null;
+      maxYear.value = null;
+      minMileage.value = null;
+      maxMileage.value = null;
+      gearbox.value = null;
+      fuel.value = null;
     };
 
     return {
@@ -182,12 +220,15 @@ export default defineComponent({
       maxYear,
       minMileage,
       maxMileage,
+      gearbox,
+      fuel,
       isMore,
       reset,
-      onSearch: () => {
+      onSubmit: () => {
         router.push({
           name: "Cars",
         });
+        emit("submit");
       },
     };
   },

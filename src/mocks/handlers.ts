@@ -22,21 +22,35 @@ export const handlers = [
       return res(ctx.delay(), ctx.status(200), ctx.json(sliced));
     }
 
-    const body = JSON.parse(req.body);
+    const body: {
+      filter?: object;
+      sort?: { sortKey: string; sortDirection: string };
+    } = JSON.parse(req.body);
     let resulted: Car[] = cars.slice();
 
     if (body.filter) {
       const filterOptions = Object.entries(body.filter);
       resulted = resulted.filter((car) => {
-        return filterOptions.every(([key, value]) => car[key] === value);
+        return filterOptions.every(([key, value]) => {
+          if ([null, ""].includes(value)) {
+            return true;
+          }
+          if (["make", "model"].includes(key)) {
+            return car[key] === value;
+          } else if (["minPrice", "minYear", "minMileage"].includes(key)) {
+            const resolvedKey = key.slice(3).toLowerCase();
+            return car[resolvedKey] >= Number(value);
+          } else if (["maxPrice", "maxYear", "maxMileage"].includes(key)) {
+            const resolvedKey = key.slice(3).toLowerCase();
+            return car[resolvedKey] <= Number(value);
+          }
+          return car[key] === value;
+        });
       });
     }
 
     if (body.sort) {
-      const {
-        sortKey,
-        sortDirection,
-      }: { sortKey: string; sortDirection: string } = body.sort;
+      const { sortKey, sortDirection } = body.sort;
       resulted = resulted.sort((a, b) => {
         if (sortKey === "year" && a[sortKey] - b[sortKey] === 0) {
           return sortDirection === "asc"

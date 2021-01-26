@@ -4,32 +4,22 @@
       <span>Cars</span>
     </h1>
 
-    <ul class="actions flex space-x-2 mb-8" ref="actions">
-      <li class="mr-auto">
-        <AppButton
-          :before="isCompactView ? 'view_stream' : 'view_module'"
-          @click="isCompactView = !isCompactView"
-          >View</AppButton
-        >
-      </li>
-      <li class="">
+    <ul class="flex space-x-2 justify-end mb-8">
+      <li>
         <AppButton before="sort" @click="isSortVisible = true">Sort</AppButton>
       </li>
-      <li class="">
+      <li>
         <AppButton before="tune" @click="isFilterVisible = true"
           >Filter</AppButton
         >
       </li>
     </ul>
 
-    <ul
-      class="carlist grid gap-4 class"
-      :class="{ 'is-compact': isCompactView }"
-      ref="carlist"
-    >
-      <CarListItemOne v-for="car in cars2" :key="car.id" :car="car" />
+    <ul class="carlist grid gap-4 class" ref="carlist">
+      <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
     </ul>
 
+    <!-- sort -->
     <transition name="fade">
       <div
         v-if="isSortVisible"
@@ -76,7 +66,9 @@
         </ul>
       </div>
     </transition>
+    <!-- /sort -->
 
+    <!-- filter -->
     <transition name="fade">
       <div
         v-if="isFilterVisible"
@@ -99,13 +91,16 @@
         class="fixed z-50 top-14 right-0 bottom-0 left-0 p-4 bg-white"
       >
         <AppSearch
-          @click-cancel="isFilterVisible = false"
-          @click-sort="isFilterVisible = false"
+          @submit="
+            isFilterVisible = false;
+            getCarsWithParams();
+          "
         />
       </div>
     </transition>
+    <!-- /filter -->
 
-    <div
+    <!-- <div
       class="fixed z-10 bottom-4 flex hidden bg-white p-1 shadow-8 rounded-full right-4"
     >
       <IconButton
@@ -114,7 +109,7 @@
       <IconButton icon="search"></IconButton>
       <IconButton icon="sort"></IconButton>
       <IconButton icon="tune"></IconButton>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -124,8 +119,8 @@ import AppButton from "@/components/AppButton/AppButton.vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
 import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
-import { mq } from "@/utils";
 import { useCars } from "@/services/cars/adapter.ts";
+import { useCarsSearch } from "@/composable/cars-search";
 import { SortOption } from "@/types.ts";
 
 export default defineComponent({
@@ -139,66 +134,6 @@ export default defineComponent({
   },
 
   setup: () => {
-    const isCompactView = ref(false);
-    const carlist = ref<null | HTMLElement>(null);
-    const compactBps = [
-      380,
-      577,
-      873,
-      1169,
-      1465,
-      1761,
-      2057,
-      2353,
-      2649,
-      2945,
-    ];
-    const normalBps = [421, 857, 1293, 1729, 2165, 2601, 3037, 3473];
-    const carlistBps = mq({
-      refEl: carlist,
-      bps: [...new Set([...compactBps, ...normalBps])].sort((a, b) => a - b),
-    });
-
-    watch([carlistBps, isCompactView], () => {
-      if (carlist.value === null) {
-        return;
-      }
-      const triggerBp = carlistBps.value.slice(-1)[0];
-      if (!triggerBp) {
-        carlist.value.style.setProperty("--columns", "1");
-        return;
-      }
-      if (isCompactView.value) {
-        const biggest = compactBps
-          .slice()
-          .reverse()
-          .find((i) => carlistBps.value.includes(i));
-        if (biggest) {
-          const index = compactBps.indexOf(biggest);
-          carlist.value.style.setProperty("--columns", String(index + 2));
-        } else {
-          carlist.value.style.setProperty("--columns", "1");
-        }
-      } else {
-        const biggest = normalBps
-          .slice()
-          .reverse()
-          .find((i) => carlistBps.value.includes(i));
-        if (biggest) {
-          const index = normalBps.indexOf(biggest);
-          carlist.value.style.setProperty("--columns", String(index + 2));
-        } else {
-          carlist.value.style.setProperty("--columns", "1");
-        }
-      }
-    });
-
-    const actions = ref(null);
-    mq({
-      refEl: actions,
-      bps: [320],
-    });
-
     //#region sort
     const sortOptions: SortOption[] = [
       { key: "createdAt", title: "Created" },
@@ -219,35 +154,58 @@ export default defineComponent({
     const isFilterVisible = ref(false);
 
     //#region cars
-    const { data: cars2, send: getCars, isLoading: areCarsLoading } = useCars();
-    getCars({
-      sort: {
-        sortKey: sortKey.value,
-        sortDirection: sortDirection.value,
-      },
-    });
-    watch([sortKey, sortDirection], () => {
+    const { data: cars, send: getCars, isLoading: areCarsLoading } = useCars();
+    const {
+      make,
+      model,
+      minPrice,
+      maxPrice,
+      minYear,
+      maxYear,
+      minMileage,
+      maxMileage,
+      gearbox,
+      fuel,
+    } = useCarsSearch();
+
+    const getCarsWithParams = () => {
       getCars({
+        filter: {
+          make: make.value,
+          model: model.value,
+          minPrice: minPrice.value,
+          maxPrice: maxPrice.value,
+          minYear: minYear.value,
+          maxYear: maxYear.value,
+          minMileage: minMileage.value,
+          maxMileage: maxMileage.value,
+          gearbox: gearbox.value,
+          fuel: fuel.value,
+        },
         sort: {
           sortKey: sortKey.value,
           sortDirection: sortDirection.value,
         },
       });
+    };
+
+    watch([sortKey, sortDirection], () => {
+      getCarsWithParams();
     });
+
+    getCarsWithParams();
     //#endregion
 
     return {
-      carlist,
-      isCompactView,
       isSortVisible,
       sortKey,
-      cars2,
+      cars,
       areCarsLoading,
       sortDirection,
       sortOptions,
       setSort,
+      getCarsWithParams,
       isFilterVisible,
-      actions,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },
@@ -255,21 +213,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.actions {
-  font-family: var(--font-family-condensed);
-}
-
-.actions[data-mq*="320"] {
-  font-family: var(--font-family-default);
-}
-
-.app-search {
-  font-family: var(--font-family-condensed);
-}
-
 .carlist {
-  --columns: 1;
-  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .slide-top-enter-active {

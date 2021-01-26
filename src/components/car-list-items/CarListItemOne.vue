@@ -6,14 +6,14 @@
           class="w-full align-top"
           :src="car.images[0]"
           width="320"
-          height="180"
+          height="240"
           alt=""
         />
       </p>
 
       <div class="content">
         <h2 class="title">
-          <span class="title-text">{{ car.brand }} {{ car.model }}</span>
+          <span class="title-text">{{ car.make }} {{ car.model }}</span>
           <IconButton
             :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
             class="bookmark"

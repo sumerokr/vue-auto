@@ -1,8 +1,10 @@
-import { Car } from "@/types";
+import { Car, searchParams } from "@/types";
 
 const getCars = async ({
+  filter,
   sort: { sortKey, sortDirection },
 }: {
+  filter: searchParams | undefined;
   sort: {
     sortKey: string;
     sortDirection: string;
@@ -11,6 +13,7 @@ const getCars = async ({
   return fetch("/api/cars", {
     method: "POST",
     body: JSON.stringify({
+      filter,
       sort: {
         sortKey,
         sortDirection,

@@ -37,3 +37,14 @@ export type Car = {
   tags: Tag[];
   createdAt: Date;
 };
+
+export type searchParams = {
+  make: string;
+  model: string;
+  minPrice: number;
+  maxPrice: number;
+  minYear: number;
+  maxYear: number;
+  minMileage: number;
+  maxMileage: number;
+};
