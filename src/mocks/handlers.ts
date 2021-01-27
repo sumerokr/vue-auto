@@ -65,4 +65,15 @@ export const handlers = [
 
     return res(ctx.delay(), ctx.status(200), ctx.json(resulted.slice(0, 20)));
   }),
+
+  rest.get("/api/cars/:id", (req, res, ctx) => {
+    const car = cars.find((c) => c.id === req.params.id);
+
+    if (!car) {
+      const fallbackCar = cars[0];
+      return res(ctx.delay(), ctx.status(200), ctx.json(fallbackCar));
+    }
+
+    return res(ctx.delay(), ctx.status(200), ctx.json(car));
+  }),
 ];

@@ -8,20 +8,13 @@
       >
         <li
           v-for="(image, index) in car.images"
-          :key="image['320']"
+          :key="image"
           class="flex-shrink-0 w-full"
           style="scroll-snap-align: start"
         >
           <img
             class="w-full"
-            :src="image['320']"
-            :srcset="`
-              ${image['320']}   320w,
-              ${image['640']}   640w,
-              ${image['960']}   960w,
-              ${image['1280']} 1280w,
-              ${image['1600']} 1600w
-            `"
+            :src="image"
             width="320"
             height="240"
             alt=""
@@ -54,7 +47,7 @@
       <li class="flex-shrink-0 w-3">&nbsp;</li>
       <li
         v-for="(image, index) in car.images"
-        :key="image['320']"
+        :key="image"
         class="flex-shrink-0"
         style="
           scroll-snap-align: start;
@@ -69,18 +62,11 @@
       >
         <img
           class="max-w-full rounded"
-          :src="image['320']"
-          :srcset="`
-            ${image['320']}   320w,
-            ${image['640']}   640w,
-            ${image['960']}   960w,
-            ${image['1280']} 1280w,
-            ${image['1600']} 1600w
-          `"
+          :src="image"
           width="320"
           height="240"
           alt=""
-          :loading="index > 0 ? 'lazy' : 'auto'"
+          loading="lazy"
         />
       </li>
       <li class="flex-shrink-0 w-3">&nbsp;</li>
@@ -94,36 +80,19 @@
       @click.self="deactivateGallry"
     >
       <div class="p-4 flex items-center justify-end">
-        <span
-          class="material-icons text-white"
-          @click="
-            () => {
-              isGalleryActive = false;
-            }
-          "
+        <span class="material-icons text-white" @click="isGalleryActive = false"
           >close</span
         >
       </div>
       <ul class="overflow-y-auto space-y-2 bg-white">
-        <li
-          v-for="(image, index) in car.images"
-          :key="image['320']"
-          class="shadow"
-        >
+        <li v-for="image in car.images" :key="image" class="shadow">
           <img
             class="w-full"
-            :src="image['320']"
-            :srcset="`
-              ${image['320']}   320w,
-              ${image['640']}   640w,
-              ${image['960']}   960w,
-              ${image['1280']} 1280w,
-              ${image['1600']} 1600w
-            `"
+            :src="image"
             width="320"
             height="240"
             alt=""
-            :loading="index > 0 ? 'lazy' : 'auto'"
+            loading="lazy"
             @click="activateGallery"
           />
         </li>
@@ -133,7 +102,7 @@
 
     <h1 class="mb-2.5 text-xl flex items-center justify-between">
       <span class="text-black text-opacity-90 font-medium"
-        >{{ car.brand }} {{ car.model }}</span
+        >{{ car.make }} {{ car.model }}</span
       >
       <IconButton
         class="-m-3 ml-3"
@@ -152,10 +121,7 @@
       <tbody>
         <tr
           v-for="[key, val] in [
-            [
-              'Month/Year',
-              `${String(car.month + 1).padStart(2, '0')}/${car.year}`,
-            ],
+            ['Produced', dateFormatter.format(new Date(car.year, car.month))],
             ['Fuel', car.fuel],
             ['Mileage', `${numberFormatter.format(car.mileage)} km`],
             ['Gearbox', car.gearbox],
@@ -163,7 +129,9 @@
             ['Drivetrain', car.drivetrain],
             [
               'Registered till',
-              dateFormatter.format(new Date(car.registeredTill)),
+              dateFormatter.format(
+                new Date(car.registeredTillYear, car.registeredTillMonth)
+              ),
             ],
             ['Drivetrain', car.drivetrain],
           ]"
@@ -206,10 +174,10 @@
       <ul class="mb-4 list-disc list-inside">
         <li
           v-for="item in option.items"
-          :key="item.id"
+          :key="item"
           class="text-black text-opacity-90"
         >
-          {{ item.value }}
+          {{ item }}
         </li>
       </ul>
     </template>
@@ -229,7 +197,7 @@
   </div>
 
   <!-- bottom bar -->
-  <div
+  <!-- <div
     class="shadow-8 fixed z-40 bottom-0 px-4 py-2.5 right-0 left-0 flex items-center justify-end bg-blue-700"
   >
     <button
@@ -292,22 +260,15 @@
         >call</span
       >
     </button>
-  </div>
+  </div> -->
   <!-- /bottom bar -->
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
-import { useStore } from "vuex";
-import f from "faker";
-
-interface Car {
-  id: string;
-  brand: string;
-  model: string;
-}
+import { useCar } from "@/services/cars/adapter.ts";
 
 export default defineComponent({
   name: "Car",
@@ -325,7 +286,9 @@ export default defineComponent({
   },
 
   setup: (props) => {
-    const store = useStore();
+    const { data: car, send: getCar } = useCar();
+    getCar(props.id);
+
     const isGalleryActive = ref(false);
 
     const isBookmarked = ref(false);
@@ -334,14 +297,9 @@ export default defineComponent({
     };
 
     return {
-      f,
       isBookmarked,
       toogleIsBookmared,
-      car: computed(
-        () =>
-          store.state.cars.find((car: Car) => car.id === props.id) ||
-          store.state.cars[0]
-      ),
+      car,
       isGalleryActive,
       activateGallery: () => {
         isGalleryActive.value = true;
@@ -360,7 +318,10 @@ export default defineComponent({
           inline: "end",
         });
       },
-      dateFormatter: new Intl.DateTimeFormat(window.navigator.language),
+      dateFormatter: new Intl.DateTimeFormat(window.navigator.language, {
+        month: "2-digit",
+        year: "numeric",
+      }),
       numberFormatter: new Intl.NumberFormat(window.navigator.language),
     };
   },

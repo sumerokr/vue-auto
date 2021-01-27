@@ -22,4 +22,10 @@ const getCars = async ({
   }).then((res) => res.json());
 };
 
-export { getCars };
+const getCar = async (id: string): Promise<Car> => {
+  return fetch(`/api/cars/${id}`, {
+    method: "GET",
+  }).then((res) => res.json());
+};
+
+export { getCars, getCar };

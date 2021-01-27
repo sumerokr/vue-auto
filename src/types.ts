@@ -13,6 +13,11 @@ export type Tag = {
   color: string;
 };
 
+export type Option = {
+  category: string;
+  items: string[];
+};
+
 export type Car = {
   [index: string]: any;
   id: string;
@@ -35,6 +40,7 @@ export type Car = {
   registeredTillMonth: number;
   registeredTillYear: number;
   tags: Tag[];
+  options: Option[];
   createdAt: Date;
 };
 

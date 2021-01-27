@@ -25,7 +25,7 @@
         <p class="price">{{ numberFormatter.format(car.price) }} €</p>
 
         <ul class="params">
-          <li>{{ String(car.month + 1).padStart(2, "0") }}/{{ car.year }}</li>
+          <li>{{ dateFormatter.format(new Date(car.year, car.month)) }}</li>
           <li>{{ car.fuel }}</li>
           <li>{{ numberFormatter.format(car.mileage) }} km</li>
           <li>{{ car.gearbox }}</li>
@@ -92,6 +92,10 @@ export default defineComponent({
       relevantBps,
       isBookmarked,
       toogleIsBookmared,
+      dateFormatter: new Intl.DateTimeFormat(window.navigator.language, {
+        month: "2-digit",
+        year: "numeric",
+      }),
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },

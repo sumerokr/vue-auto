@@ -100,6 +100,18 @@ const generateCar = (): Car => {
       color: "rgb(219, 234, 254)",
     },
   ].filter(() => Math.random() >= 0.75);
+  const optionCategories = ["Comfort", "Multimedia", "Safety", "Extra"];
+  const optionContent = optionCategories.map((oc) => ({
+    category: oc,
+    items: new Array(
+      f.random.number({
+        min: 3,
+        max: 10,
+      })
+    )
+      .fill(null)
+      .map(() => f.random.words()),
+  }));
 
   return {
     id: f.random.uuid(),
@@ -137,6 +149,7 @@ const generateCar = (): Car => {
     registeredTillMonth,
     registeredTillYear,
     tags,
+    options: optionContent,
     createdAt: f.date.recent(30),
   };
 };
