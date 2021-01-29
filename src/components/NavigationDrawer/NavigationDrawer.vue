@@ -3,7 +3,6 @@
     <div class="px-4 py-3 flex items-center">
       <IconButton class="-m-3" icon="close" @click="$emit('click')" />
       <span class="text-2xl ml-8 font-medium italic">Logo</span>
-      <!-- <span class="text-2xl ml-8 font-medium italic">vozila</span> -->
     </div>
     <ul class="my-2">
       <li v-for="item in items" :key="item.name" @click="$emit('click')">
@@ -45,6 +44,7 @@ export default defineComponent({
         { name: "Home", text: "Home", icon: "home" },
         { name: "Search", text: "Search", icon: "search" },
         { name: "Favorites", text: "Favorites", icon: "bookmarks" },
+        { name: "SavedSearch", text: "Saved search", icon: "favorite" },
       ],
     };
   },
