@@ -1,6 +1,6 @@
 <template>
   <div class="cars p-4">
-    <h1 class="text-3xl mb-8">Cars</h1>
+    <h1 class="text-3xl mb-8">Favorites</h1>
 
     <ul class="flex space-x-2 justify-end mb-8">
       <li>

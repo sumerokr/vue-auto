@@ -31,13 +31,6 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
   },
   {
-    path: "/car-card",
-    name: "CarCard",
-    component: () =>
-      import(/* webpackChunkName: "car-card" */ "../views/CarCard.vue"),
-    props: true,
-  },
-  {
     path: "/companies",
     name: "Companies",
     component: () =>
@@ -91,12 +84,10 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "user-adverts" */ "../views/UserAdverts.vue"),
   },
   {
-    path: "/user/favorites",
-    name: "UserFavorites",
+    path: "/favorites",
+    name: "Favorites",
     component: () =>
-      import(
-        /* webpackChunkName: "user-favorites" */ "../views/UserFavorites.vue"
-      ),
+      import(/* webpackChunkName: "favorites" */ "../views/Favorites.vue"),
   },
   {
     path: "/user/messages",

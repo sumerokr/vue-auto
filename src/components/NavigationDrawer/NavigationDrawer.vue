@@ -1,15 +1,23 @@
 <template>
-  <div class="navigation-drawer shadow-16">
+  <div class="navigation-drawer flex flex-col shadow-16">
     <div class="px-4 py-3 flex items-center">
       <IconButton class="-m-3" icon="close" @click="$emit('click')" />
       <span class="text-2xl ml-8 font-medium italic">Logo</span>
       <!-- <span class="text-2xl ml-8 font-medium italic">vozila</span> -->
     </div>
-    <ul>
+    <ul class="my-2">
       <li v-for="item in items" :key="item.name" @click="$emit('click')">
         <RouterLink class="link" :to="{ name: item.name }">
           <span class="material-icons icon">{{ item.icon }}</span>
           <span class="text">{{ item.text }}</span>
+        </RouterLink>
+      </li>
+    </ul>
+    <ul class="mt-auto mb-2">
+      <li>
+        <RouterLink class="link" :to="{ name: 'Pages' }">
+          <span class="material-icons icon">library_books</span>
+          <span class="text">Others</span>
         </RouterLink>
       </li>
     </ul>
@@ -36,13 +44,7 @@ export default defineComponent({
       items: [
         { name: "Home", text: "Home", icon: "home" },
         { name: "Search", text: "Search", icon: "search" },
-        { name: "Add", text: "Add", icon: "add_box" },
-        { name: "UserFavorites", text: "Favorites", icon: "bookmarks" },
-        { name: "User", text: "Profile", icon: "person" },
-        { name: "Pages", text: "Pages", icon: "library_books" },
-        { name: "Prisma", text: "Prisma", icon: "apps" },
-        { name: "Lambda users", text: "Lambda users", icon: "people" },
-        { name: "Fonts", text: "Fonts", icon: "text_fields" },
+        { name: "Favorites", text: "Favorites", icon: "bookmarks" },
       ],
     };
   },

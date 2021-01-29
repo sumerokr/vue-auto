@@ -23,26 +23,13 @@ export default defineComponent({
   setup: () => {
     return {
       routes: [
-        {
-          name: "Cars",
-          text: "Cars",
-        },
-        {
-          name: "Companies",
-          text: "Companies",
-        },
-        {
-          name: "Search",
-          text: "Search",
-        },
-        {
-          name: "Pricing",
-          text: "Pricing",
-        },
-        {
-          name: "CarCard",
-          text: "Car Card",
-        },
+        { name: "Companies", text: "Companies" },
+        { name: "Pricing", text: "Pricing" },
+        { name: "Fonts", text: "Fonts", icon: "text_fields" },
+        { name: "User", text: "Profile", icon: "person" },
+        { name: "Add", text: "Add", icon: "add_box" },
+        { name: "Lambda users", text: "Lambda users", icon: "people" },
+        { name: "Prisma", text: "Prisma", icon: "apps" },
       ],
     };
   },
