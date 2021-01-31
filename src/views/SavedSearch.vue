@@ -13,8 +13,11 @@
             <div class="mm-model text-sm">i20, i30</div>
           </div>
 
-          <div class="mb-4">
-            <span>2018 – 2019</span>, <span> 20 000 km</span>,
+          <div class="mb-4 text-sm text-black text-opacity-60">
+            <span>2018 – 2019</span>
+            <span class="mx-2">•</span>
+            <span> 20 000 km</span>
+            <span class="mx-2">•</span>
             <span>Automat</span>
           </div>
 
@@ -26,11 +29,9 @@
 
           <div class="flex justify-between items-center">
             <span>Notify me about updates</span>
-            <span
-              class="material-icons -my-1 text-blue-700"
-              style="font-size: 32px"
-              >toggle_on</span
-            >
+            <div style="margin: -12px 0">
+              <AppToggler v-model="enabled" id="foo" />
+            </div>
           </div>
         </div>
       </li>
@@ -39,14 +40,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
+import AppToggler from "@/components/AppToggler/AppToggler.vue";
 
 export default defineComponent({
   name: "SavedSearch",
 
   components: {
     AppButton,
+    AppToggler,
+  },
+
+  setup: () => {
+    const enabled = ref(false);
+
+    return {
+      enabled,
+    };
   },
 });
 </script>
