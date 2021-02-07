@@ -1,27 +1,17 @@
-import { ref } from "vue";
+import { reactive } from "vue";
+import { searchParams } from "@/types";
 
-const make = ref<null | string>(null);
-const model = ref<null | string>(null);
-const minPrice = ref<null | number>(null);
-const maxPrice = ref<null | number>(null);
-const minYear = ref<null | number>(null);
-const maxYear = ref<null | number>(null);
-const minMileage = ref<null | number>(null);
-const maxMileage = ref<null | number>(null);
-const gearbox = ref<null | string>(null);
-const fuel = ref<null | string>(null);
+const searchParams = reactive<searchParams>({
+  make: null,
+  model: null,
+  minPrice: null,
+  maxPrice: null,
+  minYear: null,
+  maxYear: null,
+  minMileage: null,
+  maxMileage: null,
+  gearbox: null,
+  fuel: null,
+});
 
-export const useCarsSearch = () => {
-  return {
-    make,
-    model,
-    minPrice,
-    maxPrice,
-    minYear,
-    maxYear,
-    minMileage,
-    maxMileage,
-    gearbox,
-    fuel,
-  };
-};
+export const useCarsSearch = () => searchParams;

@@ -45,12 +45,14 @@ export type Car = {
 };
 
 export type searchParams = {
-  make: string;
-  model: string;
-  minPrice: number;
-  maxPrice: number;
-  minYear: number;
-  maxYear: number;
-  minMileage: number;
-  maxMileage: number;
+  make?: string | null;
+  model?: string | null;
+  minPrice?: number | null;
+  maxPrice?: number | null;
+  minYear?: number | null;
+  maxYear?: number | null;
+  minMileage?: number | null;
+  maxMileage?: number | null;
+  gearbox?: string | null;
+  fuel?: string | null;
 };

@@ -105,8 +105,8 @@
         before="tune"
         appearance="secondary"
         size="36"
-        @click="isMore = true"
-        >More options</AppButton
+        @click="isMore = !isMore"
+        >{{ isMore ? "Less" : "More" }} options</AppButton
       >
 
       <AppButton
@@ -119,26 +119,18 @@
     </p>
 
     <div class="col-span-2">
-      <AppButton
-        before="search"
-        appearance="primary"
-        size="48"
-        type="submit"
-        is-block
-        >Search</AppButton
-      >
+      <slot name="footer"></slot>
     </div>
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, reactive, toRefs, watch, PropType } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import { useMakes, useModels } from "@/services/make-models/adapter.ts";
-import { useCarsSearch } from "@/composable/cars-search";
-import { useRouter } from "vue-router";
+import { searchParams } from "@/types";
 
 export default defineComponent({
   name: "AppSearch",
@@ -149,27 +141,39 @@ export default defineComponent({
     AppButton,
   },
 
+  props: {
+    initialSearchParams: {
+      type: Object as PropType<searchParams>,
+    },
+  },
+
   emits: {
+    update: null,
     submit: null,
   },
 
   setup: (props, { emit }) => {
-    const router = useRouter();
-
     const isMore = ref(false);
 
-    const {
-      make,
-      model,
-      minPrice,
-      maxPrice,
-      minYear,
-      maxYear,
-      minMileage,
-      maxMileage,
-      gearbox,
-      fuel,
-    } = useCarsSearch();
+    const defaultSearchParams: searchParams = {
+      make: null,
+      model: null,
+      minPrice: null,
+      maxPrice: null,
+      minYear: null,
+      maxYear: null,
+      minMileage: null,
+      maxMileage: null,
+      gearbox: null,
+      fuel: null,
+    };
+
+    const resolvedSearchParams = {
+      ...defaultSearchParams,
+      ...props.initialSearchParams,
+    };
+
+    const $searchParams = reactive(resolvedSearchParams);
 
     //#region makes
     const { data: makeOptions, send: getMakeOptions } = useMakes();
@@ -183,53 +187,53 @@ export default defineComponent({
       send: getModelOptions,
     } = useModels();
 
-    if (make.value) {
-      getModelOptions(make.value);
+    if ($searchParams.make) {
+      getModelOptions($searchParams.make);
     }
 
-    watch(make, () => {
-      model.value = "";
-      if (make.value) {
-        getModelOptions(make.value);
+    watch(
+      () => $searchParams.make,
+      () => {
+        $searchParams.model = "";
+        if ($searchParams.make) {
+          getModelOptions($searchParams.make);
+        }
       }
-    });
+    );
     //#endregion
 
     const reset = () => {
-      make.value = null;
-      model.value = null;
-      minPrice.value = null;
-      maxPrice.value = null;
-      minYear.value = null;
-      maxYear.value = null;
-      minMileage.value = null;
-      maxMileage.value = null;
-      gearbox.value = null;
-      fuel.value = null;
+      Object.assign($searchParams, defaultSearchParams);
+    };
+
+    watch($searchParams, () => {
+      const entries = Object.entries($searchParams);
+      const result = entries.reduce((acc, [key, val]) => {
+        acc[key] = val;
+        return acc;
+      }, {} as { [index: string]: unknown });
+      console.log({ result });
+      emit("update", result);
+    });
+
+    const onSubmit = () => {
+      const entries = Object.entries($searchParams);
+      const result: searchParams = entries.reduce((acc, [key, val]) => {
+        acc[key] = val;
+        return acc;
+      }, {} as { [index: string]: unknown });
+      console.log({ result });
+      emit("submit", result);
     };
 
     return {
-      make,
+      ...toRefs($searchParams),
       makeOptions,
-      model,
       modelOptions,
       areModelOptionsLoading,
-      minPrice,
-      maxPrice,
-      minYear,
-      maxYear,
-      minMileage,
-      maxMileage,
-      gearbox,
-      fuel,
       isMore,
       reset,
-      onSubmit: () => {
-        router.push({
-          name: "Cars",
-        });
-        emit("submit");
-      },
+      onSubmit,
     };
   },
 });

@@ -32,7 +32,7 @@ export default defineComponent({
           icon: "view_agenda",
         },
         {
-          name: "UserFavorites",
+          name: "Favorites",
           text: "Favorites",
           icon: "bookmarks",
         },

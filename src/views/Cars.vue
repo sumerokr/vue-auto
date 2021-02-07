@@ -153,33 +153,11 @@ export default defineComponent({
 
     //#region cars
     const { data: cars, send: getCars, isLoading: areCarsLoading } = useCars();
-    const {
-      make,
-      model,
-      minPrice,
-      maxPrice,
-      minYear,
-      maxYear,
-      minMileage,
-      maxMileage,
-      gearbox,
-      fuel,
-    } = useCarsSearch();
+    const composableSearchParams = useCarsSearch();
 
     const getCarsWithParams = () => {
       getCars({
-        filter: {
-          make: make.value,
-          model: model.value,
-          minPrice: minPrice.value,
-          maxPrice: maxPrice.value,
-          minYear: minYear.value,
-          maxYear: maxYear.value,
-          minMileage: minMileage.value,
-          maxMileage: maxMileage.value,
-          gearbox: gearbox.value,
-          fuel: fuel.value,
-        },
+        filter: composableSearchParams,
         sort: {
           sortKey: sortKey.value,
           sortDirection: sortDirection.value,

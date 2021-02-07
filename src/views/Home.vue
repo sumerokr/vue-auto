@@ -4,7 +4,18 @@
     <div class="image"></div>
 
     <div class="search shadow-8">
-      <AppSearch />
+      <AppSearch @update="onUpdate" @submit="onSubmit">
+        <template #footer>
+          <AppButton
+            before="search"
+            appearance="primary"
+            size="48"
+            type="submit"
+            is-block
+            >Search</AppButton
+          >
+        </template>
+      </AppSearch>
     </div>
 
     <div class="content text-black text-opacity-90">
@@ -73,12 +84,39 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppSearch from "@/components/AppSearch/AppSearch.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
+import { useCarsSearch } from "@/composable/cars-search";
+import { useRouter } from "vue-router";
+import { searchParams } from "@/types";
 
 export default defineComponent({
   name: "Home",
 
   components: {
     AppSearch,
+    AppButton,
+  },
+
+  setup: () => {
+    const router = useRouter();
+
+    const composableSearchParams = useCarsSearch();
+
+    const onUpdate = () => {
+      //
+    };
+
+    const onSubmit = (submittedSearchParams: searchParams) => {
+      Object.assign(composableSearchParams, submittedSearchParams);
+      router.push({
+        name: "Cars",
+      });
+    };
+
+    return {
+      onUpdate,
+      onSubmit,
+    };
   },
 });
 </script>
