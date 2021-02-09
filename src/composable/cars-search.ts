@@ -1,7 +1,6 @@
-import { reactive } from "vue";
 import { searchParams } from "@/types";
 
-const searchParams = reactive<searchParams>({
+const searchParams: searchParams = {
   make: null,
   model: null,
   minPrice: null,
@@ -12,6 +11,6 @@ const searchParams = reactive<searchParams>({
   maxMileage: null,
   gearbox: null,
   fuel: null,
-});
+};
 
 export const useCarsSearch = () => searchParams;

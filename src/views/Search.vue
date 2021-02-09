@@ -2,179 +2,64 @@
   <div class="p-4">
     <h1 class="text-2xl mb-8">Search for a car</h1>
 
-    <AppSearch />
-
-    <form class="grid gap-4 grid-cols-2 hidden" @submit.prevent="onSearch">
-      <button
-        class="col-span-2 border-2 border-gray-200 rounded bg-white px-3.5 py-2.5 w-full flex"
-        type="button"
-        @click="showSelector"
-      >
-        <span class="material-icons text-black text-opacity-60 mr-3"
-          >directions_car</span
+    <AppSearch
+      :initial-search-params="composableSearchParams"
+      @update="onUpdate"
+      @submit="onSubmit"
+    >
+      <template #footer>
+        <AppButton
+          before="search"
+          appearance="primary"
+          size="48"
+          type="submit"
+          is-block
+          >Search</AppButton
         >
-        <span class="text-black text-opacity-60 font-medium">Make, model</span>
-        <span class="material-icons text-black text-opacity-60 ml-auto"
-          >search</span
-        >
-      </button>
-
-      <transition name="slide-top">
-        <div
-          v-if="isSelectorVisible"
-          class="fixed right-0 bottom-0 left-0 z-50 bg-white rounded-t flex flex-col"
-          :style="`
-            top: 120px;
-            box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
-          `"
-        >
-          <div class="p-4">
-            <input
-              class="border-2 border-gray-200 bg-gray-50 rounded focus:outline-none focus:border-blue-400 px-3.5 py-2.5 w-full"
-              type="text"
-              id="make"
-            />
-          </div>
-          <div class="flex-grow p-4 overflow-y-auto">
-            <ul>
-              <li v-for="makeModel in makeModels" :key="makeModel.make">
-                <div class="flex py-3" @click="expand(makeModel.make)">
-                  <span class="flex-grow">{{ makeModel.make }}</span>
-                  <span
-                    class="material-icons p-3 -my-3 transform transition-transform"
-                    :class="{ 'rotate-180': expanded[makeModel.make] }"
-                    >expand_more</span
-                  >
-                </div>
-
-                <!-- <transition name="slide-bottom"> -->
-                <div v-if="expanded[makeModel.make]">
-                  <div
-                    class="flex items-center"
-                    v-for="model in makeModel.models"
-                    :key="model"
-                  >
-                    <span
-                      class="material-icons p-2 mr-2 text-black text-opacity-60"
-                      :class="{ 'rotate-180': expanded[makeModel.make] }"
-                      >check_box_outline_blank</span
-                    >
-                    <label>{{ model }}</label>
-                  </div>
-                </div>
-                <!-- </transition> -->
-              </li>
-            </ul>
-          </div>
-          <div class="bg-gray-50 p-4 flex justify-end">
-            <button
-              class="text-black text-opacity-60 px-4 py-2 text-sm rounded mr-4 font-medium uppercase"
-              type="button"
-              @click="hideSelector"
-            >
-              Cancel
-            </button>
-            <button
-              class="bg-blue-700 text-white px-4 py-2 text-sm rounded text-opacity-90 font-medium uppercase"
-              type="submit"
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      </transition>
-    </form>
+      </template>
+    </AppSearch>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import AppSearch from "@/components/AppSearch/AppSearch.vue";
+import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
-import { makeModels } from "@/faker/cars.ts";
+import { useCarsSearch } from "@/composable/cars-search";
+import { searchParams } from "@/types.ts";
 
 export default defineComponent({
   name: "Search",
 
   components: {
     AppSearch,
+    AppButton,
   },
 
   setup: () => {
     const router = useRouter();
-    const isSelectorVisible = ref(false);
-    const isMore = ref(false);
 
-    const make = ref("");
-    const model = ref("");
-    const minPrice = ref("");
-    const maxPrice = ref("");
-    const minYear = ref("");
-    const maxYear = ref("");
-    const minMileage = ref("");
-    const maxMileage = ref("");
+    const composableSearchParams = useCarsSearch();
 
-    interface Expanded {
-      [key: string]: boolean;
-    }
-    const expanded = ref<Expanded>({});
+    const onUpdate = () => {
+      //
+    };
+
+    const onSubmit = (submittedSearchParams: searchParams) => {
+      Object.assign(composableSearchParams, submittedSearchParams);
+      router.push({
+        name: "Cars",
+      });
+    };
 
     return {
-      make,
-      model,
-      minPrice,
-      maxPrice,
-      minYear,
-      maxYear,
-      minMileage,
-      maxMileage,
-      makeModels,
-      isSelectorVisible,
-      expanded,
-      isMore,
-      onSearch: () => {
-        router.push({
-          name: "Cars",
-        });
-      },
-      showSelector: () => {
-        isSelectorVisible.value = true;
-      },
-      hideSelector: () => {
-        isSelectorVisible.value = false;
-      },
-      expand: (car: string) => {
-        if (expanded.value[car]) {
-          expanded.value[car] = false;
-        } else {
-          expanded.value[car] = true;
-        }
-      },
+      composableSearchParams,
+      onUpdate,
+      onSubmit,
     };
   },
 });
 </script>
 
-<style scoped>
-.slide-top-enter-active {
-  transition: transform 0.2s ease-out;
-}
-.slide-top-leave-active {
-  transition: transform 0.2s ease-in;
-}
-.slide-top-enter-from,
-.slide-top-leave-to {
-  transform: translateY(100%);
-}
-
-/* .slide-bottom-enter-active {
-  transition: transform 0.3s ease-out;
-}
-.slide-bottom-leave-active {
-  transition: transform 0.3s ease-in;
-}
-.slide-bottom-enter-from,
-.slide-bottom-leave-to {
-  transform: translateY(-100%);
-} */
-</style>
+<style scoped></style>

@@ -4,7 +4,11 @@
     <div class="image"></div>
 
     <div class="search shadow-8">
-      <AppSearch @update="onUpdate" @submit="onSubmit">
+      <AppSearch
+        :initial-search-params="composableSearchParams"
+        @update="onUpdate"
+        @submit="onSubmit"
+      >
         <template #footer>
           <AppButton
             before="search"
@@ -114,6 +118,7 @@ export default defineComponent({
     };
 
     return {
+      composableSearchParams,
       onUpdate,
       onSubmit,
     };

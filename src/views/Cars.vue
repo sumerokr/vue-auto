@@ -89,11 +89,20 @@
         class="fixed z-50 top-14 right-0 bottom-0 left-0 p-4 bg-white"
       >
         <AppSearch
-          @submit="
-            isFilterVisible = false;
-            getCarsWithParams();
-          "
-        />
+          :initial-search-params="composableSearchParams"
+          @submit="onSubmit"
+        >
+          <template #footer>
+            <AppButton
+              before="search"
+              appearance="primary"
+              size="48"
+              type="submit"
+              is-block
+              >Search</AppButton
+            >
+          </template>
+        </AppSearch>
       </div>
     </transition>
     <!-- /filter -->
@@ -119,7 +128,7 @@ import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import { useCars } from "@/services/cars/adapter.ts";
 import { useCarsSearch } from "@/composable/cars-search";
-import { SortOption } from "@/types.ts";
+import { SortOption, searchParams } from "@/types.ts";
 
 export default defineComponent({
   name: "Cars",
@@ -165,6 +174,12 @@ export default defineComponent({
       });
     };
 
+    const onSubmit = (submittedSearchParams: searchParams) => {
+      Object.assign(composableSearchParams, submittedSearchParams);
+      getCarsWithParams();
+      isFilterVisible.value = false;
+    };
+
     watch([sortKey, sortDirection], () => {
       getCarsWithParams();
     });
@@ -179,9 +194,11 @@ export default defineComponent({
       areCarsLoading,
       sortDirection,
       sortOptions,
+      onSubmit,
       setSort,
       getCarsWithParams,
       isFilterVisible,
+      composableSearchParams,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },

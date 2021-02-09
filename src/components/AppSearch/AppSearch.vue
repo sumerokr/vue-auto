@@ -1,7 +1,7 @@
 <template>
   <form class="grid grid-cols-2 gap-4" @submit.prevent="onSubmit">
     <AppSelect v-model="make" id="make" label="Make">
-      <option value="" hidden selected></option>
+      <option :value="null" hidden selected></option>
       <option v-for="make in makeOptions" :value="make" :key="make">
         {{ make }}
       </option>
@@ -11,10 +11,10 @@
       v-model="model"
       id="model"
       label="Model"
-      :disabled="make === '' || areModelOptionsLoading === true"
+      :disabled="make === null || areModelOptionsLoading === true"
       :loading="areModelOptionsLoading === true"
     >
-      <option value="" hidden selected></option>
+      <option :value="null" hidden selected></option>
       <template v-if="make">
         <option v-for="model in modelOptions" :value="model" :key="model">
           {{ model }}
@@ -125,7 +125,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs, watch, PropType } from "vue";
+import {
+  defineComponent,
+  ref,
+  unref,
+  reactive,
+  toRefs,
+  watch,
+  PropType,
+} from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
@@ -143,6 +151,7 @@ export default defineComponent({
 
   props: {
     initialSearchParams: {
+      // TODO: type checking doesn't work
       type: Object as PropType<searchParams>,
     },
   },
@@ -207,23 +216,11 @@ export default defineComponent({
     };
 
     watch($searchParams, () => {
-      const entries = Object.entries($searchParams);
-      const result = entries.reduce((acc, [key, val]) => {
-        acc[key] = val;
-        return acc;
-      }, {} as { [index: string]: unknown });
-      console.log({ result });
-      emit("update", result);
+      emit("update", $searchParams);
     });
 
     const onSubmit = () => {
-      const entries = Object.entries($searchParams);
-      const result: searchParams = entries.reduce((acc, [key, val]) => {
-        acc[key] = val;
-        return acc;
-      }, {} as { [index: string]: unknown });
-      console.log({ result });
-      emit("submit", result);
+      emit("submit", $searchParams);
     };
 
     return {
