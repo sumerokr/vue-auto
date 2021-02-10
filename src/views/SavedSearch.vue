@@ -4,7 +4,7 @@
 
     <ul class="grid gap-4">
       <li v-for="n in 3" :key="n">
-        <SavedSearchItem />
+        <SavedSearchListItem />
       </li>
     </ul>
   </div>
@@ -12,13 +12,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SavedSearchItem from "@/components/SavedSearchItem/SavedSearchItem.vue";
+import SavedSearchListItem from "@/components/SavedSearchListItem/SavedSearchListItem.vue";
 
 export default defineComponent({
   name: "SavedSearch",
 
   components: {
-    SavedSearchItem,
+    SavedSearchListItem,
   },
 });
 </script>

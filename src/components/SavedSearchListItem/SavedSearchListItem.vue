@@ -1,5 +1,6 @@
 <template>
   <div class="card rounded shadow-1">
+    <h2 class="mm-make text-xl mb-2">Hynday</h2>
     <div class="mm">
       <div class="mm-image">
         <span class="block w-12 h-12 bg-blue-100 rounded-xl"></span>
