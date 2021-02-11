@@ -2,7 +2,7 @@
   <div class="cars p-4">
     <h1 class="text-3xl mb-8">Saved search</h1>
 
-    <AppInput v-model="searchName" label="Search name" id="min-price" />
+    <AppInput v-model="searchName" label="Search name" id="search-name" />
 
     <br />
 

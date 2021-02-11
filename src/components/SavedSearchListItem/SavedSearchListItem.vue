@@ -1,6 +1,6 @@
 <template>
   <div class="card rounded shadow-1">
-    <h2 class="mm-make text-xl mb-2">Hynday</h2>
+    <h2 class="mm-make text-xl mb-2">My saved search</h2>
     <div class="mm">
       <div class="mm-image">
         <span class="block w-12 h-12 bg-blue-100 rounded-xl"></span>
@@ -17,14 +17,18 @@
       <span>Automat</span>
     </div>
 
-    <div>
-      <AppButton before="edit">Edit</AppButton>
+    <div class="flex gap-2">
+      <AppButton before="search" @click="search">Search</AppButton>
+      <AppButton before="edit" @click="edit">Edit</AppButton>
+      <IconButton class="-my-1.5 ml-auto" icon="delete" @click="edit"
+        >Edit</IconButton
+      >
     </div>
 
     <hr class="my-4" />
 
     <div class="flex justify-between items-center">
-      <span>Notify me about updates</span>
+      <span class="text-black text-opacity-90">Notify me about updates</span>
       <div style="margin: -12px 0">
         <AppToggler v-model="enabled" :id="'foo' + Math.random()" />
       </div>
@@ -35,21 +39,49 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
 import AppToggler from "@/components/AppToggler/AppToggler.vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "SavedSearchItem",
 
   components: {
     AppButton,
+    IconButton,
     AppToggler,
   },
 
+  props: {
+    savedSearch: {
+      type: Object,
+    },
+  },
+
   setup: () => {
+    const router = useRouter();
+
     const enabled = ref(false);
+
+    const search = () => {
+      router.push({
+        name: "Cars",
+      });
+    };
+
+    const edit = () => {
+      router.push({
+        name: "SavedSearch2",
+        params: {
+          id: "uid",
+        },
+      });
+    };
 
     return {
       enabled,
+      search,
+      edit,
     };
   },
 });

@@ -3,7 +3,7 @@
     <h1 class="text-3xl mb-8">Saved search</h1>
 
     <ul class="grid gap-4">
-      <li v-for="n in 3" :key="n">
+      <li v-for="n in 5" :key="n">
         <SavedSearchListItem />
       </li>
     </ul>
