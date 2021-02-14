@@ -36,69 +36,69 @@
       id="max-price"
     />
 
-    <AppSelect v-if="isMore" v-model="minYear" id="min-year" label="Min year">
-      <option value="" hidden selected></option>
-      <option
-        v-for="year in new Array(20)
-          .fill(null)
-          .map((item, index) => 2020 - index)"
-        :value="year"
-        :key="year"
-      >
-        {{ year }}
-      </option>
-    </AppSelect>
+    <div v-if="isMore" class="col-span-2 grid grid-cols-2 gap-4">
+      <AppSelect v-model="minYear" id="min-year" label="Min year">
+        <option value="" hidden selected></option>
+        <option
+          v-for="year in new Array(20)
+            .fill(null)
+            .map((item, index) => 2020 - index)"
+          :value="year"
+          :key="year"
+        >
+          {{ year }}
+        </option>
+      </AppSelect>
 
-    <AppSelect v-if="isMore" v-model="maxYear" id="max-year" label="Max year">
-      <option value="" hidden selected></option>
-      <option
-        v-for="year in new Array(20)
-          .fill(null)
-          .map((item, index) => 2020 - index)"
-        :value="year"
-        :key="year"
-      >
-        {{ year }}
-      </option>
-    </AppSelect>
+      <AppSelect v-model="maxYear" id="max-year" label="Max year">
+        <option value="" hidden selected></option>
+        <option
+          v-for="year in new Array(20)
+            .fill(null)
+            .map((item, index) => 2020 - index)"
+          :value="year"
+          :key="year"
+        >
+          {{ year }}
+        </option>
+      </AppSelect>
 
-    <AppInput
-      v-if="isMore"
-      v-model="minMileage"
-      label="Min mileage, km"
-      type="number"
-      id="min-mileage"
-    />
+      <AppInput
+        v-model="minMileage"
+        label="Min mileage, km"
+        type="number"
+        id="min-mileage"
+      />
 
-    <AppInput
-      v-if="isMore"
-      v-model="maxMileage"
-      label="Max mileage, km"
-      type="number"
-      id="max-mileage"
-    />
+      <AppInput
+        v-model="maxMileage"
+        label="Max mileage, km"
+        type="number"
+        id="max-mileage"
+      />
 
-    <AppSelect v-if="isMore" v-model="gearbox" id="gearbox" label="Gearbox">
-      <option value="" hidden selected></option>
-      <option
-        v-for="gearboxOption in ['Automatic', 'Manual']"
-        :value="gearboxOption"
-        :key="gearboxOption"
-      >
-        {{ gearboxOption }}
-      </option>
-    </AppSelect>
+      <AppSelect v-model="gearbox" id="gearbox" label="Gearbox">
+        <option value="" hidden selected></option>
+        <option
+          v-for="gearboxOption in ['Automatic', 'Manual']"
+          :value="gearboxOption"
+          :key="gearboxOption"
+        >
+          {{ gearboxOption }}
+        </option>
+      </AppSelect>
 
-    <AppSelect v-if="isMore" v-model="fuel" id="fuel" label="Fuel">
-      <option value="" hidden selected></option>
-      <option
-        v-for="fuelOption in ['Diesel', 'Electric', 'Gasoline', 'Hybrid']"
-        :value="fuelOption"
-        :key="fuelOption"
-      >
-        {{ fuelOption }}
-      </option>
-    </AppSelect>
+      <AppSelect v-model="fuel" id="fuel" label="Fuel">
+        <option value="" hidden selected></option>
+        <option
+          v-for="fuelOption in ['Diesel', 'Electric', 'Gasoline', 'Hybrid']"
+          :value="fuelOption"
+          :key="fuelOption"
+        >
+          {{ fuelOption }}
+        </option>
+      </AppSelect>
+    </div>
 
     <p class="col-span-2 flex justify-between">
       <AppButton

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 pb-20" v-if="car">
+  <div class="p-4" v-if="car">
     <!-- main slider -->
     <div class="relative z-10 -mx-4 -mt-4 mb-4">
       <ul
@@ -25,7 +25,7 @@
       </ul>
 
       <div
-        class="absolute bottom-4 right-4 rounded flex items-center py-1 px-2 bg-black bg-opacity-50"
+        class="absolute bottom-4 right-4 rounded flex items-center py-1 px-2 bg-black bg-opacity-50 pointer-events-none"
       >
         <span
           class="material-icons mr-1.5 text-white text-opacity-60"
@@ -100,7 +100,7 @@
     </div>
     <!-- /gallery -->
 
-    <h1 class="mb-2.5 text-xl flex items-center justify-between">
+    <h1 class="mb-4 text-xl flex items-center justify-between">
       <span class="text-black text-opacity-90 font-medium"
         >{{ car.make }} {{ car.model }}</span
       >
@@ -113,7 +113,9 @@
 
     <p class="flex items-center mb-6 text-3xl font-semibold">
       <span>{{ numberFormatter.format(car.price) }} €</span>
-      <AppButton class="ml-6" before="timeline">Price history</AppButton>
+      <AppButton class="ml-6" before="timeline" @click="isHistoryVisible = true"
+        >Price history</AppButton
+      >
     </p>
 
     <h3 class="text-xl mb-2">Details</h3>
@@ -163,15 +165,13 @@
     </div>
     <!-- /description -->
 
-    <br />
-
     <!-- options -->
     <h3 class="text-xl mb-2">Options</h3>
     <template v-for="option in car.options" :key="option">
       <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
         {{ option.category }}
       </h4>
-      <ul class="mb-4 list-disc list-inside">
+      <ul class="mb-8 list-disc list-inside">
         <li
           v-for="item in option.items"
           :key="item"
@@ -183,18 +183,87 @@
     </template>
     <!-- options -->
 
-    <br />
+    <h3 class="text-lg mb-2">Seller info</h3>
+    <p class="seller-info-item gap-x-4 mb-2">
+      <span class="material-icons opacity-60">{{ car.ownerType }}</span>
+      <span class="col-start-2 text-black text-opacity-90">{{
+        car.ownerName
+      }}</span>
+      <span class="col-start-2 text-xs text-black text-opacity-60"
+        >registered 2 years ago</span
+      >
+    </p>
+    <p class="seller-info-item gap-x-4 mb-4">
+      <span class="material-icons opacity-60">place</span>
+      <span class="col-start-2 text-black text-opacity-90">{{ car.city }}</span>
+    </p>
 
-    <h3 class="text-lg mb-2">Contacts</h3>
-    <p class="flex items-center mb-2">
-      <span class="mr-4 material-icons opacity-60">{{ car.ownerType }}</span
-      ><span class="text-black text-opacity-90">{{ car.ownerName }}</span>
+    <div class="flex space-x-4 mb-8">
+      <AppButton appearance="primary" before="call" class="flex-1"
+        >Call</AppButton
+      >
+      <AppButton appearance="primary" before="message" class="flex-1"
+        >Message</AppButton
+      >
+    </div>
+
+    <p class="seller-info-item gap-x-4 mb-2">
+      <span class="material-icons opacity-60">list</span>
+      <span class="col-start-2 text-black text-opacity-90"
+        >Other cars by {{ car.ownerName }}</span
+      >
     </p>
-    <p class="flex items-center">
-      <span class="mr-4 material-icons opacity-60">place</span>
-      <span class="text-black text-opacity-90">{{ car.city }}</span>
-    </p>
+
+    <!-- related -->
+    <ul
+      class="flex overflow-x-scroll -mx-4 space-x-2 pb-2"
+      style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
+    >
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
+    </ul>
+    <!-- /related -->
   </div>
+
+  <teleport to="body">
+    <transition name="pop-top">
+      <AppModal v-if="isHistoryVisible" @close="onClose">
+        <h2 class="text-xl mb-4">Price history</h2>
+        <table>
+          <thead>
+            <tr>
+              <th class="py-1 text-left font-medium">Date</th>
+              <th class="py-1 text-right pl-16 font-medium">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-1">27.01.2021</td>
+              <td class="py-1 text-red-800 text-right">
+                {{ numberFormatter.format(car.price + 300) }} €
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1">13.01.2021</td>
+              <td class="py-1 text-green-800 text-right">
+                {{ numberFormatter.format(car.price - 1000) }} €
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1">02.01.2021</td>
+              <td class="py-1 text-right">
+                {{ numberFormatter.format(car.price) }} €
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </AppModal>
+    </transition>
+  </teleport>
 
   <!-- bottom bar -->
   <!-- <div
@@ -267,7 +336,9 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
+import CarCardCompact from "@/components/CarCardCompact/CarCardCompact.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
+import AppModal from "@/components/AppModal/AppModal.vue";
 import { useCar } from "@/services/cars/adapter.ts";
 
 export default defineComponent({
@@ -276,6 +347,8 @@ export default defineComponent({
   components: {
     IconButton,
     AppButton,
+    AppModal,
+    CarCardCompact,
   },
 
   props: {
@@ -295,6 +368,8 @@ export default defineComponent({
     const toogleIsBookmared = () => {
       isBookmarked.value = !isBookmarked.value;
     };
+
+    const isHistoryVisible = ref(false);
 
     return {
       isBookmarked,
@@ -318,6 +393,10 @@ export default defineComponent({
           inline: "end",
         });
       },
+      isHistoryVisible,
+      onClose: () => {
+        isHistoryVisible.value = false;
+      },
       dateFormatter: new Intl.DateTimeFormat(window.navigator.language, {
         month: "2-digit",
         year: "numeric",
@@ -327,3 +406,26 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.car-card-compact {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.seller-info-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+}
+
+.pop-top-enter-active {
+  transition: opacity 0.2s ease-out;
+}
+.pop-top-leave-active {
+  transition: opacity 0.2s ease-in;
+}
+.pop-top-enter-from,
+.pop-top-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,11 +1,11 @@
 <template>
   <div class="card rounded shadow-1">
-    <h2 class="mm-make text-xl mb-2">My saved search</h2>
+    <h2 class="text-black text-opacity-75 mb-2">My saved search</h2>
     <div class="mm">
       <div class="mm-image">
         <span class="block w-12 h-12 bg-blue-100 rounded-xl"></span>
       </div>
-      <div class="mm-make text-xl">Hynday</div>
+      <div class="mm-make text-xl">Mercedes-Benz</div>
       <div class="mm-model text-sm">i20, i30</div>
     </div>
 
@@ -20,7 +20,7 @@
     <div class="flex gap-2">
       <AppButton before="search" @click="search">Search</AppButton>
       <AppButton before="edit" @click="edit">Edit</AppButton>
-      <IconButton class="-my-1.5 ml-auto" icon="delete" @click="edit"
+      <IconButton class="-my-1.5 ml-auto" icon="delete" @click="remove"
         >Edit</IconButton
       >
     </div>
@@ -78,10 +78,15 @@ export default defineComponent({
       });
     };
 
+    const remove = () => {
+      console.log("remove");
+    };
+
     return {
       enabled,
       search,
       edit,
+      remove,
     };
   },
 });

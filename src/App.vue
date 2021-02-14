@@ -11,6 +11,12 @@
     ></div>
   </transition>
   <router-view />
+
+  <!-- <div class="footer border-t-2 border-red-500 p-4 bg-blue-50">
+    <p class="text-black text-opacity-60">
+      © {{ new Date().getFullYear() }} Site. All rights reserved
+    </p>
+  </div> -->
 </template>
 
 <script lang="ts">

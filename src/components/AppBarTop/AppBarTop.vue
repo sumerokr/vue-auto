@@ -3,7 +3,7 @@
     class="app-bar-top shadow-4 fixed z-40 top-0 px-4 py-3 right-0 left-0 flex items-center bg-blue-700"
   >
     <IconButton
-      class="-m-3 mr-5"
+      class="-my-2 -mx-3 mr-5"
       icon="menu"
       theme="light"
       @click="$emit('click')"
@@ -13,7 +13,7 @@
     <!-- <span class="text-white text-2xl font-semibold italic">vo</span>
     <span class="text-white text-2xl font-medium italic">zi</span>
     <span class="text-white text-2xl italic">la</span> -->
-    <div class="relative z-10 mx-6 flex-grow">
+    <!-- <div class="relative z-10 mx-6 flex-grow">
       <span
         class="absolute top-0 -z-10 left-0 right-0 bg-blue-500 bg-opacity-50"
         style="height: 4px"
@@ -52,11 +52,11 @@
         class="absolute bottom-0 -z-10 left-0 right-0 bg-blue-500 bg-opacity-50"
         style="height: 4px"
       ></span>
-    </div>
+    </div> -->
     <IconButton
       icon="format_size"
       theme="light"
-      class="-m-3"
+      class="-my-2 ml-auto"
       @click="pickNext"
     />
   </div>
