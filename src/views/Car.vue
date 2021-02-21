@@ -1,7 +1,7 @@
 <template>
-  <div class="p-4" v-if="car">
+  <div v-if="car">
     <!-- main slider -->
-    <div class="relative z-10 -mx-4 -mt-4 mb-4">
+    <div class="relative z-10 mb-4">
       <ul
         class="slider flex overflow-x-scroll"
         style="scroll-snap-type: x mandatory"
@@ -41,19 +41,15 @@
 
     <!-- thumbs -->
     <ul
-      class="flex overflow-x-scroll -mx-4 mb-4 space-x-1"
-      style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
+      class="flex overflow-x-scroll mb-4 space-x-2"
+      style="scroll-snap-type: x mandatory; scroll-padding: 0 1rem"
     >
-      <li class="flex-shrink-0 w-3">&nbsp;</li>
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
       <li
         v-for="(image, index) in car.images"
         :key="image"
         class="flex-shrink-0"
-        style="
-          scroll-snap-align: start;
-          width: calc(100% - 2rem);
-          max-width: 80px;
-        "
+        style="scroll-snap-align: start; max-width: 120px"
         @click="
           () => {
             goTo(index);
@@ -69,7 +65,7 @@
           loading="lazy"
         />
       </li>
-      <li class="flex-shrink-0 w-3">&nbsp;</li>
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
     </ul>
     <!-- /thumbs -->
 
@@ -100,133 +96,147 @@
     </div>
     <!-- /gallery -->
 
-    <h1 class="mb-4 text-xl flex items-center justify-between">
-      <span class="text-black text-opacity-90 font-medium"
-        >{{ car.make }} {{ car.model }}</span
-      >
-      <IconButton
-        class="-m-3 ml-3"
-        :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
-        @click.prevent="toogleIsBookmared"
-      />
-    </h1>
-
-    <p class="flex items-center mb-6 text-3xl font-semibold">
-      <span>{{ numberFormatter.format(car.price) }} €</span>
-      <AppButton class="ml-6" before="timeline" @click="isHistoryVisible = true"
-        >Price history</AppButton
-      >
-    </p>
-
-    <h3 class="text-xl mb-2">Details</h3>
-    <table>
-      <tbody>
-        <tr
-          v-for="[key, val] in [
-            ['Produced', dateFormatter.format(new Date(car.year, car.month))],
-            ['Fuel', car.fuel],
-            ['Mileage', `${numberFormatter.format(car.mileage)} km`],
-            ['Gearbox', car.gearbox],
-            ['Power', `${car.power} hp`],
-            ['Drivetrain', car.drivetrain],
-            [
-              'Registered till',
-              dateFormatter.format(
-                new Date(car.registeredTillYear, car.registeredTillMonth)
-              ),
-            ],
-            ['Drivetrain', car.drivetrain],
-          ]"
-          :key="key"
+    <div class="py-6 px-4 bg-gray-100">
+      <h1 class="mb-4 text-xl flex items-center justify-between">
+        <span class="text-black text-opacity-90 font-medium"
+          >{{ car.make }} {{ car.model }}</span
         >
-          <td class="pr-8 text-black text-opacity-60">{{ key }}</td>
-          <td class="text-black text-opacity-90">{{ val }}</td>
-        </tr>
-      </tbody>
-    </table>
+        <IconButton
+          class="-m-3 ml-3"
+          :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
+          @click.prevent="toogleIsBookmared"
+        />
+      </h1>
 
-    <br />
+      <p class="flex items-center mb-6 text-3xl font-semibold">
+        <span>{{ numberFormatter.format(car.price) }} €</span>
+        <AppButton
+          class="ml-6"
+          before="timeline"
+          @click="isHistoryVisible = true"
+          >Price history</AppButton
+        >
+      </p>
 
-    <!-- description -->
-    <h3 class="text-xl mb-2">Description</h3>
-    <div class="mb-4 border-l-2 pl-4">
-      <p class="mb-4 text-black text-opacity-90">
-        Lato is a sans serif typeface family started in the summer of 2010 by
-        Warsaw-based designer Łukasz Dziedzic (“Lato” means “Summer” in Polish).
-        In December 2010 the Lato family was published under the Open Font
-        License by his foundry tyPoland, with support from Google.
-      </p>
-      <p class="flex items-center">
-        <span class="mr-2 material-icons opacity-60" style="font-size: 12px">{{
-          car.ownerType
-        }}</span
-        ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
-      </p>
+      <h3 class="text-xl mb-2">Details</h3>
+      <table>
+        <tbody>
+          <tr
+            v-for="[key, val] in [
+              ['Produced', dateFormatter.format(new Date(car.year, car.month))],
+              ['Fuel', car.fuel],
+              ['Mileage', `${numberFormatter.format(car.mileage)} km`],
+              ['Gearbox', car.gearbox],
+              ['Power', `${car.power} hp`],
+              ['Drivetrain', car.drivetrain],
+              [
+                'Registered till',
+                dateFormatter.format(
+                  new Date(car.registeredTillYear, car.registeredTillMonth)
+                ),
+              ],
+              ['Drivetrain', car.drivetrain],
+            ]"
+            :key="key"
+          >
+            <td class="pr-8 text-black text-opacity-60">{{ key }}</td>
+            <td class="text-black text-opacity-90">{{ val }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <!-- /description -->
 
-    <!-- options -->
-    <h3 class="text-xl mb-2">Options</h3>
-    <template v-for="option in car.options" :key="option">
-      <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
-        {{ option.category }}
-      </h4>
-      <ul class="mb-8 list-disc list-inside">
-        <li
-          v-for="item in option.items"
-          :key="item"
-          class="text-black text-opacity-90"
+    <div class="py-6 px-4">
+      <!-- description -->
+      <h3 class="text-xl mb-2">Description</h3>
+      <div class="mb-4 border-l-2 pl-4">
+        <p class="mb-4 text-black text-opacity-90">
+          Lato is a sans serif typeface family started in the summer of 2010 by
+          Warsaw-based designer Łukasz Dziedzic (“Lato” means “Summer” in
+          Polish). In December 2010 the Lato family was published under the Open
+          Font License by his foundry tyPoland, with support from Google.
+        </p>
+        <p class="flex items-center">
+          <span
+            class="mr-2 material-icons opacity-60"
+            style="font-size: 12px"
+            >{{ car.ownerType }}</span
+          ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
+        </p>
+      </div>
+      <!-- /description -->
+    </div>
+
+    <div class="py-6 px-4 bg-gray-100">
+      <!-- options -->
+      <h3 class="text-xl mb-2">Options</h3>
+      <template v-for="option in car.options" :key="option">
+        <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+          {{ option.category }}
+        </h4>
+        <ul class="mb-8 list-disc list-inside">
+          <li
+            v-for="item in option.items"
+            :key="item"
+            class="text-black text-opacity-90"
+          >
+            {{ item }}
+          </li>
+        </ul>
+      </template>
+      <!-- options -->
+    </div>
+
+    <div class="py-6 px-4">
+      <h3 class="text-lg mb-2">Seller info</h3>
+      <p class="seller-info-item gap-x-4 mb-2">
+        <span class="material-icons opacity-60">{{ car.ownerType }}</span>
+        <span class="col-start-2 text-black text-opacity-90">{{
+          car.ownerName
+        }}</span>
+        <span class="col-start-2 text-xs text-black text-opacity-60"
+          >registered 2 years ago</span
         >
-          {{ item }}
-        </li>
+      </p>
+      <p class="seller-info-item gap-x-4 mb-4">
+        <span class="material-icons opacity-60">place</span>
+        <span class="col-start-2 text-black text-opacity-90">{{
+          car.city
+        }}</span>
+      </p>
+
+      <div class="flex space-x-4 mb-8">
+        <AppButton appearance="primary" before="call" class="flex-1"
+          >Call</AppButton
+        >
+        <AppButton appearance="primary" before="message" class="flex-1"
+          >Message</AppButton
+        >
+      </div>
+    </div>
+
+    <div class="py-6 px-4 bg-gray-100">
+      <p class="seller-info-item gap-x-4 mb-2">
+        <span class="material-icons opacity-60">list</span>
+        <span class="col-start-2 text-black text-opacity-90"
+          >Other cars by {{ car.ownerName }}</span
+        >
+      </p>
+
+      <!-- related -->
+      <ul
+        class="flex overflow-x-scroll -mx-4 space-x-2 pb-2"
+        style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
+      >
+        <li class="flex-shrink-0 w-2">&nbsp;</li>
+        <CarCardCompact :car="car" />
+        <CarCardCompact :car="car" />
+        <CarCardCompact :car="car" />
+        <CarCardCompact :car="car" />
+        <li class="flex-shrink-0 w-2">&nbsp;</li>
       </ul>
-    </template>
-    <!-- options -->
-
-    <h3 class="text-lg mb-2">Seller info</h3>
-    <p class="seller-info-item gap-x-4 mb-2">
-      <span class="material-icons opacity-60">{{ car.ownerType }}</span>
-      <span class="col-start-2 text-black text-opacity-90">{{
-        car.ownerName
-      }}</span>
-      <span class="col-start-2 text-xs text-black text-opacity-60"
-        >registered 2 years ago</span
-      >
-    </p>
-    <p class="seller-info-item gap-x-4 mb-4">
-      <span class="material-icons opacity-60">place</span>
-      <span class="col-start-2 text-black text-opacity-90">{{ car.city }}</span>
-    </p>
-
-    <div class="flex space-x-4 mb-8">
-      <AppButton appearance="primary" before="call" class="flex-1"
-        >Call</AppButton
-      >
-      <AppButton appearance="primary" before="message" class="flex-1"
-        >Message</AppButton
-      >
+      <!-- /related -->
     </div>
-
-    <p class="seller-info-item gap-x-4 mb-2">
-      <span class="material-icons opacity-60">list</span>
-      <span class="col-start-2 text-black text-opacity-90"
-        >Other cars by {{ car.ownerName }}</span
-      >
-    </p>
-
-    <!-- related -->
-    <ul
-      class="flex overflow-x-scroll -mx-4 space-x-2 pb-2"
-      style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
-    >
-      <li class="flex-shrink-0 w-2">&nbsp;</li>
-      <CarCardCompact :car="car" />
-      <CarCardCompact :car="car" />
-      <CarCardCompact :car="car" />
-      <CarCardCompact :car="car" />
-      <li class="flex-shrink-0 w-2">&nbsp;</li>
-    </ul>
-    <!-- /related -->
   </div>
 
   <teleport to="body">
