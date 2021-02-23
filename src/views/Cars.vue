@@ -1,8 +1,10 @@
 <template>
-  <div class="cars p-4">
-    <h1 class="text-3xl mb-8">Cars</h1>
+  <div class="cars">
+    <h1 class="text-3xl p-4">Cars</h1>
 
-    <ul class="flex space-x-2 justify-end mb-8">
+    <ul
+      class="relative z-10 flex space-x-2 justify-end mb-4 p-2 sticky top-14 bg-white"
+    >
       <li>
         <AppButton before="sort" @click="isSortVisible = true">Sort</AppButton>
       </li>
@@ -13,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="carlist grid gap-4 class" ref="carlist">
+    <ul class="carlist grid gap-4 p-4" ref="carlist">
       <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
     </ul>
 

@@ -96,7 +96,7 @@
     </div>
     <!-- /gallery -->
 
-    <div class="py-6 px-4 bg-gray-100">
+    <div class="p-4">
       <h1 class="mb-4 text-xl flex items-center justify-between">
         <span class="text-black text-opacity-90 font-medium"
           >{{ car.make }} {{ car.model }}</span
@@ -118,6 +118,7 @@
         >
       </p>
 
+      <!-- details -->
       <h3 class="text-xl mb-2">Details</h3>
       <table>
         <tbody>
@@ -144,11 +145,10 @@
           </tr>
         </tbody>
       </table>
-    </div>
+      <!-- /details -->
 
-    <div class="py-6 px-4">
       <!-- description -->
-      <h3 class="text-xl mb-2">Description</h3>
+      <h3 class="text-xl mt-12 mb-2">Description</h3>
       <div class="mb-4 border-l-2 pl-4">
         <p class="mb-4 text-black text-opacity-90">
           Lato is a sans serif typeface family started in the summer of 2010 by
@@ -165,30 +165,30 @@
         </p>
       </div>
       <!-- /description -->
-    </div>
 
-    <div class="py-6 px-4 bg-gray-100">
       <!-- options -->
-      <h3 class="text-xl mb-2">Options</h3>
-      <template v-for="option in car.options" :key="option">
-        <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
-          {{ option.category }}
-        </h4>
-        <ul class="mb-8 list-disc list-inside">
-          <li
-            v-for="item in option.items"
-            :key="item"
-            class="text-black text-opacity-90"
-          >
-            {{ item }}
-          </li>
-        </ul>
-      </template>
-      <!-- options -->
-    </div>
+      <h3 class="text-xl mt-12 mb-2">Options</h3>
+      <div class="space-y-6">
+        <div v-for="option in car.options" :key="option">
+          <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+            {{ option.category }}
+          </h4>
+          <ul class="list-disc list-inside">
+            <li
+              v-for="item in option.items"
+              :key="item"
+              class="text-black text-opacity-90"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="py-6 px-4">
-      <h3 class="text-lg mb-2">Seller info</h3>
+      <!-- options -->
+
+      <!-- seller -->
+      <h3 class="text-lg mt-12 mb-2">Seller info</h3>
       <p class="seller-info-item gap-x-4 mb-2">
         <span class="material-icons opacity-60">{{ car.ownerType }}</span>
         <span class="col-start-2 text-black text-opacity-90">{{
@@ -205,7 +205,7 @@
         }}</span>
       </p>
 
-      <div class="flex space-x-4 mb-8">
+      <div class="flex space-x-4">
         <AppButton appearance="primary" before="call" class="flex-1"
           >Call</AppButton
         >
@@ -213,9 +213,10 @@
           >Message</AppButton
         >
       </div>
+      <!-- /seller -->
     </div>
 
-    <div class="py-6 px-4 bg-gray-100">
+    <div class="mt-8 p-4">
       <p class="seller-info-item gap-x-4 mb-2">
         <span class="material-icons opacity-60">list</span>
         <span class="col-start-2 text-black text-opacity-90"

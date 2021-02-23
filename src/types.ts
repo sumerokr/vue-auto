@@ -19,7 +19,6 @@ export type Option = {
 };
 
 export type Car = {
-  [index: string]: any;
   id: string;
   make: string;
   model: string;

@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow-1 rounded" ref="root">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
-      <p class="image-wrapper">
+      <div class="image-wrapper">
         <img
           class="w-full align-top"
           :src="car.images[0]"
@@ -9,7 +9,21 @@
           height="240"
           alt=""
         />
-      </p>
+        <img
+          class="w-full align-top"
+          :src="car.images[1]"
+          width="320"
+          height="240"
+          alt=""
+        />
+        <img
+          class="w-full align-top"
+          :src="car.images[2]"
+          width="320"
+          height="240"
+          alt=""
+        />
+      </div>
 
       <div class="content">
         <h2 class="title">
@@ -108,6 +122,28 @@ export default defineComponent({
   display: flex;
 }
 
+.image-wrapper {
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  grid-template-rows: 3fr 3fr;
+}
+
+.image-wrapper > img:first-child {
+  grid-row: 1 / 3;
+}
+
+.image-wrapper > img:nth-child(1) {
+  clip-path: inset(0 1px 0 0);
+}
+
+.image-wrapper > img:nth-child(2) {
+  clip-path: inset(0 0 1px 1px);
+}
+
+.image-wrapper > img:nth-child(3) {
+  clip-path: inset(1px 0 0 1px);
+}
+
 .link {
   flex-grow: 1; /* importnat to keep horizontal pace */
   display: flex;
@@ -174,8 +210,6 @@ export default defineComponent({
 }
 
 .card[data-mq*="240"] .params {
-  font-size: 16px;
-  line-height: 20px;
   font-family: var(--font-family-default);
 }
 
