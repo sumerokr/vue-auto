@@ -60,6 +60,7 @@ export default defineComponent({
   text-transform: uppercase;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   transition: all 0.1s;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
 }
 
 .app-button:focus {

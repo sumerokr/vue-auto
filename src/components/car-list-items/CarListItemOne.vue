@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-1 rounded" ref="root">
+  <div class="card rounded" ref="root">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <div class="image-wrapper">
         <img
@@ -120,6 +120,8 @@ export default defineComponent({
 .card {
   overflow: hidden;
   display: flex;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
 }
 
 .image-wrapper {
