@@ -1,8 +1,8 @@
 <template>
-  <!-- <AppNav /> -->
-  <AppBarTop @click="isNavVisible = true" /><transition name="slide">
-    <NavigationDrawer v-if="isNavVisible" @click="isNavVisible = false"
-  /></transition>
+  <AppBarTop @click="isNavVisible = true" />
+  <transition name="slide">
+    <NavigationDrawer v-if="isNavVisible" @click="isNavVisible = false" />
+  </transition>
   <transition name="fade">
     <div
       v-if="isNavVisible"
@@ -11,17 +11,10 @@
     ></div>
   </transition>
   <router-view />
-
-  <!-- <div class="footer border-t-2 border-red-500 p-4 bg-blue-50">
-    <p class="text-black text-opacity-60">
-      © {{ new Date().getFullYear() }} Site. All rights reserved
-    </p>
-  </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-// import AppNav from "@/components/AppNav/AppNav.vue";
 import AppBarTop from "@/components/AppBarTop/AppBarTop.vue";
 import NavigationDrawer from "@/components/NavigationDrawer/NavigationDrawer.vue";
 
@@ -29,7 +22,6 @@ export default defineComponent({
   name: "App",
 
   components: {
-    // AppNav,
     NavigationDrawer,
     AppBarTop,
   },

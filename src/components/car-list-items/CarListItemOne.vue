@@ -132,16 +132,12 @@ export default defineComponent({
   grid-row: 1 / 3;
 }
 
-.image-wrapper > img:nth-child(1) {
-  clip-path: inset(0 1px 0 0);
-}
-
 .image-wrapper > img:nth-child(2) {
-  clip-path: inset(0 0 1px 1px);
+  clip-path: inset(0 0 1px 2px);
 }
 
 .image-wrapper > img:nth-child(3) {
-  clip-path: inset(1px 0 0 1px);
+  clip-path: inset(1px 0 0 2px);
 }
 
 .link {
