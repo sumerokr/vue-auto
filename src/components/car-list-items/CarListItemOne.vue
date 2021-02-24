@@ -1,5 +1,5 @@
 <template>
-  <div class="card rounded" ref="root">
+  <div class="card rounded">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <div class="image-wrapper">
         <img
@@ -26,25 +26,23 @@
       </div>
 
       <div class="content">
-        <h2 class="title">
-          <span class="title-text">{{ car.make }} {{ car.model }}</span>
+        <div class="price-wrapper">
+          <span class="price">{{ numberFormatter.format(car.price) }} €</span>
           <IconButton
             :icon="isBookmarked ? 'bookmark' : 'bookmark_border'"
             class="bookmark"
             type="button"
             @click.prevent="toogleIsBookmared"
           />
-        </h2>
+        </div>
 
-        <p class="price">{{ numberFormatter.format(car.price) }} €</p>
+        <h2 class="title">{{ car.make }} {{ car.model }}</h2>
 
         <ul class="params">
-          <li>{{ dateFormatter.format(new Date(car.year, car.month)) }}</li>
-          <li>{{ car.fuel }}</li>
+          <li>{{ car.year }}</li>
           <li>{{ numberFormatter.format(car.mileage) }} km</li>
           <li>{{ car.gearbox }}</li>
-          <li>{{ car.power }} hp</li>
-          <li>{{ car.drivetrain }}</li>
+          <li>{{ car.fuel }}</li>
         </ul>
 
         <ul v-if="car.tags.length" class="tags">
@@ -76,7 +74,6 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
-import { mq } from "@/utils";
 
 export default defineComponent({
   name: "CarListItemOne",
@@ -93,23 +90,14 @@ export default defineComponent({
   },
 
   setup: () => {
-    const root = ref(null);
-    const relevantBps = mq({ refEl: root, bps: [240, 320] });
-
     const isBookmarked = ref(false);
     const toogleIsBookmared = () => {
       isBookmarked.value = !isBookmarked.value;
     };
 
     return {
-      root,
-      relevantBps,
       isBookmarked,
       toogleIsBookmared,
-      dateFormatter: new Intl.DateTimeFormat(window.navigator.language, {
-        month: "2-digit",
-        year: "numeric",
-      }),
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },
@@ -153,30 +141,30 @@ export default defineComponent({
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 11px 12px;
-}
-
-.card[data-mq*="240"] .content {
   padding: 14px 16px;
 }
 
-.title {
+.price-wrapper {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
-.title-text {
+.price {
   font-size: 20px;
-  font-weight: 500;
-  font-family: var(--font-family-condensed);
+  font-weight: 600;
   line-height: 24px;
   color: var(--color-text-primary);
 }
 
-.card[data-mq*="240"] .title-text {
+.title {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
   font-family: var(--font-family-default);
+  line-height: 24px;
+  color: var(--color-text-secondary);
 }
 
 .bookmark {
@@ -187,39 +175,31 @@ export default defineComponent({
   color: var(--color-text-secondary);
 }
 
-.price {
-  margin-bottom: 12px;
-  font-size: 22px;
-  font-weight: 600;
-  font-family: var(--font-family-default);
-  line-height: 1;
-  color: var(--color-text-primary);
-}
-
 .params {
-  margin-bottom: 12px;
-  display: grid;
-  gap: 4px 8px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  font-size: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
   line-height: 20px;
-  font-family: var(--font-family-condensed);
+  font-family: var(--font-family-default);
   color: var(--color-text-secondary);
 }
 
-.card[data-mq*="240"] .params {
-  font-family: var(--font-family-default);
+.params > li {
+  display: inline-block;
 }
 
-.card[data-mq*="320"] .params {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.params > li:not(:first-child)::before {
+  content: "•";
+  display: inline-block;
+  margin-right: 6px;
+  margin-left: 6px;
+  color: var(--color-text-mute);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .tag {
@@ -231,17 +211,10 @@ export default defineComponent({
   color: var(--color-text-quite);
 }
 
-.card[data-mq*="320"] .tag {
-  font-family: var(--font-family-default);
-}
-
 .meta {
   margin-top: auto;
   display: grid;
-  gap: 2px 8px;
-}
-
-.card[data-mq*="320"] .meta {
+  gap: 8px;
   justify-content: space-between;
   align-items: start;
   grid-template-columns: repeat(2, minmax(0, auto));

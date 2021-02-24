@@ -3,7 +3,7 @@
     <h1 class="text-3xl p-4 hidden">Cars</h1>
 
     <ul
-      class="relative z-10 flex space-x-2 justify-end p-2 sticky top-14 bg-white"
+      class="filters relative z-10 flex space-x-2 justify-end p-2 sticky top-14 bg-white"
     >
       <li>
         <AppButton before="sort" @click="isSortVisible = true">Sort</AppButton>
@@ -210,6 +210,10 @@ export default defineComponent({
 <style scoped>
 .carlist {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.filters {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12);
 }
 
 .slide-top-enter-active {
