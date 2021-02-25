@@ -7,7 +7,8 @@
       class="logo text-white text-2xl text-white bg-red-500 rounded font-medium px-2"
       >Logo</span
     >
-    <IconButton icon="format_size" class="-my-2 ml-auto" @click="pickNext" />
+    <IconButton icon="notifications" class="-my-2 ml-auto" />
+    <IconButton icon="person" class="-my-2" @click="pickNext" />
   </div>
 </template>
 

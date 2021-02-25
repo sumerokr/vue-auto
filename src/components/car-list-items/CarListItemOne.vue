@@ -176,7 +176,7 @@ export default defineComponent({
 }
 
 .params {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-size: 14px;
   line-height: 20px;
   font-family: var(--font-family-default);
