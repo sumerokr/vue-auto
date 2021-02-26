@@ -1,5 +1,9 @@
 <template>
-  <div v-if="car" class="bg-white">
+  <div
+    v-if="car"
+    class="bg-white mb-2"
+    style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
+  >
     <!-- main slider -->
     <div class="relative z-10 mb-4">
       <ul
@@ -119,7 +123,7 @@
 
       <!-- details -->
       <h3 class="text-xl mb-2">Details</h3>
-      <table>
+      <table class="mb-8">
         <tbody>
           <tr
             v-for="[key, val] in [
@@ -147,8 +151,8 @@
       <!-- /details -->
 
       <!-- description -->
-      <h3 class="text-xl mt-12 mb-2">Description</h3>
-      <div class="mb-4 border-l-2 pl-4">
+      <h3 class="text-xl mb-2">Description</h3>
+      <div class="mb-8 border-l-2 pl-4">
         <p class="mb-4 text-black text-opacity-90">
           Lato is a sans serif typeface family started in the summer of 2010 by
           Warsaw-based designer Łukasz Dziedzic (“Lato” means “Summer” in
@@ -158,9 +162,9 @@
         <p class="flex items-center">
           <span
             class="mr-2 material-icons opacity-60"
-            style="font-size: 12px"
+            style="font-size: 20px"
             >{{ car.ownerType }}</span
-          ><span class="text-xs opacity-60">{{ car.ownerName }}</span>
+          ><span class="text-sm opacity-60">{{ car.ownerName }}</span>
         </p>
       </div>
       <!-- /description -->
@@ -185,58 +189,64 @@
       </div>
 
       <!-- options -->
-
-      <!-- seller -->
-      <h3 class="text-lg mt-12 mb-2">Seller info</h3>
-      <p class="seller-info-item gap-x-4 mb-2">
-        <span class="material-icons opacity-60">{{ car.ownerType }}</span>
-        <span class="col-start-2 text-black text-opacity-90">{{
-          car.ownerName
-        }}</span>
-        <span class="col-start-2 text-xs text-black text-opacity-60"
-          >registered 2 years ago</span
-        >
-      </p>
-      <p class="seller-info-item gap-x-4 mb-4">
-        <span class="material-icons opacity-60">place</span>
-        <span class="col-start-2 text-black text-opacity-90">{{
-          car.city
-        }}</span>
-      </p>
-
-      <div class="flex space-x-4">
-        <AppButton appearance="primary" before="call" class="flex-1"
-          >Call</AppButton
-        >
-        <AppButton appearance="primary" before="message" class="flex-1"
-          >Message</AppButton
-        >
-      </div>
-      <!-- /seller -->
     </div>
+  </div>
 
-    <div class="mt-8 p-4">
-      <p class="seller-info-item gap-x-4 mb-2">
-        <span class="material-icons opacity-60">list</span>
-        <span class="col-start-2 text-black text-opacity-90"
-          >Other cars by {{ car.ownerName }}</span
-        >
-      </p>
-
-      <!-- related -->
-      <ul
-        class="flex overflow-x-scroll -mx-4 space-x-2 pb-2"
-        style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
+  <div
+    v-if="car"
+    class="mb-2 p-4 bg-white"
+    style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
+  >
+    <!-- seller -->
+    <h3 class="text-lg mb-2">Seller info</h3>
+    <p class="seller-info-item gap-x-4 mb-2">
+      <span class="material-icons opacity-60">{{ car.ownerType }}</span>
+      <span class="col-start-2 text-black text-opacity-90">{{
+        car.ownerName
+      }}</span>
+      <span class="col-start-2 text-xs text-black text-opacity-60"
+        >registered 2 years ago</span
       >
-        <li class="flex-shrink-0 w-2">&nbsp;</li>
-        <CarCardCompact :car="car" />
-        <CarCardCompact :car="car" />
-        <CarCardCompact :car="car" />
-        <CarCardCompact :car="car" />
-        <li class="flex-shrink-0 w-2">&nbsp;</li>
-      </ul>
-      <!-- /related -->
+    </p>
+    <p class="seller-info-item gap-x-4 mb-4">
+      <span class="material-icons opacity-60">place</span>
+      <span class="col-start-2 text-black text-opacity-90">{{ car.city }}</span>
+    </p>
+
+    <div class="flex space-x-4">
+      <AppButton appearance="primary" before="call" class="flex-1"
+        >Call</AppButton
+      >
+      <AppButton appearance="primary" before="message" class="flex-1"
+        >Message</AppButton
+      >
     </div>
+    <!-- /seller -->
+  </div>
+
+  <div
+    v-if="car"
+    class="p-4 bg-white"
+    style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
+  >
+    <h3 class="seller-info-item gap-x-4 mb-4">
+      <span class="material-icons opacity-60">list</span>
+      <span class="col-start-2 text-black text-opacity-90">Similiar cars</span>
+    </h3>
+
+    <!-- related -->
+    <ul
+      class="flex overflow-x-scroll -mx-4 space-x-2 pb-1"
+      style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
+    >
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <CarCardCompact :car="car" />
+      <li class="flex-shrink-0 w-2">&nbsp;</li>
+    </ul>
+    <!-- /related -->
   </div>
 
   <teleport to="body">

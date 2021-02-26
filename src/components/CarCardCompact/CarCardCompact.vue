@@ -1,5 +1,8 @@
 <template>
-  <div class="car-card-compact shadow-1 rounded">
+  <div
+    class="car-card-compact rounded"
+    style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
+  >
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <p class="image-wrapper">
         <img
