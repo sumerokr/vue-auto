@@ -101,7 +101,9 @@
     <!-- /gallery -->
 
     <div class="p-4">
-      <div class="mb-2 text-2xl flex items-center">
+      <h1 class="mb-4 text-3xl">{{ car.make }} {{ car.model }}</h1>
+
+      <div class="mb-8 text-2xl flex items-center">
         <span class="font-semibold text-black text-opacity-90"
           >{{ numberFormatter.format(car.price) }} €</span
         >
@@ -118,8 +120,6 @@
           @click="toogleIsBookmared"
         />
       </div>
-
-      <h1 class="mb-8 text-xl">{{ car.make }} {{ car.model }}</h1>
 
       <!-- details -->
       <h3 class="text-xl mb-2">Details</h3>
@@ -201,16 +201,16 @@
     <h3 class="text-lg mb-2">Seller info</h3>
     <p class="seller-info-item gap-x-4 mb-2">
       <span class="material-icons opacity-60">{{ car.ownerType }}</span>
-      <span class="col-start-2 text-black text-opacity-90">{{
+      <a class="col-start-2 text-red-700 text-opacity-90">{{
         car.ownerName
-      }}</span>
+      }}</a>
       <span class="col-start-2 text-xs text-black text-opacity-60"
         >registered 2 years ago</span
       >
     </p>
     <p class="seller-info-item gap-x-4 mb-4">
       <span class="material-icons opacity-60">place</span>
-      <span class="col-start-2 text-black text-opacity-90">{{ car.city }}</span>
+      <a class="col-start-2 text-red-700 text-opacity-90">{{ car.city }}</a>
     </p>
 
     <div class="flex space-x-4">
@@ -236,7 +236,7 @@
 
     <!-- related -->
     <ul
-      class="flex overflow-x-scroll -mx-4 space-x-2 pb-1"
+      class="flex overflow-x-scroll -mx-4 space-x-2 py-0.5"
       style="scroll-snap-type: x mandatory; scroll-padding-left: 1rem"
     >
       <li class="flex-shrink-0 w-2">&nbsp;</li>
