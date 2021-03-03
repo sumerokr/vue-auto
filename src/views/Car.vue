@@ -198,19 +198,44 @@
     style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
   >
     <!-- seller -->
-    <h3 class="text-lg mb-2">Seller info</h3>
+    <h3 class="text-lg mb-6">Seller info</h3>
     <p class="seller-info-item gap-x-4 mb-2">
       <span class="material-icons opacity-60">{{ car.ownerType }}</span>
-      <a class="col-start-2 text-red-700 text-opacity-90">{{
+      <a class="col-start-2 text-blue-700 text-opacity-90">{{
         car.ownerName
       }}</a>
       <span class="col-start-2 text-xs text-black text-opacity-60"
         >registered 2 years ago</span
       >
     </p>
-    <p class="seller-info-item gap-x-4 mb-4">
+    <p class="seller-info-item gap-x-4 mb-2">
       <span class="material-icons opacity-60">place</span>
-      <a class="col-start-2 text-red-700 text-opacity-90">{{ car.city }}</a>
+      <a class="col-start-2 text-blue-700 text-opacity-90">{{ car.city }}</a>
+      <span
+        v-if="car.ownerType === 'business'"
+        class="col-start-2 text-xs text-black text-opacity-60"
+        >Unknown street, 64-128</span
+      >
+    </p>
+    <p
+      v-if="car.ownerType === 'business'"
+      class="seller-info-item gap-x-4 mb-2"
+    >
+      <span class="material-icons opacity-60">web</span>
+      <a class="col-start-2 text-blue-700 text-opacity-90">carparts.com</a>
+      <span class="col-start-2 text-xs text-black text-opacity-60"
+        >Official website</span
+      >
+    </p>
+    <p
+      v-if="car.ownerType === 'business'"
+      class="seller-info-item gap-x-4 mb-6"
+    >
+      <span class="material-icons opacity-60">schedule</span>
+      <span class="col-start-2 text-black text-opacity-90">09:00 – 18:00</span>
+      <span class="col-start-2 text-xs text-black text-opacity-60"
+        >Saturday: 10:00 – 12:00</span
+      >
     </p>
 
     <div class="flex space-x-4">
