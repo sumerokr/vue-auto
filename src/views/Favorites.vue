@@ -1,8 +1,10 @@
 <template>
-  <div class="cars p-4">
-    <h1 class="text-3xl mb-8">Favorites</h1>
+  <div class="cars">
+    <h1 class="text-3xl p-4 hidden">Favorites</h1>
 
-    <ul class="flex space-x-2 justify-end mb-8">
+    <ul
+      class="filters relative z-10 flex space-x-2 justify-end p-2 sticky top-14 bg-white"
+    >
       <li>
         <AppButton before="sort" @click="isSortVisible = true">Sort</AppButton>
       </li>
@@ -13,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="carlist grid gap-4 class" ref="carlist">
+    <ul class="carlist grid gap-2 p-2" ref="carlist">
       <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
     </ul>
 
@@ -89,11 +91,20 @@
         class="fixed z-50 top-14 right-0 bottom-0 left-0 p-4 bg-white"
       >
         <AppSearch
-          @submit="
-            isFilterVisible = false;
-            getCarsWithParams();
-          "
-        />
+          :initial-search-params="composableSearchParams"
+          @submit="onSubmit"
+        >
+          <template #footer>
+            <AppButton
+              before="search"
+              appearance="primary"
+              size="48"
+              type="submit"
+              is-block
+              >Search</AppButton
+            >
+          </template>
+        </AppSearch>
       </div>
     </transition>
     <!-- /filter -->
@@ -119,7 +130,7 @@ import AppSearch from "@/components/AppSearch/AppSearch.vue";
 import CarListItemOne from "@/components/car-list-items/CarListItemOne.vue";
 import { useCars } from "@/services/cars/adapter.ts";
 import { useCarsSearch } from "@/composable/cars-search";
-import { SortOption } from "@/types.ts";
+import { SortOption, searchParams } from "@/types.ts";
 
 export default defineComponent({
   name: "Cars",
@@ -165,6 +176,12 @@ export default defineComponent({
       });
     };
 
+    const onSubmit = (submittedSearchParams: searchParams) => {
+      Object.assign(composableSearchParams, submittedSearchParams);
+      getCarsWithParams();
+      isFilterVisible.value = false;
+    };
+
     watch([sortKey, sortDirection], () => {
       getCarsWithParams();
     });
@@ -179,9 +196,11 @@ export default defineComponent({
       areCarsLoading,
       sortDirection,
       sortOptions,
+      onSubmit,
       setSort,
       getCarsWithParams,
       isFilterVisible,
+      composableSearchParams,
       numberFormatter: new Intl.NumberFormat("ru-RU"),
     };
   },
@@ -191,6 +210,10 @@ export default defineComponent({
 <style scoped>
 .carlist {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.filters {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12);
 }
 
 .slide-top-enter-active {

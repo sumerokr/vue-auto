@@ -229,7 +229,7 @@
     </p>
     <p
       v-if="car.ownerType === 'business'"
-      class="seller-info-item gap-x-4 mb-6"
+      class="seller-info-item gap-x-4 mb-2"
     >
       <span class="material-icons opacity-60">schedule</span>
       <span class="col-start-2 text-black text-opacity-90">09:00 – 18:00</span>
@@ -238,7 +238,7 @@
       >
     </p>
 
-    <div class="flex space-x-4">
+    <div class="flex mt-6 space-x-4">
       <AppButton appearance="primary" before="call" class="flex-1"
         >Call</AppButton
       >
