@@ -7,7 +7,7 @@
       </p>
     </div>
 
-    <div class="bg-white p-4">
+    <div class="bg-white shadow-0 p-4">
       <form class="grid grid-cols-2 gap-4" @submit.prevent="onSubmit">
         <AppSelect v-model="make" id="make" label="Make">
           <option :value="null" hidden selected></option>
@@ -73,14 +73,129 @@
           </option>
         </AppSelect>
 
+        <!-- options -->
+        <h2 class="col-span-2 mt-4 text-2xl">Options</h2>
+
+        <div class="col-span-2 space-y-6">
+          <div>
+            <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+              Comfort
+            </h4>
+            <ul class="-mx-4">
+              <AppListItemInteractive
+                v-for="item in optionContent.find(
+                  (oc) => oc.category === 'Comfort'
+                ).items"
+                :key="item"
+                @click="onCheck('comfort', item)"
+              >
+                <template #before>
+                  <IconButton
+                    type="button"
+                    :icon="
+                      comfort.includes(item)
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    "
+                  />
+                </template>
+                {{ item }}
+              </AppListItemInteractive>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+              Multimedia
+            </h4>
+            <ul class="-mx-4">
+              <AppListItemInteractive
+                v-for="item in optionContent.find(
+                  (oc) => oc.category === 'Multimedia'
+                ).items"
+                :key="item"
+                @click="onCheck('multimedia', item)"
+              >
+                <template #before>
+                  <IconButton
+                    type="button"
+                    :icon="
+                      multimedia.includes(item)
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    "
+                  />
+                </template>
+                {{ item }}
+              </AppListItemInteractive>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+              Safety
+            </h4>
+            <ul class="-mx-4">
+              <AppListItemInteractive
+                v-for="item in optionContent.find(
+                  (oc) => oc.category === 'Safety'
+                ).items"
+                :key="item"
+                @click="onCheck('safety', item)"
+              >
+                <template #before>
+                  <IconButton
+                    type="button"
+                    :icon="
+                      safety.includes(item)
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    "
+                  />
+                </template>
+                {{ item }}
+              </AppListItemInteractive>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-medium text-black text-opacity-60 mb-2">
+              Extra
+            </h4>
+            <ul class="-mx-4">
+              <AppListItemInteractive
+                v-for="item in optionContent.find(
+                  (oc) => oc.category === 'Extra'
+                ).items"
+                :key="item"
+                @click="onCheck('extra', item)"
+              >
+                <template #before>
+                  <IconButton
+                    type="button"
+                    :icon="
+                      extra.includes(item)
+                        ? 'check_box'
+                        : 'check_box_outline_blank'
+                    "
+                  />
+                </template>
+                {{ item }}
+              </AppListItemInteractive>
+            </ul>
+          </div>
+        </div>
+
+        <!-- options -->
+
         <div class="col-span-2">
           <AppButton
-            before="save"
+            after="arrow_forward"
             appearance="primary"
             size="48"
             type="submit"
             is-block
-            >Save</AppButton
+            >Next</AppButton
           >
         </div>
       </form>
@@ -93,6 +208,9 @@ import { defineComponent, reactive, toRefs, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
+import IconButton from "@/components/IconButton/IconButton.vue";
+import AppListItemInteractive from "@/components/AppList/AppListItemInteractive.vue";
+import { optionContent } from "@/db/index.ts";
 import { useMakes, useModels } from "@/services/make-models/adapter.ts";
 
 export default defineComponent({
@@ -102,21 +220,36 @@ export default defineComponent({
     AppInput,
     AppSelect,
     AppButton,
-  },
-
-  emits: {
-    update: null,
-    submit: null,
+    AppListItemInteractive,
+    IconButton,
   },
 
   setup: () => {
-    const defaultParams = {
+    type defaultParams = {
+      [index: string]: any;
+      make: null | string;
+      model: null | string;
+      year: null | number;
+      mileage: null | number;
+      gearbox: null | string;
+      fuel: null | string;
+      comfort: string[];
+      multimedia: string[];
+      safety: string[];
+      extra: string[];
+    };
+
+    const defaultParams: defaultParams = {
       make: null,
       model: null,
       year: null,
       mileage: null,
       gearbox: null,
       fuel: null,
+      comfort: [],
+      multimedia: [],
+      safety: [],
+      extra: [],
     };
 
     const $params = reactive(defaultParams);
@@ -152,12 +285,20 @@ export default defineComponent({
       //
     };
 
+    const onCheck = (option: string, item: string) => {
+      $params[option].includes(item)
+        ? $params[option].splice($params[option].indexOf(item), 1)
+        : $params[option].push(item);
+    };
+
     return {
       ...toRefs($params),
       makeOptions,
       modelOptions,
       areModelOptionsLoading,
       onSubmit,
+      onCheck,
+      optionContent,
     };
   },
 });

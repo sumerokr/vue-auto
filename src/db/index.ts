@@ -72,6 +72,19 @@ const photos = [
   ],
 ];
 
+export const optionCategories = ["Comfort", "Multimedia", "Safety", "Extra"];
+export const optionContent = optionCategories.map((oc) => ({
+  category: oc,
+  items: new Array(
+    f.random.number({
+      min: 3,
+      max: 10,
+    })
+  )
+    .fill(null)
+    .map(() => f.random.words()),
+}));
+
 const generateCar = (): Car => {
   const make = f.random.arrayElement(makes);
   const model = f.random.arrayElement(modelsByMake[make]);
@@ -100,18 +113,6 @@ const generateCar = (): Car => {
       color: "rgb(219, 234, 254)",
     },
   ].filter(() => Math.random() >= 0.75);
-  const optionCategories = ["Comfort", "Multimedia", "Safety", "Extra"];
-  const optionContent = optionCategories.map((oc) => ({
-    category: oc,
-    items: new Array(
-      f.random.number({
-        min: 3,
-        max: 10,
-      })
-    )
-      .fill(null)
-      .map(() => f.random.words()),
-  }));
 
   return {
     id: f.random.uuid(),
