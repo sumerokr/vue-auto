@@ -1,8 +1,8 @@
 <template>
-  <div class="cars p-4">
-    <h1 class="text-3xl mb-8">Saved search</h1>
+  <div class="cars">
+    <h1 class="text-3xl p-4">Saved search</h1>
 
-    <ul class="grid gap-4">
+    <ul class="grid gap-2">
       <li v-for="n in 5" :key="n">
         <SavedSearchListItem />
       </li>

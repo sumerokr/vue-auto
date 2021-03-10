@@ -78,7 +78,7 @@ export const optionContent = optionCategories.map((oc) => ({
   items: new Array(
     f.random.number({
       min: 3,
-      max: 10,
+      max: 5,
     })
   )
     .fill(null)

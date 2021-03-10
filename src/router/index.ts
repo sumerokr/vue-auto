@@ -56,6 +56,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "add" */ "../views/Add.vue"),
   },
   {
+    path: "/add-success",
+    name: "AddSuccess",
+    component: () =>
+      import(/* webpackChunkName: "add-success" */ "../views/AddSuccess.vue"),
+  },
+  {
     path: "/companies/:id",
     name: "Company",
     component: () =>

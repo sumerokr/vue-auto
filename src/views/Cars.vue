@@ -3,7 +3,7 @@
     <h1 class="text-3xl p-4 hidden">Cars</h1>
 
     <ul
-      class="filters relative z-10 flex space-x-2 justify-end p-2 sticky top-14 bg-white"
+      class="filters relative z-10 flex space-x-2 justify-end px-4 py-2 sticky top-14 bg-white"
     >
       <li>
         <AppButton before="sort" @click="isSortVisible = true">Sort</AppButton>
@@ -15,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="carlist grid gap-2 p-2" ref="carlist">
+    <ul class="carlist grid gap-2 py-2" ref="carlist">
       <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
     </ul>
 
