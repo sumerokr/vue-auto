@@ -6,9 +6,10 @@
       <AddDetails v-if="step === 1" />
       <AddOptions v-else-if="step === 2" />
       <AddPhotos v-else-if="step === 3" />
+      <AddSuccess v-else-if="step === 4" />
 
-      <div class="grid grid-cols-2 mt-8 gap-4">
-        <AppButton after="arrow_back" size="48" is-block @click="onBack"
+      <div v-if="step !== 4" class="grid grid-cols-2 mt-8 gap-4">
+        <AppButton before="arrow_back" size="48" is-block @click="onBack"
           >Back</AppButton
         >
         <AppButton
@@ -29,6 +30,7 @@ import { defineComponent, ref } from "vue";
 import AddDetails from "@/components/add/AddDetails.vue";
 import AddOptions from "@/components/add/AddOptions.vue";
 import AddPhotos from "@/components/add/AddPhotos.vue";
+import AddSuccess from "@/components/add/AddSuccess.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
 import { useRouter } from "vue-router";
 
@@ -39,6 +41,7 @@ export default defineComponent({
     AddDetails,
     AddOptions,
     AddPhotos,
+    AddSuccess,
     AppButton,
   },
 
@@ -54,7 +57,7 @@ export default defineComponent({
     };
 
     const onSubmit = () => {
-      if (step.value < 3) {
+      if (step.value < 4) {
         step.value += 1;
       } else {
         router.push({

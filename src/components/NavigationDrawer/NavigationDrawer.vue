@@ -45,6 +45,7 @@ export default defineComponent({
         { name: "Search", text: "Search", icon: "search" },
         { name: "Favorites", text: "Favorites", icon: "bookmarks" },
         { name: "SavedSearch", text: "Saved search", icon: "favorite" },
+        { name: "Add", text: "Add a car", icon: "add_box" },
       ],
     };
   },

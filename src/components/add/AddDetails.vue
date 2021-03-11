@@ -68,9 +68,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs, watch } from "vue";
 import AppInput from "@/components/AppInput/AppInput.vue";
 import AppSelect from "@/components/AppSelect/AppSelect.vue";
+import { useMakes, useModels } from "@/services/make-models/adapter.ts";
 
 export default defineComponent({
   name: "AddDetails",
@@ -81,7 +82,48 @@ export default defineComponent({
   },
 
   setup: () => {
-    //
+    const $params = reactive({
+      make: null,
+      model: null,
+      year: null,
+      mileage: null,
+      gearbox: null,
+      fuel: null,
+    });
+
+    //#region makes
+    const { data: makeOptions, send: getMakeOptions } = useMakes();
+    getMakeOptions();
+    //#endregion
+
+    //#region models
+    const {
+      data: modelOptions,
+      isLoading: areModelOptionsLoading,
+      send: getModelOptions,
+    } = useModels();
+
+    if ($params.make) {
+      getModelOptions($params.make);
+    }
+
+    watch(
+      () => $params.make,
+      () => {
+        $params.model = null;
+        if ($params.make) {
+          getModelOptions($params.make);
+        }
+      }
+    );
+    //#endregion
+
+    return {
+      ...toRefs($params),
+      makeOptions,
+      modelOptions,
+      areModelOptionsLoading,
+    };
   },
 });
 </script>
