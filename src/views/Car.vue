@@ -192,12 +192,12 @@
     </div>
   </div>
 
+  <!-- seller info -->
   <div
     v-if="car"
     class="mb-2 p-4 bg-white"
     style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
   >
-    <!-- seller -->
     <h3 class="text-lg mb-6">Seller info</h3>
     <p class="seller-info-item gap-x-4 mb-2">
       <span class="material-icons opacity-60">{{ car.ownerType }}</span>
@@ -237,17 +237,22 @@
         >Saturday: 10:00 – 12:00</span
       >
     </p>
-
-    <div class="flex mt-6 space-x-4">
-      <AppButton appearance="primary" before="call" class="flex-1"
-        >Call</AppButton
-      >
-      <AppButton appearance="primary" before="message" class="flex-1"
-        >Message</AppButton
-      >
-    </div>
-    <!-- /seller -->
   </div>
+  <!-- /seller info -->
+
+  <!-- seller contacts -->
+  <div
+    class="sticky bottom-0 mb-2 p-4 bg-white flex space-x-4"
+    style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12)"
+  >
+    <AppButton appearance="primary" before="call" class="flex-1"
+      >Call</AppButton
+    >
+    <AppButton appearance="primary" before="message" class="flex-1"
+      >Message</AppButton
+    >
+  </div>
+  <!-- /seller contacts -->
 
   <div
     v-if="car"
