@@ -15,9 +15,19 @@
       </li>
     </ul>
 
-    <ul class="carlist grid gap-2 py-2" ref="carlist">
-      <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
-    </ul>
+    <div class="relative">
+      <ul v-if="cars" class="carlist grid gap-2 py-2" ref="carlist">
+        <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
+      </ul>
+      <div v-else class="h-32"></div>
+
+      <div
+        v-if="areCarsLoading"
+        class="absolute p-4 inset-0 bg-white bg-opacity-50"
+      >
+        Loading...
+      </div>
+    </div>
 
     <!-- sort -->
     <transition name="fade">

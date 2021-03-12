@@ -38,8 +38,6 @@ export default defineComponent({
     const source = ref();
 
     const handleMain = () => {
-      console.log("handleMain");
-
       if (uploader.value === null) {
         return;
       }

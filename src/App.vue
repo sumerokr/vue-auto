@@ -11,11 +11,14 @@
     ></div>
   </transition>
   <router-view />
+
+  <AppFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import AppBarTop from "@/components/AppBarTop/AppBarTop.vue";
+import AppFooter from "@/components/AppFooter.vue";
 import NavigationDrawer from "@/components/NavigationDrawer/NavigationDrawer.vue";
 
 export default defineComponent({
@@ -24,6 +27,7 @@ export default defineComponent({
   components: {
     NavigationDrawer,
     AppBarTop,
+    AppFooter,
   },
 
   setup: () => {
