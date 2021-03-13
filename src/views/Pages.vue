@@ -23,7 +23,6 @@ export default defineComponent({
   setup: () => {
     return {
       routes: [
-        { name: "Companies", text: "Companies" },
         { name: "Pricing", text: "Pricing" },
         { name: "Fonts", text: "Fonts", icon: "text_fields" },
         { name: "User", text: "Profile", icon: "person" },

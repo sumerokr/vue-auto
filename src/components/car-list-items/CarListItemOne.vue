@@ -1,5 +1,5 @@
 <template>
-  <div class="card rounded">
+  <div class="card">
     <RouterLink class="link" :to="{ name: 'Car', params: { id: car.id } }">
       <div class="image-wrapper">
         <img

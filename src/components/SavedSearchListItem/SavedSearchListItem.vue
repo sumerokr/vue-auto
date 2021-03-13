@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-white rounded shadow-0">
+  <div class="card bg-white shadow-0">
     <h2 class="text-black text-opacity-75 mb-2">My saved search</h2>
     <div class="mm">
       <div class="mm-image">

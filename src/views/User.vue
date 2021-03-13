@@ -37,11 +37,6 @@ export default defineComponent({
           icon: "bookmarks",
         },
         {
-          name: "UserMessages",
-          text: "Messages",
-          icon: "message",
-        },
-        {
           name: "UserPersonalDetails",
           text: "Personal details",
           icon: "person_outline",

@@ -45,21 +45,9 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
   },
   {
-    path: "/companies",
-    name: "Companies",
-    component: () =>
-      import(/* webpackChunkName: "companies" */ "../views/Companies.vue"),
-  },
-  {
     path: "/add",
     name: "Add",
     component: () => import(/* webpackChunkName: "add" */ "../views/Add.vue"),
-  },
-  {
-    path: "/companies/:id",
-    name: "Company",
-    component: () =>
-      import(/* webpackChunkName: "company" */ "../views/Company.vue"),
   },
   //#region Auth
   {
@@ -102,14 +90,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "Favorites",
     component: () =>
       import(/* webpackChunkName: "favorites" */ "../views/Favorites.vue"),
-  },
-  {
-    path: "/user/messages",
-    name: "UserMessages",
-    component: () =>
-      import(
-        /* webpackChunkName: "user-messages" */ "../views/UserMessages.vue"
-      ),
   },
   {
     path: "/user/personal-details",

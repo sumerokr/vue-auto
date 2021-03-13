@@ -15,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="carlist grid gap-2 p-2" ref="carlist">
+    <ul class="carlist grid gap-2" ref="carlist">
       <CarListItemOne v-for="car in cars" :key="car.id" :car="car" />
     </ul>
 

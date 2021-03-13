@@ -5,7 +5,7 @@
     <IconButton class="-my-2 -mx-3 mr-5" icon="menu" @click="$emit('click')" />
     <span
       class="logo text-white text-xl text-white bg-red-500 rounded font-medium px-2"
-      >{{ currentFont }}</span
+      >{{ currentFont || "Logo" }}</span
     >
     <IconButton icon="notifications" class="-my-2 ml-auto" />
     <IconButton icon="person" class="-my-2" @click="pickNext" />
