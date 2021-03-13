@@ -3,9 +3,10 @@
     class="app-bar-top fixed z-40 top-0 px-4 py-3 right-0 left-0 flex bg-white items-center"
   >
     <IconButton class="-my-2 -mx-3 mr-5" icon="menu" @click="$emit('click')" />
-    <span
+    <RouterLink
+      :to="{ name: 'Home' }"
       class="logo text-white text-xl text-white bg-red-500 rounded font-medium px-2"
-      >{{ currentFont || "Logo" }}</span
+      >{{ currentFont || "Logo" }}</RouterLink
     >
     <IconButton icon="notifications" class="-my-2 ml-auto" />
     <IconButton icon="person" class="-my-2" @click="pickNext" />
