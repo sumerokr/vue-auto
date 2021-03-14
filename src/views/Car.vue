@@ -23,7 +23,7 @@
             height="240"
             alt=""
             :loading="index > 0 ? 'lazy' : 'auto'"
-            @click="activateGallery"
+            @click="activateGallery(index)"
           />
         </li>
       </ul>
@@ -84,7 +84,7 @@
           >close</span
         >
       </div>
-      <ul class="overflow-y-auto space-y-2 bg-white">
+      <ul class="overflow-y-auto space-y-2 bg-white" ref="galleryList">
         <li v-for="image in car.images" :key="image" class="shadow">
           <img
             class="w-full"
@@ -93,7 +93,6 @@
             height="240"
             alt=""
             loading="lazy"
-            @click="activateGallery"
           />
         </li>
       </ul>
@@ -101,6 +100,17 @@
     <!-- /gallery -->
 
     <div class="p-4">
+      <ul v-if="car.tags.length" class="tags">
+        <li
+          v-for="tag in car.tags"
+          :key="tag.name"
+          class="tag rounded"
+          :style="`background-color: ${tag.color}`"
+        >
+          {{ tag.name }}
+        </li>
+      </ul>
+
       <h1 class="mb-4 text-3xl">{{ car.make }} {{ car.model }}</h1>
 
       <div class="mb-8 text-2xl flex items-center">
@@ -334,7 +344,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, nextTick, ref } from "vue";
 import IconButton from "@/components/IconButton/IconButton.vue";
 import CarCardCompact from "@/components/CarCardCompact/CarCardCompact.vue";
 import AppButton from "@/components/AppButton/AppButton.vue";
@@ -359,6 +369,7 @@ export default defineComponent({
   },
 
   setup: (props) => {
+    const galleryList = ref();
     const { data: car, send: getCar } = useCar();
     getCar(props.id);
 
@@ -372,12 +383,15 @@ export default defineComponent({
     const isHistoryVisible = ref(false);
 
     return {
+      galleryList,
       isBookmarked,
       toogleIsBookmared,
       car,
       isGalleryActive,
-      activateGallery: () => {
+      activateGallery: async (index: number) => {
         isGalleryActive.value = true;
+        await nextTick();
+        galleryList.value.children[index].scrollIntoView();
       },
       deactivateGallry: () => {
         isGalleryActive.value = false;
@@ -408,6 +422,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  padding: 2px 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--font-family-condensed);
+  line-height: 18px;
+  color: var(--color-text-quite);
+}
+
 .car-card-compact {
   flex-shrink: 0;
   scroll-snap-align: start;

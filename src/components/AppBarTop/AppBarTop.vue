@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-bar-top fixed z-40 top-0 px-4 py-3 right-0 left-0 flex bg-white items-center"
+    class="app-bar-top sticky z-40 top-0 px-4 py-3 right-0 left-0 flex bg-white items-center"
   >
     <IconButton class="-my-2 -mx-3 mr-5" icon="menu" @click="$emit('click')" />
     <RouterLink

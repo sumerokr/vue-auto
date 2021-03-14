@@ -13,7 +13,7 @@
       </li>
     </ul>
     <ul class="mt-auto mb-2">
-      <li>
+      <li @click="$emit('click')">
         <RouterLink class="link" :to="{ name: 'Pages' }">
           <span class="material-icons icon">library_books</span>
           <span class="text">Others</span>

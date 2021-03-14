@@ -10,7 +10,9 @@
       @click="isNavVisible = false"
     ></div>
   </transition>
-  <router-view />
+  <main>
+    <router-view />
+  </main>
 
   <AppFooter />
 </template>
@@ -48,6 +50,16 @@ export default defineComponent({
   --color-text-secondary: rgba(0, 0, 0, 0.75);
   --color-text-quite: rgba(0, 0, 0, 0.6);
   --color-text-mute: rgba(0, 0, 0, 0.4);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
 }
 
 .slide-enter-active {
